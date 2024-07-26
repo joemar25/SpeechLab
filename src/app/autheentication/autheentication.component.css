@@ -1,0 +1,4 @@
+input[type="checkbox"] {
+    background-color: gray;
+    z-index: -1;
+}

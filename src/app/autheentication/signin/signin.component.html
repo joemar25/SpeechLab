@@ -1,0 +1,29 @@
+<div class="w-full h-full px-28 flex flex-col justify-between  items-center py-16 left-0 absolute top-0">
+    <img src="assets/logo/CATSU_Logo.png" class="-mt-12 h-28 w-28" alt="">
+    <p class="font-semibold text-lg  text-center">
+        Enroll Today, Speak Tomorrow: Join Our Digital Language Classroom
+    </p>
+    <div class="w-full flex flex-col justify-center items-start gap-4">
+        <div class="flex flex-col">
+            <h4>Welcome back!</h4>
+            <small class="text-gray-400">please enter your details</small>
+        </div>
+        <div class="flex flex-col gap-1 text-base w-full">
+            <label for="id_number" class="pl-1 font-semibold text-sm">ID NUMBER</label>
+            <input type="text" class="bg-tertiary-tw border-2 px-4 border-black rounded-2xl p-2 w-full" id="id_number">
+        </div>
+        <div class="flex flex-col gap-1 text-base w-full">
+            <label for="password" class="pl-1 font-semibold text-sm">PASSWORD</label>
+            <input type="password" class="bg-tertiary-tw border-2 px-4 border-black rounded-2xl p-2 w-full" id="password">
+        </div>
+        <div class="justify-center items-center flex text-gray-500 gap-1">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
+        </div>
+    </div>
+
+    @if (!this.authComponent.slide) {
+    <button type="submit" class="bg-secondary-tw py-2 w-32 rounded-lg text-primary-text-tw">Sign
+        in</button>
+    }
+</div>
