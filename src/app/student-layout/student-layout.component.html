@@ -1,1 +1,18 @@
-<p>student-layout works!</p>
+<div class="h-dvh w-dvw flex bg-tertiary-tw">
+    <div class="h-full w-fit z-20 relative">
+        <div class="w-full h-full bg-primary-tw text-primary-text-tw">
+            <app-side-bar></app-side-bar>
+        </div>
+    </div>
+    <div class="flex flex-col w-full h-full">
+        <div class="h-full w-full mx-auto child-div">
+            <div class="h-[15dvh] w-full z-30">
+                <app-header></app-header>
+            </div>
+            <div class="h-[85dvh] w-full px-8 pb-4">
+                <!-- Contents for student/s page -->
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
