@@ -1,9 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
-import { AutheenticationComponent } from './autheentication/autheentication.component';
-import { StudentLayoutComponent } from './student-layout/student-layout.component';
-import { DashboardComponent } from './student-layout/dashboard/dashboard.component';
+
 import { NgModule } from '@angular/core';
-import { ClassLabComponent } from './student-layout/class-lab/class-lab.component';
+import { AutheenticationComponent } from './features/auth/autheentication.component';
+import { ClassLabComponent } from './features/student-layout/class-lab/class-lab.component';
+import { DashboardComponent } from './features/student-layout/dashboard/dashboard.component';
+import { StudentLayoutComponent } from './features/student-layout/student-layout.component';
+
 
 export const routes: Routes = [
     {
@@ -17,6 +19,7 @@ export const routes: Routes = [
     {
         path: 'student', component: StudentLayoutComponent,
         children: [
+            { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
             { path: 'class-lab', component: ClassLabComponent },
         ]
