@@ -1,1 +1,32 @@
-<p>class-lab works!</p>
+<section class="flex flex-col rounded-none">
+    <header class="flex flex-wrap gap-4 justify-between items-start w-full text-base font-medium text-slate-800 max-md:max-w-full">
+        <h1 class="max-md:max-w-full">
+          <span class="text-2xl font-extrabold text-slate-800">Hello,</span>
+          <span class="text-2xl font-extrabold text-amber-500"> JUAN DELA CRUZ! </span>
+          <br />
+          <span class="text-sm text-slate-800"> Please select your preferred study mode for the upcoming lessons: </span>
+        </h1>
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e24071b5e194c6d073b9a3596be0c69e22780f2b229dc71096859d7fbd3cd30b?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Decorative image related to study modes" class="object-contain shrink-0 mt-2 max-w-full aspect-[1.5] w-[200px]" />
+      </header>
+
+        <main class="self-center mt-28 ml-5 max-w-full w-[724px] max-md:mt-10">
+          <div class="flex gap-5 max-md:flex-col">
+            <article [routerLink]="['/student/class-lab/teacher-led']" class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+              <div class="flex flex-col grow text-2xl font-extrabold text-center text-white whitespace-nowrap max-md:mt-10">
+                <div class="flex flex-col items-center px-20 py-16 rounded-3xl shadow-sm bg-slate-800 min-h-[355px] max-md:px-5">
+                  <h2>TEACHER-LED</h2>
+                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3222d24d2aca7c4e184aad9a2b8614b2d07044572993a7e7623643447f69d3c6?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Icon representing teacher-led study mode" class="object-contain mt-9 max-w-full aspect-[1.03] w-[167px]" />
+                </div>
+              </div>
+            </article>
+            <article [routerLink]="['/student/class-lab/self-assesment']" class="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
+              <div class="flex flex-col grow text-2xl font-extrabold text-center text-white whitespace-nowrap max-md:mt-10">
+                <div class="flex flex-col items-center px-11 pt-16 pb-26 rounded-3xl shadow-sm bg-slate-800 min-h-[355px] max-md:px-5 max-md:pb-24">
+                  <h2>SELF-ASSESSMENT</h2>
+                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2dfa237dfc3e5d7908f39b0c0d91474aac26bfe9884e37947d9bee7ce7739ae1?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Icon representing self-assessment study mode" class="object-contain mt-9 max-w-full aspect-square w-[125px]" />
+                </div>
+              </div>
+            </article>
+          </div>
+        </main>
+      </section>

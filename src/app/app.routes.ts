@@ -1,20 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgModule } from '@angular/core';
-import { AutheenticationComponent } from './features/auth/autheentication.component';
+import { AutheenticationComponent } from './features/auth/login-layout/autheentication.component';
 import { ClassLabComponent } from './features/student-layout/class-lab/class-lab.component';
 import { DashboardComponent } from './features/student-layout/dashboard/dashboard.component';
 import { StudentLayoutComponent } from './features/student-layout/student-layout.component';
+import { UserProfileComponent } from './features/student-layout/user/user-profile.component';
+import { TeacherLedComponent } from './features/student-layout/class-lab/teacher-led/teacher-led.component';
+import { SelfAssesmentComponent } from './features/student-layout/class-lab/self-assesment/self-assesment.component';
+import { AssesmentCategoryComponent } from './features/student-layout/class-lab/self-assesment/assesment-category/assesment-category.component';
 
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'auth-page',
+        redirectTo: '/login',
         pathMatch: 'full'
     },
     {
-        path: 'auth-page', component: AutheenticationComponent,
+        path: 'login', component: AutheenticationComponent,
     },
     {
         path: 'student', component: StudentLayoutComponent,
@@ -22,6 +26,10 @@ export const routes: Routes = [
             { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
             { path: 'class-lab', component: ClassLabComponent },
+            { path: 'profile', component: UserProfileComponent },
+            {path:'class-lab/teacher-led',component: TeacherLedComponent},
+            {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
+            {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},
         ]
     }
 ];

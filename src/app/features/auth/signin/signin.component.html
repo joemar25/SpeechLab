@@ -23,7 +23,7 @@
     </div>
 
     @if (!this.authComponent.slide) {
-    <button type="submit" class="bg-secondary-tw py-2 w-32 rounded-lg text-primary-text-tw">Sign
+    <button type="submit" [routerLink]="['/student/dashboard']" class="bg-secondary-tw py-2 w-32 rounded-lg text-primary-text-tw">Sign
         in</button>
     }
-</div>
+</div> 

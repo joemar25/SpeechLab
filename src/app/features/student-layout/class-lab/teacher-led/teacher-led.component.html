@@ -1,0 +1,80 @@
+<section class="flex flex-col rounded-none max-w-6xl mx-auto px-4">
+  <header class="flex flex-wrap gap-5 justify-between items-center w-full">
+    <h2 class="text-3xl font-extrabold text-black flex-grow max-w-2xl">
+      Our most popular courses
+    </h2>
+    <nav class="flex gap-5 justify-end items-center">
+      <button (click)="moveCourses('prev')" aria-label="Previous course" tabindex="0" class="p-2">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/684436b53bee6b7053a7e88250a4c662aee731350f949951bbec209a671ca529?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Previous course" class="w-8 h-8 object-contain" />
+      </button>
+      <button (click)="moveCourses('next')" aria-label="Next course" tabindex="0" class="p-2">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/efe0c29fbda8dd92ff979adce4f23be67ef8d041c1db1330b276e7734ad8c39e?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Next course" class="w-8 h-8 object-contain" />
+      </button>
+    </nav>
+  </header>
+  <main class="mt-8 w-full overflow-hidden">
+    <div class="courses-container" [class]="animationClass">
+      @for (Category of category; track Category.title) {
+        <article class="course-item">
+          <img [src]="Category.imageUrl" [alt]="Category.title + ' course background'" class="object-cover w-full h-32 rounded-xl" />
+          <h3 class="absolute inset-0 flex items-center justify-center text-sm font-bold text-center text-white bg-slate-800 bg-opacity-90 rounded-xl">
+            {{ Category.title }}
+          </h3>
+        </article>
+      }
+    </div>
+  </main>
+</section>
+
+
+
+
+<section class="mt-10 flex flex-col rounded-none max-w-6xl mx-auto px-4">
+  <h2 class="text-3xl font-bold text-black">Courses</h2>
+  <div class="flex flex-wrap gap-4 justify-between items-center mt-3 w-full text-sm text-black">
+    <nav class="flex flex-wrap gap-2 items-center">
+      @for (category of difficulty; track category) {
+        <button class="px-3 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 transition-colors">
+          {{ category }}
+        </button>
+      }
+    </nav>
+    <button class="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 transition-colors">
+      <span>All</span>
+      <img src="https://cdn-icons-png.flaticon.com/512/32/32195.png" class="w-4 h-4" alt="Dropdown icon" />
+    </button>
+  </div>
+  <div class="mt-6 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (course of courses; track course.title) {
+        <article class="flex flex-col rounded-xl bg-neutral-200 shadow-lg overflow-hidden">
+          <img [src]="course.imageUrl" [alt]="course.title + ' course image'" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-3">
+              <div class="flex items-center gap-2">
+                <img [src]="course.instructorImage" [alt]="course.instructor + ' profile picture'" class="w-8 h-8 rounded-full" />
+                <span class="text-sm font-medium">{{ course.instructor }}</span>
+              </div>
+              <img src="https://cdn-icons-png.flaticon.com/512/8212/8212730.png" class="w-5 h-5" alt="More options icon" />            </div>
+            <h3 class="text-lg font-medium mb-2">{{ course.title }}</h3>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-semibold">{{ course.progress }}%</span>
+              <div class="w-full bg-zinc-300 rounded-full h-2">
+                <div class="bg-amber-500 h-2 rounded-full" [style.width]="course.progress + '%'"></div>
+              </div>
+            </div>
+            <span class="text-sm text-black text-opacity-80">{{ course.level }}</span>
+            <div class="flex justify-between items-center mt-3 text-xs">
+              <span>{{ course.duration }} hours</span>
+              <div class="flex">
+                @for (star of [1, 2, 3, 4, 5]; track star) {
+                  <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" class="w-4 h-4" [class.opacity-50]="star > course.rating" alt="Star icon" />
+                }
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

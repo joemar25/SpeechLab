@@ -1,0 +1,47 @@
+<section class="flex flex-col max-w-6xl mx-auto px-4">
+    <header class="flex flex-wrap gap-4 justify-between w-full mb-6">
+      <h1 class="text-3xl font-bold text-black">
+        Choose what category you <br> want to improve:
+      </h1>
+      <nav class="flex flex-wrap gap-2 items-center self-end mt-4 text-xs text-white">
+        @for (category of categories; track category.name) {
+          <button 
+            class="flex gap-2 px-4 py-2 rounded-xl bg-slate-800" 
+            [class.text-amber-500]="category.active"
+            (click)="setActiveCategory(category.name)"
+          >
+            <img [src]="category.icon" class="w-5 h-5 object-contain" [alt]="category.name + ' icon'" />
+            <span>{{ category.name }}</span>
+          </button>
+        }
+      </nav>
+    </header>
+    <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      @for (level of levels; track level.id) {
+        <article class="relative flex flex-col rounded-xl bg-neutral-200 shadow-lg overflow-hidden">
+          <div class="flex flex-col items-center p-4 h-full">
+            <img [src]="level.image" class="w-full h-52 object-cover rounded-lg" [alt]="'Level ' + level.id + ' Quiz illustration'" />
+            <h2 class="mt-4 text-xl font-bold text-center">Level {{ level.id }}: {{ level.title }}</h2>
+            <p class="mt-2 text-sm text-center text-black text-opacity-70">
+              {{ level.description }}
+            </p>
+            <button 
+              class="mt-4 px-6 py-2 rounded-lg bg-amber-500 text-white text-sm"
+              (click)="startLevel(level.id)"
+              [disabled]="level.locked"
+            >
+              Start
+            </button>
+          </div>
+          @if (level.locked) {
+            <div class="absolute inset-0 bg-slate-800 bg-opacity-75 backdrop-blur-sm flex items-center justify-center">
+                <svg width="68" height="88" viewBox="0 0 68 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M59 29.2506H54.8334V20.9173C54.8334 9.41732 45.5 0.0839844 34 0.0839844C22.5 0.0839844 13.1667 9.41732 13.1667 20.9173V29.2506H9.00002C4.41669 29.2506 0.666687 33.0006 0.666687 37.584V79.2506C0.666687 83.834 4.41669 87.584 9.00002 87.584H59C63.5834 87.584 67.3334 83.834 67.3334 79.2506V37.584C67.3334 33.0006 63.5834 29.2506 59 29.2506ZM34 66.7506C29.4167 66.7506 25.6667 63.0006 25.6667 58.4173C25.6667 53.834 29.4167 50.084 34 50.084C38.5834 50.084 42.3334 53.834 42.3334 58.4173C42.3334 63.0006 38.5834 66.7506 34 66.7506ZM46.9167 29.2506H21.0834V20.9173C21.0834 13.7923 26.875 8.00065 34 8.00065C41.125 8.00065 46.9167 13.7923 46.9167 20.9173V29.2506Z" fill="white"/>
+                    </svg>
+                    
+            </div>
+          }
+        </article>
+      }
+    </main>
+  </section>

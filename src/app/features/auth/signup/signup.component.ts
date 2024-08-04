@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AutheenticationComponent } from '../autheentication.component';
+import { AutheenticationComponent } from '../login-layout/autheentication.component';
 
 @Component({
   selector: 'app-signup',

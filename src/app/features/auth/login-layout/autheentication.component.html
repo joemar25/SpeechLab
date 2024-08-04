@@ -1,0 +1,55 @@
+<div class="w-dvw h-dvh bg-bg-tw">
+    <section class="w-full h-full flex justify-center items-center ">
+        <div class="w-[70%] h-[80%] relative">
+            <div class="w-full h-full bg-primary-tw rounded-6xl flex flex-col justify-end items-center relative">
+            </div>
+            <div class="w-[50%] h-full bg-primary-tw rounded-6xl absolute top-0 flex flex-col duration-300 text-primary-text-tw
+                {{!slide ? 'translate-x-px' : '-translate-x-full'}} justify-end items-center gap-12 py-16 right-0">
+
+                @if (!slide) {
+                <div class="w-full px-10 flex flex-col justify-center items-center text-right gap-12">
+                    <h1 class="text-5xl font-bold">
+                        Empower Fluency: Unleash Digital Language <br> Learning
+                    </h1>
+                    <h4 class="text-3xl font-medium text-secondary-tw">
+                        Catanduanes State University Language Lab Classroom
+                    </h4>
+                    <p class="text-base text-right">
+                        A cutting-edge digital language teaching solution that offers teachers and students new
+                        possibilities for digital teaching and learning.
+                    </p>
+                </div>
+                }@else {
+                <div class=" w-full h-full px-12 pr-20 flex flex-col justify-evenly gap-12 items-center text-right">
+                    <h1 class="text-left text-5xl text-secondary-tw font-bold">
+                        Welcome to Catanduanes State University!
+                    </h1>
+                    <h4 class="text-left text-xl text-primary-text-tw pb-14">
+                        Complete the form below to create your account and embark on an exciting journey with CSU.
+                        Together, we can achieve greatness!
+                    </h4>
+                </div>
+                }
+                @if (!slide) {
+                <button (click)="slideInOut()" class="bg-secondary-tw py-2 w-32 rounded-lg">Register now!</button>
+                }@else {
+                <button (click)="slideInOut()" class="bg-secondary-tw py-2 w-32 rounded-lg">Sign in</button>
+                }
+            </div>
+            <div class="w-[50%] h-full bg-white rounded-6xl absolute top-0 duration-300 flex border-2 border-black flex-col text-secondary-text-tw
+                {{!slide ? '-translate-x-px' : 'translate-x-full'}} justify-end items-center">
+                @if (!slide) {
+                    <div class=" w-full h-full relative">
+                        <app-signin></app-signin>
+                    </div>
+                
+                }@else {
+                    <div class=" w-full h-full relative">
+                        <app-signup></app-signup>
+                    </div>
+                
+                }
+            </div>
+        </div>
+    </section>
+</div>

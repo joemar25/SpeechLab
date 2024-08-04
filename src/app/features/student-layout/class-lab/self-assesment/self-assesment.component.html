@@ -1,0 +1,22 @@
+<section class="flex flex-col max-w-6xl mx-auto px-4">
+    <header class="flex z-10 flex-wrap gap-4 justify-between items-start w-full text-black">
+      <div class="flex flex-col self-start max-w-xl">
+        <h1 class="text-3xl font-bold">Select Language</h1>
+        <p class="mt-1 text-lg font-medium">Choose Japanese, English, or French and let the language lab be your gateway to a world of words.</p>
+      </div>
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/597ced9016d39c8116aa3d1d045a49a431d8c97dec3c38682af2e4894a6494dd?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Decorative image related to language selection" class="object-contain shrink-0 self-end mt-4 max-w-full aspect-[1.6] w-[200px]" />
+    </header>
+    <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      @for (language of languages; track language.name) {
+        <section class="ml-5 flex flex-col text-center text-white rounded-none max-w-72">
+          <article [routerLink]="['/student/class-lab/self-assesment/assesment-category']" class="flex flex-col justify-center px-4 py-3 w-full rounded-2xl bg-slate-800 shadow-[8px_8px_12px_rgba(0,0,0,0.4)]">
+            <div class="flex flex-col">
+              <img loading="lazy" [src]="language.imageUrl" class="object-cover self-center w-full h-56 rounded-xl" [alt]="language.name + ' Challenge Illustration'" />
+              <h2 class="mt-2 text-xl font-bold">{{ language.name | uppercase }}</h2>
+              <p class="mt-1.5 tex-sm font-sans">Challenge your {{ language.name }} skills <br>across 20 levels.</p>
+            </div>
+          </article>
+        </section>
+      }
+    </nav>
+  </section>

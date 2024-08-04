@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-secondary: #F5A425;
+  --color-primary: #162239;
+}
+
 
 @layer utilities {
     .inner-shadow {
       box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
     }
   }
+
