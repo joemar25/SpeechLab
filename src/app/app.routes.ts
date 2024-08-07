@@ -10,6 +10,8 @@ import { TeacherLedComponent } from './features/student-layout/class-lab/teacher
 import { SelfAssesmentComponent } from './features/student-layout/class-lab/self-assesment/self-assesment.component';
 import { AssesmentCategoryComponent } from './features/student-layout/class-lab/self-assesment/assesment-category/assesment-category.component';
 import { VideoConferenceComponent } from './features/student-layout/meet/video-conference.component';
+import { TeacherSpeechLabComponent } from './features/teacher-layout/teacher-speech-lab/teacher-speech-lab.component';
+import { TeacherLayoutComponent } from './features/teacher-layout/teacher-layout.component';
 
 export const routes: Routes = [
     {
@@ -31,6 +33,12 @@ export const routes: Routes = [
             {path:'class-lab/teacher-led',component: TeacherLedComponent},
             {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
             {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},
+        ]
+    },
+    {
+        path: 'teacher', component: TeacherLayoutComponent,
+        children: [
+            { path: 'speechlab',component: TeacherSpeechLabComponent},
         ]
     }
 ];
