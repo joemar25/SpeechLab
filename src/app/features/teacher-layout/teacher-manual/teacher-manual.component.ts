@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-manual',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './teacher-manual.component.html',
   styleUrl: './teacher-manual.component.css'
 })

@@ -18,6 +18,7 @@ import { TaskLayoutComponent } from './features/student-layout/task/task-layout/
 import { TeacherSelectionComponent } from './features/teacher-layout/teacher-selection/teacher-selection.component';
 import { TeacherAutoComponent } from './features/teacher-layout/teacher-auto/teacher-auto.component';
 import { TeacherManualComponent } from './features/teacher-layout/teacher-manual/teacher-manual.component';
+import { SeatArrangementComponent } from './features/teacher-layout/seat-arrangement/seat-arrangement.component';
 
 export const routes: Routes = [
     {
@@ -51,6 +52,7 @@ export const routes: Routes = [
             { path: 'teacher-selection', component: TeacherSelectionComponent },
             { path: 'teacher-auto', component: TeacherAutoComponent },
             { path: 'teacher-manual', component: TeacherManualComponent },
+            { path: 'seat-arrangement', component: SeatArrangementComponent },
         ]
     }
 ];
