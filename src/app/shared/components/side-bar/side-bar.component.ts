@@ -25,10 +25,11 @@ export class SideBarComponent {
     { label: 'Class Lab', icon: 'ri:graduation-cap-fill', route: '/student/class-lab' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/student/meet' },
     { label: 'Tasks', icon: 'mdi:format-list-bulleted' },
-    { label: 'Speech Lab', svgIcon: 'speech-lab-icon' },
+    { label: 'Speech Lab', svgIcon: 'speech-lab-icon'},
     { label: 'Dictionary', icon: 'ic:sharp-dashboard' },
     { label: 'Text to Speech', svgIcon: 'text-to-speech-icon' },
     { label: 'Speech Analyzer', svgIcon: 'text-to-speech-icon' },
+    { label: 'T Speech Lab', svgIcon: 'speech-lab-icon',route: '/teacher/speechlab' },
   ];
 
   othersMenu: MenuItem[] = [
