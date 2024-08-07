@@ -9,7 +9,7 @@ import { UserProfileComponent } from './features/student-layout/user/user-profil
 import { TeacherLedComponent } from './features/student-layout/class-lab/teacher-led/teacher-led.component';
 import { SelfAssesmentComponent } from './features/student-layout/class-lab/self-assesment/self-assesment.component';
 import { AssesmentCategoryComponent } from './features/student-layout/class-lab/self-assesment/assesment-category/assesment-category.component';
-
+import { VideoConferenceComponent } from './features/student-layout/meet/video-conference.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +27,7 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'class-lab', component: ClassLabComponent },
             { path: 'profile', component: UserProfileComponent },
+            { path: 'meet', component: VideoConferenceComponent },
             {path:'class-lab/teacher-led',component: TeacherLedComponent},
             {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
             {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},

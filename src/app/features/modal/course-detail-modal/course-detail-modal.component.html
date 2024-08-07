@@ -1,0 +1,86 @@
+<!-- course-details-modal.component.html -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <section class="flex pr-4 rounded-none max-md:pr-3">
+    <article class="flex flex-col grow shrink-0 -mr-10 bg-white rounded-2xl basis-0 min-h-[700px] max-md:max-w-full">
+      <header class="flex flex-col w-[940px] max-md:max-w-full">
+        <img [src]="course?.imageUrl" alt="Cyber Security Course Banner" class="object-cover w-full h-64 rounded-t-2xl" />
+        <div class="flex flex-col self-center mt-4 max-w-full w-[950px]">
+          <div class="flex flex-wrap gap-4 justify-between items-start w-full max-md:max-w-full">
+            <div class="pl-6 flex flex-col items-start min-w-[200px] w-[650px] max-md:max-w-full">
+              <div class="flex flex-col self-stretch pt-2 pr-4 w-full text-black max-md:pr-3 max-md:max-w-full">
+                <h1 class="text-xl font-extrabold max-md:max-w-full">{{ course?.title }}</h1>
+                <p class="mt-4 mr-5 text-sm max-md:mr-2 max-md:max-w-full">Learn about the fast-growing field of cybersecurity and how to protect your data and information from digital attacks.</p>
+              </div>
+              <div class="flex flex-col mt-6 max-w-full text-black w-[200px]">
+                <div class="flex gap-2 items-center">
+                  <span class="self-stretch my-auto text-sm font-extrabold">{{ course?.rating }}</span>
+                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/27c192287d1bab00fef192423cd154ef433dc9b7c29a1d0552bcd307e85871b5?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="object-contain shrink-0 self-stretch my-auto w-20 aspect-[6.41]" alt="{{ course?.rating }} star rating"  />
+                  <span class="self-stretch my-auto text-xs">2,322 ratings</span>
+                </div>
+              </div>
+              <div class="flex gap-2 justify-between items-center mt-6 max-w-full w-[320px]">
+                <div class="flex flex-col self-stretch my-auto w-48 rounded-xl">
+                  <input type="text" placeholder="Enter code here" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-800" />
+                </div>
+                <button class="flex flex-col self-stretch my-auto text-sm font-medium text-center text-white rounded-xl w-[110px]">
+                  <span class="px-3 py-2 rounded-xl bg-slate-800 max-md:px-2">Enroll Now</span>
+                </button>
+              </div>
+            </div>
+
+            <aside class="pr-6 flex flex-col rounded-2xl min-w-[240px] w-[270px]">
+              <div class="flex border-2 gap-2.5 items-center px-2.5 py-5 bg-white rounded-2xl shadow-sm aspect-square min-h-[261px]">
+                <div class="flex flex-col items-start self-stretch my-auto w-[194px]">
+                  <div class="flex flex-col self-stretch w-full max-w-[194px]">
+                    <div class="flex gap-3 justify-between items-center">
+                      <svg width="25" height="25" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.2541 16.918C20.6742 16.918 24.2542 13.338 24.2542 8.91797C24.2542 4.49797 20.6742 0.917969 16.2541 0.917969C11.8342 0.917969 8.25415 4.49797 8.25415 8.91797C8.25415 13.338 11.8342 16.918 16.2541 16.918ZM16.2541 20.918C10.9142 20.918 0.25415 23.598 0.25415 28.918V32.918H32.2541V28.918C32.2541 23.598 21.5942 20.918 16.2541 20.918Z" fill="#F5A425"/>
+                        </svg>
+                                              <div class="flex flex-col self-stretch my-auto w-[151px]">
+                        <span class="text-base text-amber-500">Professor</span>
+                        <strong class="text-xs font-bold text-black">{{ course?.instructor }}</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col mt-5 max-w-full w-[126px]">
+                    <div class="flex gap-3 justify-between items-center">
+                      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a271b369562fcc6b38d418f4f22ae5c867dce8564aed9623926a7f2d754761f?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Skill Level Icon" class="object-contain shrink-0 self-stretch my-auto w-8 aspect-square" />
+                      <div class="flex flex-col self-stretch my-auto w-[83px]">
+                        <span class="text-base text-amber-500">Skill level</span>
+                        <strong class="text-xs font-bold text-black">{{ course?.level }}</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col mt-5 max-w-full whitespace-nowrap w-[110px]">
+                    <div class="flex gap-2.5 justify-between items-center">
+                      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0125d8b3fa37000859a71408eae7a35817b4187902796437de14966b0939f5b9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Language Icon" class="object-contain shrink-0 self-stretch my-auto w-8 aspect-square" />
+                      <div class="flex flex-col self-stretch my-auto w-[68px]">
+                        <span class="text-base text-amber-500">Duration</span>
+                        <strong class="text-xs font-bold text-black">{{ course?.duration }} hours</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex relative flex-col mt-5 aspect-[2.286] w-[95px]">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/84a73e249ed525703161e3a968437e18dffb0a8a2f0c3fa1ae1d64022ff65af4?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Course Feature" class="object-cover absolute inset-0 size-full" />
+                    <div class="flex relative justify-between items-end">
+                      <div class="flex min-h-[42px] w-[53px]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <section class="pl-6 pr-3 flex flex-col w-full text-black">
+            <div class="flex flex-col w-full">
+              <div class="flex flex-col max-md:max-w-full">
+                <h2 class="text-xl font-extrabold max-md:max-w-full">About this course</h2>
+                <p class="text-sm max-md:max-w-full">Cybersecurity involves everyone and every entity — from you and your neighbors to organizations and companies to governments. It's considered a fundamental necessity, and in this introduction to cybersecurity course, you'll learn how to protect yourself and others from online attacks. This is a great starting point for anyone interested in learning cybersecurity but not sure where to start.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </header>
+    </article>
+    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/86c3432a359ecdf86ce9b98b4c391433d5e543a4ca3b613d41e21cff6c34a241?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Decorative Icon" class="object-contain shrink-0 self-start mt-4 w-6 aspect-square" />
+  </section>
+</div>

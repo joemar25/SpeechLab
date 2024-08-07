@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CourseDetailModalComponent } from '../../../modal/course-detail-modal/course-detail-modal.component';
 
 interface Category {
   title: string;
@@ -20,7 +21,7 @@ interface Course {
 @Component({
   selector: 'app-teacher-led',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CourseDetailModalComponent],
   templateUrl: './teacher-led.component.html',
   styleUrl: './teacher-led.component.css'
 })
@@ -114,6 +115,15 @@ export class TeacherLedComponent {
       this.isAnimating = false;
       this.cdr.detectChanges();
     }, 500); // This should match the animation duration in CSS
+  }
+  selectedCourse: any | null = null;
+
+  openModal(course: any) {
+    this.selectedCourse = course;
+  }
+
+  closeModal() {
+    this.selectedCourse = null;
   }
 }
 
