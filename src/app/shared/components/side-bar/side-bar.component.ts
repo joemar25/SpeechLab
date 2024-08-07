@@ -24,7 +24,7 @@ export class SideBarComponent {
     { label: 'Dashboard', icon: 'ic:sharp-dashboard', route: '/student/dashboard' },
     { label: 'Class Lab', icon: 'ri:graduation-cap-fill', route: '/student/class-lab' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/student/meet' },
-    { label: 'Tasks', icon: 'mdi:format-list-bulleted' },
+    { label: 'Tasks', icon: 'mdi:format-list-bulleted', route: '/student/task'},
     { label: 'Speech Lab', svgIcon: 'speech-lab-icon'},
     { label: 'Dictionary', icon: 'ic:sharp-dashboard' },
     { label: 'Text to Speech', svgIcon: 'text-to-speech-icon' },
