@@ -1,0 +1,34 @@
+<section class="flex flex-col justify-center px-40 py-60 text-center text-white rounded-3xl bg-slate-800 max-md:px-5 max-md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-md:max-w-full">
+        <!-- Left column for Auto Sort -->
+        <div class="flex justify-center">
+            <button 
+                (click)="selectOption('auto')" 
+                [style.backgroundColor]="selectedOption === 'auto' ? '#bd8a1d' : '#1e293b'" 
+                class="flex flex-col justify-center text-center px-10 py-16 rounded-3xl min-w-[240px] shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] w-full max-w-[400px]">
+                <div class="flex flex-col px-14">
+                    <h2 class="self-center text-4xl font-bold">Auto Sort</h2>
+                    <p class="mt-5 text-sm">Units are auto sorted for you</p>
+                </div>
+            </button>
+        </div>
+        <!-- Right column for Manual Sort -->
+        <div class="flex justify-center">
+            <button 
+                (click)="selectOption('manual')" 
+                [style.backgroundColor]="selectedOption === 'manual' ? '#bd8a1d' : '#1e293b'" 
+                class="flex flex-col justify-center px-6 py-16 rounded-3xl min-w-[240px] shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] w-full max-w-[400px]">
+                <div class="flex flex-col px-14">
+                    <h2 class="text-4xl font-bold">Manual Sort</h2>
+                    <p class="mt-6 text-sm">You will manually sort the units</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    <button 
+        [routerLink]="getRouterLink()" 
+        class="gap-2.5 self-center px-16 py-3.5 mt-14 text-3xl whitespace-nowrap rounded-xl bg-slate-800 max-md:px-5 max-md:mt-10 shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)]"
+        tabindex="0">
+        Continue
+    </button>
+</section>

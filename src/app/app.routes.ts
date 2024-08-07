@@ -15,6 +15,9 @@ import { TeacherLayoutComponent } from './features/teacher-layout/teacher-layout
 import { TaskListComponent } from './features/student-layout/task/task-list/task-list.component';
 import { TaskDetailComponent } from './features/student-layout/task/task-detail/task-detail.component';
 import { TaskLayoutComponent } from './features/student-layout/task/task-layout/task-layout.component';
+import { TeacherSelectionComponent } from './features/teacher-layout/teacher-selection/teacher-selection.component';
+import { TeacherAutoComponent } from './features/teacher-layout/teacher-auto/teacher-auto.component';
+import { TeacherManualComponent } from './features/teacher-layout/teacher-manual/teacher-manual.component';
 
 export const routes: Routes = [
     {
@@ -45,6 +48,9 @@ export const routes: Routes = [
         path: 'teacher', component: TeacherLayoutComponent,
         children: [
             { path: 'speechlab',component: TeacherSpeechLabComponent},
+            { path: 'teacher-selection', component: TeacherSelectionComponent },
+            { path: 'teacher-auto', component: TeacherAutoComponent },
+            { path: 'teacher-manual', component: TeacherManualComponent },
         ]
     }
 ];
