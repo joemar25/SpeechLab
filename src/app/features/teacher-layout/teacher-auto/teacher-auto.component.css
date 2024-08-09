@@ -1,0 +1,9 @@
+/* Style for selected students */
+.border-2 {
+    border-width: 2px;
+  }
+  
+  .border-blue-500 {
+    border-color: #3b82f6; /* Blue color for selected border */
+  }
+  
