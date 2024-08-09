@@ -1,0 +1,37 @@
+<div class="h-dvh w-dvw flex overflow-hidden">
+    <div class="h-full w-fit z-20 flex-shrink-0">
+        <div class="w-full h-full bg-primary-tw text-primary-text-tw overflow-y-auto">
+            <app-side-bar></app-side-bar>
+        </div>
+    </div>
+    <div class="flex flex-col w-full h-full overflow-hidden">
+        <div class="h-[15dvh] w-full z-30 flex-shrink-0">
+            <app-header></app-header>
+        </div>
+        <div class="flex-grow overflow-y-auto">
+            <div class="w-full px-8 pb-4">
+                <div class="flex flex-col max-w-full ">
+                    <header class="flex gap-1.5 items-center self-start text-3xl font-extrabold text-black whitespace-nowrap">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[50px] h-[50px]">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                      </svg>
+                      <h1 class="self-stretch my-auto w-[302px] text-2xl">SpeechAssess</h1>
+                    </header>
+                    <nav class="flex gap-2.5 items-center mt-2.5 w-full text-lg text-center text-white max-md:max-w-full">
+                      <button [routerLink]="['/speech-analyzer/record-speech']"  class="flex flex-col self-stretch my-auto whitespace-nowrap rounded-2xl w-[120px]">
+                        <span class="px-8 py-1.5 bg-amber-500 rounded-2xl max-md:px-4 text-sm">Record</span>
+                      </button>
+                      <button [routerLink]="['/speech-analyzer/record-list']" class="flex flex-col self-stretch my-auto whitespace-nowrap rounded-2xl w-[120px]">
+                        <span class="px-5 py-1.5 rounded-2xl bg-slate-800 max-md:px-4 text-sm">Recordings</span>
+                      </button>
+                      <button class="flex flex-col self-stretch my-auto whitespace-nowrap rounded-2xl w-[120px]">
+                        <span class="px-5 py-1.5 rounded-2xl bg-slate-800 max-md:px-4 text-sm">Evaluation Report</span>
+                      </button>
+                    </nav>
+                  </div>
+                <!-- Contents for student/s page -->
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

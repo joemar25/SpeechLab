@@ -28,7 +28,7 @@ export class SideBarComponent {
     { label: 'Speech Lab', svgIcon: 'speech-lab-icon'},
     { label: 'Dictionary', icon: 'ic:sharp-dashboard' },
     { label: 'Text to Speech', svgIcon: 'text-to-speech-icon' },
-    { label: 'Speech Analyzer', svgIcon: 'text-to-speech-icon' },
+    { label: 'Speech Analyzer', svgIcon: 'text-to-speech-icon', route : '/speech-analyzer/record-speech' },
     { label: 'T Speech Lab', svgIcon: 'speech-lab-icon',route: '/teacher/speechlab' },
   ];
 

@@ -19,6 +19,11 @@ import { TeacherSelectionComponent } from './features/teacher-layout/teacher-sel
 import { TeacherAutoComponent } from './features/teacher-layout/teacher-auto/teacher-auto.component';
 import { TeacherManualComponent } from './features/teacher-layout/teacher-manual/teacher-manual.component';
 import { SeatArrangementComponent } from './features/teacher-layout/seat-arrangement/seat-arrangement.component';
+import { SpeechAnalyzerComponent } from './features/speech-analyzer/speech-analyzer.component';
+import { RecordSpeechComponent } from './features/speech-analyzer/record-speech/record-speech.component';
+import { RecordListComponent } from './features/speech-analyzer/record-list/record-list.component';
+import { RecordReportComponent } from './features/speech-analyzer/record-report/record-report.component';
+
 
 export const routes: Routes = [
     {
@@ -53,6 +58,14 @@ export const routes: Routes = [
             { path: 'teacher-auto', component: TeacherAutoComponent },
             { path: 'teacher-manual', component: TeacherManualComponent },
             { path: 'seat-arrangement', component: SeatArrangementComponent },
+        ]
+    },
+    {
+        path: 'speech-analyzer', component: SpeechAnalyzerComponent,
+        children: [
+            { path: 'record-speech',component: RecordSpeechComponent},
+            { path: 'record-list',component: RecordListComponent},
+            { path: 'record-report',component: RecordReportComponent},
         ]
     }
 ];
