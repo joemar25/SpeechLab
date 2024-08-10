@@ -26,6 +26,8 @@ import { RecordSpeechComponent } from './features/speech-analyzer/record-speech/
 import { RecordListComponent } from './features/speech-analyzer/record-list/record-list.component';
 import { RecordReportComponent } from './features/speech-analyzer/record-report/record-report.component';
 import { MeetLayoutComponent } from './features/meet/meet-layout.component';
+import { HomeLayoutComponent } from './shared/components/home-layout/home-layout.component';
+import { DictionaryComponent } from './features/dictionary/dictionary.component';
 
 
 export const routes: Routes = [
@@ -63,6 +65,13 @@ export const routes: Routes = [
             { path: 'manual-dashboard', component: ManualDashboardComponent },
         ]
     },
+    
+    {
+        path: 'dictionary', component: HomeLayoutComponent,
+        children: [
+            { path: 'd-search',component: DictionaryComponent},
+        ]
+    },
     {
         path: 'speech-analyzer', component: SpeechAnalyzerComponent,
         children: [
@@ -72,7 +81,7 @@ export const routes: Routes = [
         ]
     },
     {
-         path: 'meet', component: MeetLayoutComponent ,
+         path: 'meet', component: HomeLayoutComponent ,
          children: [
 
         {path: 'video-conference', component: VideoConferenceComponent} ,

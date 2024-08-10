@@ -1,55 +1,60 @@
-<section class="flex flex-col rounded-none">
-  <main class="flex flex-col border self-end px-8 pt-6 pb-8 mt-10 w-full max-w-[700px] mx-auto bg-white rounded-2xl shadow-sm min-h-[500px] max-md:px-4">
-    <div class="flex flex-col w-full">
-      <header class="flex flex-col max-w-full">
-        <h2 class="text-2xl font-bold text-black">
-          {{ currentPhase === 'register' ? 'Register your voice' : 
-             currentPhase === 'question' ? 'Answer the question' : 'Your Transcript' }}
-        </h2>
-        <time class="mt-1 text-sm font-medium text-neutral-500">Wednesday, August 6, 2024 - 12:00 PM</time>
-      </header>
-      <section class="flex flex-col mt-6 w-full text-lg font-medium text-center text-black">
+<section class="flex flex-col items-center justify-center mt-14">
+  <main class="w-full max-w-2xl bg-white rounded-3xl shadow-lg overflow-hidden">
+    <div class="bg-gradient-to-r from-amber-500 to-amber-600 p-6 text-white">
+      <h2 class="text-3xl font-bold">
+        {{ currentPhase === 'register' ? 'Register your voice' : 
+           currentPhase === 'question' ? 'Answer the question' : 'Your Transcript' }}
+      </h2>
+      <time class="text-sm opacity-80">Wednesday, August 6, 2024 - 12:00 PM</time>
+    </div>
+
+    <div class="p-8">
+      <section class="text-center">
         <ng-container *ngIf="currentPhase === 'register'">
-          <p class="text-zinc-700">Click the mic and read the following quote by Steve Jobs:</p>
-          <blockquote class="mt-5 text-lg font-bold">
+          <p class="text-gray-600 mb-4">Click the mic and read the following quote by Steve Jobs:</p>
+          <blockquote class="text-xl font-semibold text-gray-800 italic border-l-4 border-amber-500 pl-4 py-2 mb-8">
             "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma — which is living with the results of other people's thinking."
           </blockquote>
         </ng-container>
+
         <ng-container *ngIf="currentPhase === 'question'">
-          <p class="text-zinc-700">Answer the following question by speaking for at least 20 seconds:</p>
-          <blockquote class="mt-5 text-lg font-bold">
+          <p class="text-gray-600 mb-4">Answer the following question by speaking for at least 20 seconds:</p>
+          <blockquote class="text-xl font-semibold text-gray-800 italic border-l-4 border-gray-500 pl-4 py-2 mb-8">
             Why is learning a new language important to you?
           </blockquote>
         </ng-container>
+
         <ng-container *ngIf="currentPhase === 'transcript'">
-          <p class="text-zinc-700 text-left">Your Transcript</p>
-          <p class="mt-5 text-lg text-left">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold text-gray-800">Your Transcript</h3>
+            <span class="text-sm font-medium text-gray-500">Duration: {{ recordingDuration }}</span>
+          </div>
+          <p class="text-gray-600 text-left leading-relaxed">
             Learning a new language is important to me because it opens doors to new cultures and perspectives, enhances communication skills, and boosts career opportunities. It also helps me connect with people from different backgrounds and broadens my understanding of the world.
           </p>
         </ng-container>
-        <div class="flex flex-col self-center mt-5 max-w-full w-[300px]">
-          <ng-container *ngIf="currentPhase !== 'transcript'">
-            <svg 
-              *ngIf="!recordingComplete"
+
+        <div class="mt-8">
+          <ng-container *ngIf="currentPhase !== 'transcript' && !recordingComplete">
+            <button 
               (click)="toggleRecording()"
-              [attr.fill]="isRecording ? 'green' : 'none'" 
-              xmlns="http://www.w3.org/2000/svg" 
-              viewBox="0 0 24 24" 
-              stroke-width="1.5" 
-              [attr.stroke]="isRecording ? 'white' : 'currentColor'" 
-              class="w-[60px] h-[60px] mx-auto cursor-pointer"
+              class="w-24 h-24 rounded-full shadow-lg focus:outline-none focus:ring-4 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105"
+              [ngClass]="{'bg-green-500 hover:bg-green-600 focus:ring-green-400': isRecording, 'bg-blue-500 hover:bg-blue-600 focus:ring-blue-400': !isRecording}"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-            </svg>
-            <p class="mt-2 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+              </svg>
+            </button>
+            <p class="mt-4 text-sm text-gray-600">
               {{ isRecording ? 'Recording... click to stop' : 'Click the microphone when you\'re ready to speak!' }}
             </p>
           </ng-container>
-          <div *ngIf="recordingComplete || currentPhase === 'transcript'" class="flex justify-center mt-4 space-x-4">
-            <button (click)="redo()" class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+
+          <div *ngIf="recordingComplete || currentPhase === 'transcript'" class="flex justify-center mt-8 space-x-4">
+            <button (click)="redo()" class="px-6 py-3 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition-colors duration-300">
               Redo
             </button>
-            <button (click)="next()" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+            <button (click)="next()" class="px-6 py-3 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-300">
               {{ currentPhase === 'transcript' ? 'View Report' : 'Next' }}
             </button>
           </div>
