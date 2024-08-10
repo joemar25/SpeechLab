@@ -1,0 +1,73 @@
+<section class="max-w-[1200px] mx-auto p-6 bg-white rounded-2xl border border-gray-200 shadow-lg">
+  <div class="flex flex-wrap gap-6 items-start w-full">
+    <!-- Join Meeting Section -->
+    <div class="flex-grow min-w-[300px] max-w-[700px]">
+      <div class="bg-gradient-to-br from-slate-800 to-slate-700 rounded-2xl p-6 flex items-center justify-center min-h-[400px] shadow-inner">
+        <button *ngIf="!meetingJoined" (click)="joinMeeting()" class="px-8 py-4 bg-amber-500 hover:bg-amber-600 transition-colors rounded-xl text-white font-bold text-lg shadow-md">
+          Join Meeting
+        </button>
+        <div *ngIf="meetingJoined" class="text-white text-2xl font-semibold">
+          You've joined the meeting
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Chat Section -->
+    <aside class="w-[320px] bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden">
+      <h2 class="text-2xl font-bold text-amber-500 p-4 border-b border-gray-200">Live Chat</h2>
+      <div class="h-[255px] overflow-y-auto p-4">
+        <ul class="space-y-4">
+          <li *ngFor="let message of chatMessages" class="animate-fade-in">
+            <div class="flex items-start gap-3">
+              <img [src]="message.avatar" [alt]="message.sender" class="w-8 h-8 rounded-full" />
+              <div>
+                <div class="flex items-center">
+                  <span class="font-semibold text-gray-800 mr-2">{{ message.sender }}</span>
+                  <time class="text-xs text-gray-500">{{ message.time }}</time>
+                </div>
+                <p class="mt-1 text-gray-700">{{ message.message }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <form (ngSubmit)="sendMessage()" class="p-4 border-t border-gray-200">
+        <div class="flex items-center bg-gray-100 rounded-full overflow-hidden">
+          <input type="text" [(ngModel)]="newMessage" name="newMessage" placeholder="Type your message here..." class="flex-grow p-3 bg-transparent focus:outline-none" />
+          <button type="submit" class="p-3 bg-amber-500 hover:bg-amber-600 transition-colors">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6a2a61404f4a4bd82bb739b45461b3854ac3d270c75eca2d37872f03c184fb25?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="w-6 h-6" alt="Send" />
+          </button>
+        </div>
+      </form>
+    </aside>
+  </div>
+
+  <!-- Meeting Info -->
+  <div class="flex justify-between items-center mt-6 mb-4">
+    <h1 class="text-sm font-bold text-gray-800">Introduction to Programming</h1>
+    <div class="flex items-center text-sm font-semibold bg-gray-100 px-3 py-1 rounded-full">
+      <span class="mr-2">{{ participantCount }}</span>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8b00a3fc0ef442eb7682e0f9fed5f544dd2a72900d15e00488e13b393cfb26dd?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" alt="Participants" class="w-5 h-5" />
+    </div>
+  </div>
+
+  <!-- Participants Video Feed -->
+  <div class="flex items-center justify-between mt-6 bg-gray-100 p-4 rounded-xl">
+    <div class="flex-shrink-0 bg-gray-300 w-[150px] h-[100px] rounded-lg flex items-center justify-center font-bold text-xl shadow-inner">YOU</div>
+
+    <button aria-label="Previous participant" class="p-2 bg-white rounded-full shadow hover:bg-gray-50 transition-colors">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/043033aacbbe0c083c37432b73e839996a2b1414de1fc5ee5b49cba591489e92?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="w-6 h-6" alt="" />
+    </button>
+    <div class="flex gap-3 overflow-x-auto flex-grow mx-4 pb-2">
+      <div *ngFor="let i of [1,2,3,4,5,6]" class="flex-shrink-0 bg-gray-300 w-[150px] h-[100px] rounded-lg shadow"></div>
+    </div>
+    <button aria-label="Next participant" class="p-2 bg-white rounded-full shadow hover:bg-gray-50 transition-colors">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f9eb512ad0c1bf541e2ad48da564e99e9ff04e09a55bdfa0458c5be4035946df?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="w-6 h-6" alt="" />
+    </button>
+  </div>
+
+  <!-- Meeting Controls -->
+  <footer class="w-full mt-6 py-4 bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl flex justify-center items-center shadow-md">
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b457e443d9295c14162afb1e11352854dadb76adbaea1d3fb9537c5c702b439a?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" alt="Footer logo" class="h-10" />
+  </footer>
+</section>
