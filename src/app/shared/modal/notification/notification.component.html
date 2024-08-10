@@ -1,0 +1,17 @@
+<div class="h-full w-full  z-50">
+    <div (clickOutside)="closeModal()"
+        class="flex flex-col justify-center mx-auto items-center gap-8 shadow-lg w-full max-w-[520px] 
+        border border-gray-300 rounded-2xl h-fit py-8 p-4 bg-white">
+        <div class="w-fit h-fit relative">
+            <iconify-icon class="text-[#454545]" icon="ic:round-mail" width="50" height="50"></iconify-icon>
+            <iconify-icon class="absolute bottom-2 -right-[2px] text-green-500" icon="ic:baseline-check-circle"
+                width="22" height="22"></iconify-icon>
+        </div>
+        <h1 class="lg:text-2xl md:text-xl text-secondary-text-tw text-center font-[700] px-8">Michael Maxwell started a
+            synchronous class.</h1>
+        <p class="text-center text-base font-medium ">Michael Maxwell started a meet with your class 'DOJ' on 'DOJ
+            Certification'. Try to catch up with the meeting!.</p>
+        <button (click)="closeModal()" type="button"
+            class="bg-primary-tw text-white w-24 py-2 rounded-xl hover:bg-secondary-tw duration-300">Done</button>
+    </div>
+</div>

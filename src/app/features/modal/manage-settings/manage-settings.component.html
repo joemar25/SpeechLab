@@ -1,0 +1,36 @@
+<div class="h-full w-full  z-50">
+    <div (clickOutside)="closeModal()"
+        class="flex flex-col justify-center mx-auto items-center gap-8 shadow-lg w-full max-w-screen-lg 
+        border border-gray-300 rounded-2xl h-fit py-8 p-4 bg-white relative">
+        <iconify-icon (click)="closeModal()" class="absolute top-2 right-2 text-red-500 cursor-pointer" icon="carbon:close-filled" width="30" height="30"></iconify-icon>
+        <div class="w-full ">
+            <!-- form fields -->
+            <form class="w-full h-fit flex flex-col gap-8 px-8">
+                <h1 class="text-2xl font-semibold">Manage Account Password</h1>
+                <div class="grid lg:grid-cols-2 grid-cols-1 gap-x-16 gap-y-8">
+                    <div class="flex flex-col gap-1">
+                        <label for="email" class="uppercase font-medium ml-1">current password</label>
+                        <input type="text" class="bg-tertiary-tw px-4 border-2 border-black rounded-xl p-2 min-w-72 w-full">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="email" class="uppercase font-medium ml-1">email address</label>
+                        <input type="text" class="bg-tertiary-tw px-4 border-2 border-black rounded-xl p-2 w-full"
+                             value="example: Alromercado@gmail.com"  disabled>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="email" class="uppercase font-medium ml-1">new password</label>
+                        <input type="text" class="bg-tertiary-tw px-4 border-2 border-black rounded-xl p-2 w-full">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="email" class="uppercase font-medium ml-1">confirm new password</label>
+                        <input type="text" class="bg-tertiary-tw px-4 border-2 border-black rounded-xl p-2 w-full">
+                    </div>
+                </div>
+                <div class="w-full justify-end flex">
+                    <button type="submit" class="bg-primary-tw py-2 w-32  rounded-lg text-primary-text-tw hover:bg-secondary-tw duration-300">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
