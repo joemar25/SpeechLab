@@ -9,7 +9,7 @@ import { UserProfileComponent } from './features/student-layout/user/user-profil
 import { TeacherLedComponent } from './features/student-layout/class-lab/teacher-led/teacher-led.component';
 import { SelfAssesmentComponent } from './features/student-layout/class-lab/self-assesment/self-assesment.component';
 import { AssesmentCategoryComponent } from './features/student-layout/class-lab/self-assesment/assesment-category/assesment-category.component';
-import { VideoConferenceComponent } from './features/student-layout/meet/video-conference.component';
+import { VideoConferenceComponent } from './features/meet/video-conference/video-conference.component';
 import { TeacherSpeechLabComponent } from './features/teacher-layout/teacher-speech-lab/teacher-speech-lab.component';
 import { TeacherLayoutComponent } from './features/teacher-layout/teacher-layout.component';
 import { TaskListComponent } from './features/student-layout/task/task-list/task-list.component';
@@ -25,6 +25,7 @@ import { SpeechAnalyzerComponent } from './features/speech-analyzer/speech-analy
 import { RecordSpeechComponent } from './features/speech-analyzer/record-speech/record-speech.component';
 import { RecordListComponent } from './features/speech-analyzer/record-list/record-list.component';
 import { RecordReportComponent } from './features/speech-analyzer/record-report/record-report.component';
+import { MeetLayoutComponent } from './features/meet/meet-layout.component';
 
 
 export const routes: Routes = [
@@ -43,7 +44,6 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'class-lab', component: ClassLabComponent },
             { path: 'profile', component: UserProfileComponent },
-            { path: 'meet', component: VideoConferenceComponent },
             { path: 'task', component: TaskLayoutComponent},
             { path: 'task/task-detail', component: TaskDetailComponent},
             { path: 'task/task-list', component: TaskListComponent},
@@ -70,6 +70,14 @@ export const routes: Routes = [
             { path: 'record-list',component: RecordListComponent},
             { path: 'record-report',component: RecordReportComponent},
         ]
+    },
+    {
+         path: 'meet', component: MeetLayoutComponent ,
+         children: [
+
+        {path: 'video-conference', component: VideoConferenceComponent} ,
+         ]
+
     }
 ];
 @NgModule({

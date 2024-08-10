@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-record-speech',
   standalone: true,
@@ -12,6 +12,8 @@ export class RecordSpeechComponent {
   isRecording: boolean = false;
   recordingComplete: boolean = false;
   currentPhase: 'register' | 'question' | 'transcript' = 'register';
+
+  constructor(private router: Router) {}
 
   toggleRecording() {
     if (this.isRecording) {
@@ -45,8 +47,8 @@ export class RecordSpeechComponent {
     } else if (this.currentPhase === 'question') {
       this.currentPhase = 'transcript';
     } else {
-      // Here you would handle moving to the next step or saving the recording
-      console.log('Moving to next step after viewing transcript');
+      // Navigate to the speech-analyzer/record-report route
+      this.router.navigate(['/speech-analyzer/record-report']);
     }
   }
 }
