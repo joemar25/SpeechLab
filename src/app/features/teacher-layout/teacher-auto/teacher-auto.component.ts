@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 export class TeacherAutoComponent {
   selectedMode: string = '';
   selectedStudents: number[] = [];
+  maxStudents: number = 42;
+
   students = [
     { name: 'John Doe', id: '001' },
   { name: 'Jane Smith', id: '002' },
@@ -50,56 +52,103 @@ export class TeacherAutoComponent {
   { name: 'Sophia Moore', id: '036' },
   { name: 'Benj Taylor', id: '037' },
   { name: 'Isa Ason', id: '038' },
-  { name: 'Lucas Thomas', id: '039' },
-  { name: 'Mia Jackson', id: '040' },
-  { name: 'Ethan White', id: '041' },
-  { name: 'Char Harris', id: '042' }
+  { name: 'Lucas Thomas', id: '039' }
   ];
 
-  get leftColumnStudents() {
-    return this.students.slice(0, 24).map((student, index) => ({ ...student, index }));
+  constructor() {
+    this.fillWithDefaultStudents();
   }
 
-  get rightColumnStudents() {
-    return this.students.slice(24).map((student, index) => ({ ...student, index: index + 24 }));
+fillWithDefaultStudents() {
+  const defaultStudentCount = this.maxStudents - this.students.length;
+  for (let i = 0; i < defaultStudentCount; i++) {
+    this.students.push({
+      name: 'Student Name',
+      id: `Absent - ${i + 1}` 
+    });
   }
+}
+
+
+  isDefaultStudent(student: any): boolean {
+    return student.id.startsWith('Absent - ');
+  }  
+
+  get leftColumnStudents() {
+    return this.students
+      .filter((_, index) => index % 7 < 4) 
+      .map((student, index) => ({ ...student, index }));
+  }
+  
+  get rightColumnStudents() {
+    return this.students
+      .filter((_, index) => index % 7 >= 4)
+      .map((student, index) => ({ ...student, index: index + this.students.length / 2 }));
+  }
+  
+
   selectMode(mode: string) {
     if (this.selectedMode === mode) {
-      // Toggle off the mode
       this.selectedMode = '';
       this.selectedStudents = [];
     } else {
-      // Set the new mode
       this.selectedMode = mode;
-      // Clear selected students if not in "1v1" mode
       if (mode !== '1v1') {
         this.selectedStudents = [];
       }
     }
   }
+
   selectStudent(index: number) {
-    if (!this.selectedMode) {
-      // Do not allow selection if no mode is selected
-      return;
+    const student = this.students[index];
+    
+    if (this.isDefaultStudent(student)) {
+        console.log('Default student cannot be selected:', student);
+        return;
     }
 
-    const isSelected = this.selectedStudents.includes(index);
+    if (!this.selectedMode) {
+        console.log('Select a mode first before choosing a student.');
+        return;
+    }
 
     if (this.selectedMode === '1v1') {
-      // Allow only one student to be selected
-      this.selectedStudents = isSelected ? [] : [index];
-    } else if (this.selectedMode === 'Group') {
-      // Limit the number of selected students to 5
-      if (isSelected) {
-        this.selectedStudents = this.selectedStudents.filter(i => i !== index);
-      } else if (this.selectedStudents.length < 5) {
-        this.selectedStudents.push(index);
-      }
-    } else if (this.selectedMode === 'Custom') {
-      // Allow unlimited selection
-      this.selectedStudents = isSelected 
-        ? this.selectedStudents.filter(i => i !== index)
-        : [...this.selectedStudents, index];
+        if (this.selectedStudents.length < 1) {
+            this.selectedStudents.push(index);
+        } else {
+            const studentIndex = this.selectedStudents.indexOf(index);
+            if (studentIndex > -1) {
+                this.selectedStudents.splice(studentIndex, 1);
+            } else {
+                this.selectedStudents = [index];
+            }
+        }
+    } else {
+        const studentIndex = this.selectedStudents.indexOf(index);
+        if (studentIndex > -1) {
+            this.selectedStudents.splice(studentIndex, 1);
+        } else {
+            this.selectedStudents.push(index);
+        }
     }
+}
+
+
+  confirmSelection() {
+    console.log('Confirmed student selection:', this.selectedStudents);
+    this.selectedStudents = [];
+    this.selectedMode = '';
+  }
+
+  cancelSelection() {
+    this.selectedStudents = [];
+  }
+
+  isButtonDisabled(mode: string): boolean {
+    return this.selectedMode === '1v1' && this.selectedMode !== mode;
+  }
+
+  isConfirmCancelVisible(): boolean {
+    return this.selectedMode === '1v1' && this.selectedStudents.length === 1;
   }
 }
