@@ -19,3 +19,10 @@
   .modal-open {
     overflow: hidden;
   }
+
+  .scroll-bar-none{
+    scrollbar-width: none;
+  }
+  .scroll-bar-none::-webkit-scrollbar-button{
+    display: none;
+  }

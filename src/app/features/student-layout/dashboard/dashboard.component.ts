@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NotificationComponent } from "../../../shared/modal/notification/notification.component";
+import { Subscription } from 'rxjs';
+import { NotificationService } from '../../../../app-services/modal-services/notification.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 interface LanguageProgress {
   language: string;
@@ -30,11 +34,25 @@ interface Course {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NotificationComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [  
+        style({ opacity: 1 }),
+        animate('200ms', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class DashboardComponent {
+  
   pageTitle = "Self-Assessment Progress";
 
   welcomeMessage = {
@@ -131,4 +149,6 @@ export class DashboardComponent {
       // Implement the logic to play the audio
     }
   }
+
+  
 }

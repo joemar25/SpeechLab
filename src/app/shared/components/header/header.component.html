@@ -1,32 +1,93 @@
 <header class="w-full py-2 px-2 sm:px-4 lg:px-8">
-    <div class="w-full rounded-2xl shadow-sd py-3 sm:py-4 px-3 sm:px-4 lg:px-8 bg-neutral-50">
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-        <div class="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4 lg:gap-8 w-full sm:w-auto">
-          <div class="flex items-center gap-2 sm:gap-3 text-secondary-text-tw">
-            <svg width="24" height="24" sm:width="28" sm:height="28" lg:width="32" lg:height="32" viewBox="0 0 43 47" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M38.4365 4.52311H36.3532V0.356445H32.1865V4.52311H11.3532V0.356445H7.18652V4.52311H5.10319C2.81152 4.52311 0.936523 6.39811 0.936523 8.68978V42.0231C0.936523 44.3148 2.81152 46.1898 5.10319 46.1898H38.4365C40.7282 46.1898 42.6032 44.3148 42.6032 42.0231V8.68978C42.6032 6.39811 40.7282 4.52311 38.4365 4.52311ZM38.4365 42.0231H5.10319V19.1064H38.4365V42.0231ZM38.4365 14.9398H5.10319V8.68978H38.4365V14.9398Z" fill="currentColor" />
-            </svg>
-            <p class="text-xs sm:text-sm whitespace-nowrap">July 25, 2024</p>
-          </div>
-          <p class="text-xs sm:text-sm whitespace-nowrap">03:42:00 PM</p>
+  <div class="w-full rounded-2xl shadow-sd py-3 sm:py-4 px-3 sm:px-4 lg:px-8 bg-neutral-50">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+      <div class="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4 lg:gap-8 w-full sm:w-auto">
+        <div class="flex items-center gap-2 sm:gap-3 text-secondary-text-tw">
+          <svg width="24" height="24" sm:width="28" sm:height="28" lg:width="32" lg:height="32" viewBox="0 0 43 47"
+            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M38.4365 4.52311H36.3532V0.356445H32.1865V4.52311H11.3532V0.356445H7.18652V4.52311H5.10319C2.81152 4.52311 0.936523 6.39811 0.936523 8.68978V42.0231C0.936523 44.3148 2.81152 46.1898 5.10319 46.1898H38.4365C40.7282 46.1898 42.6032 44.3148 42.6032 42.0231V8.68978C42.6032 6.39811 40.7282 4.52311 38.4365 4.52311ZM38.4365 42.0231H5.10319V19.1064H38.4365V42.0231ZM38.4365 14.9398H5.10319V8.68978H38.4365V14.9398Z"
+              fill="currentColor" />
+          </svg>
+          <p class="text-xs sm:text-sm whitespace-nowrap">{{currentDate | date: 'fullDate'}}</p>
         </div>
-        
-        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 lg:gap-8 w-full sm:w-auto mt-3 sm:mt-0">
-          <div class="relative w-full sm:w-auto flex-grow sm:flex-grow-0 max-w-[400px]">
-            <input type="text" placeholder="Search..." class="w-full sm:w-[200px] md:w-[250px] lg:w-[300px] py-1.5 sm:py-2 pl-3 sm:pl-4 pr-10 text-xs sm:text-sm text-gray-700 bg-tertiary-tw rounded-xl border border-black focus:outline-none focus:ring-2 focus:ring-blue-200" />
-            <button class="absolute right-0 top-0 h-full px-3 sm:px-4 bg-navy-700 text-white rounded-r-xl p-1.5 sm:p-2 bg-primary-tw focus:outline-none focus:ring-2 focus:ring-navy-500">
-              <iconify-icon icon="bitcoin-icons:search-filled" width="16" height="16" sm:width="18" sm:height="18" lg:width="20" lg:height="20"></iconify-icon>
-            </button>
+        <p class="text-xs sm:text-sm whitespace-nowrap">{{currentTime | date:'hh:mm:ss a'}}</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 lg:gap-6 w-full sm:w-auto mt-3 sm:mt-0">
+        <div class="relative w-full sm:w-auto flex-grow sm:flex-grow-0 max-w-[400px]">
+          <input type="text" placeholder="Search..."
+            class="w-full sm:w-[200px] md:w-[250px] lg:w-[300px] py-1.5 sm:py-2 pl-3 sm:pl-4 pr-10 text-xs sm:text-sm text-gray-700 bg-tertiary-tw rounded-xl border border-black focus:outline-none focus:ring-2 focus:ring-blue-200" />
+          <button
+            class="absolute right-0 top-0 h-full px-3 sm:px-4 bg-navy-700 text-white rounded-r-xl p-1.5 sm:p-2 bg-primary-tw focus:outline-none focus:ring-2 focus:ring-navy-500">
+            <iconify-icon icon="bitcoin-icons:search-filled" width="16" height="16" sm:width="18" sm:height="18"
+              lg:width="20" lg:height="20"></iconify-icon>
+          </button>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-3 lg:gap-2 flex-shrink-0 relative">
+          <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full relative" (click)="toggleNotification()">
+            <iconify-icon icon="ic:outline-notifications" width="30" height="30" sm:width="26" sm:height="26"
+              lg:width="28" lg:height="28"></iconify-icon>
+            @if (this.notification) {
+            <div class="absolute right-0 top-0 w-4 h-4 bg-red-500 rounded-full flex justify-center items-center">
+              <span class="text-[10px] text-white"><small>08</small></span>
+            </div>
+            }
+          </button>
+          <!-- dropdown -->
+          @if (this.dropDown) {
+          <div @fadeAnimation (clickOutside)="closeDropdown()"
+            class="absolute right-12 top-12 z-10 mt-2 min-w-96 max-h-56 w-full overflow-hidden scroll-bar-none overflow-y-auto border border-gray-300
+            origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="py-1" role="none">
+              <div (click)="openNotification()" [ngClass]="{ 'text-secondary-tw': notification === true }"
+                class="px-4 py-2 text-sm text-quinary flex justify-between items-center gap-2 cursor-pointer"
+                role="menuitem" tabindex="-1" id="menu-item-0">
+                <div class="flex gap-3 justify-center items-center">
+                  <iconify-icon icon="ic:round-mail" width="30" height="30"></iconify-icon>
+                  <div class="flex flex-col">
+                    {{name}}
+                    <small>started asynchronous class</small>
+                  </div>
+                </div>
+                <div>
+                  <p>Few seconds ago</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0">
-            <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full">
-              <iconify-icon icon="ic:outline-notifications" width="24" height="24" sm:width="26" sm:height="26" lg:width="28" lg:height="28"></iconify-icon>
-            </button>
-            <a [routerLink]="['/student/profile']" class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full">
-              <iconify-icon icon="solar:user-circle-bold-duotone" width="30" height="30" sm:width="26" sm:height="26" lg:width="28" lg:height="28"></iconify-icon>
-            </a>
+          }
+          <!-- end dropdown [routerLink]="['/student/profile']"-->
+          <div (click)="toggleDropdown()" class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+            <iconify-icon icon="solar:user-circle-bold-duotone" width="30" height="30" sm:width="26" sm:height="26"
+              lg:width="28" lg:height="28"></iconify-icon>
           </div>
+          @if (this.profileDropdown) {
+          <div @fadeAnimation (clickOutside)="closeProfileDropdown()" class="absolute right-0 top-12 z-10 mt-2 min-w-56 max-h-56 w-full overflow-hidden scroll-bar-none overflow-y-auto 
+              origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-300"
+            tabindex="-1">
+            <div class="p-2 w-full flex flex-col gap-2" role="none">
+              <div [routerLink]="['/student/profile']" class="flex justify-start items-center gap-3 cursor-pointer">
+                <iconify-icon icon="solar:user-circle-bold-duotone" width="40" height="40" sm:width="26" sm:height="26"
+                  lg:width="28" lg:height="28"></iconify-icon>
+                <div class="flex flex-col font-medium">
+                  <p>
+                    {{name}}
+                  </p>
+                  <small>ID NO: 1146489955</small>
+                </div>
+              </div>
+              <div (click)="openSettings()"
+               class="flex justify-start items-center gap-4 text-secondary-tw cursor-pointer">
+                <iconify-icon class="ml-[6px]" icon="iconamoon:settings-light" width="30" height="30"></iconify-icon>
+                <p class="font-medium">Manage Settings</p>
+              </div>
+            </div>
+          </div>
+          }
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>

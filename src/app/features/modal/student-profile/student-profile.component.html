@@ -1,0 +1,84 @@
+
+<div class="h-full w-full  z-50">
+    <div (clickOutside)="closeModal()"
+        class="flex flex-col justify-center mx-auto items-center gap-8 shadow-lg w-full max-w-screen-lg 
+        border border-gray-300 rounded-2xl h-fit py-8 p-4 bg-white relative">
+        <iconify-icon (click)="closeModal()" class="absolute top-2 right-2 text-red-500 cursor-pointer" icon="carbon:close-filled" width="30" height="30"></iconify-icon>
+        <div class="w-full ">
+            <!-- form fields -->
+            <form (ngSubmit)="updateProfileInfo()" class="w-full h-fit flex flex-col gap-4 px-8">
+                <h1 class="text-2xl font-semibold">Update Profile</h1>
+                <div class="grid lg:grid-cols-2 grid-cols-1 gap-x-16 gap-y-6">
+                    <div class="flex flex-col gap-1">
+                        <label for="nationality" class="uppercase font-medium">Nationality</label>
+                        <div class="relative">
+                            <select id="nationality" class="appearance-none bg-white w-full border-2 border-black rounded-lg p-2 pr-8">
+                                <option value="">Select Nationality</option>
+                                <!-- Add nationality options here -->
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="province" class="uppercase font-medium">Province</label>
+                        <div class="relative">
+                            <select id="province" class="appearance-none bg-white w-full border-2 border-black rounded-lg p-2 pr-8">
+                                <option value="">Select Province</option>
+                                <!-- Add province options here -->
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="address" class="uppercase font-medium">Address</label>
+                        <input type="text" id="address" class="bg-white w-full border-2 border-black rounded-lg p-2">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="town" class="uppercase font-medium">Town/City/Municipality</label>
+                        <div class="relative">
+                            <select id="town" class="appearance-none bg-white w-full border-2 border-black rounded-lg p-2 pr-8">
+                                <option value="">Select Town/City/Municipality</option>
+                                <!-- Add town options here -->
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="birthplace" class="uppercase font-medium">Place of Birth</label>
+                        <input type="text" id="birthplace" class="bg-white w-full border-2 border-black rounded-lg p-2">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="barangay" class="uppercase font-medium">Barangay</label>
+                        <div class="relative">
+                            <select id="barangay" class="appearance-none bg-white w-full border-2 border-black rounded-lg p-2 pr-8">
+                                <option value="">Select Barangay</option>
+                                <!-- Add barangay options here -->
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="birthdate" class="uppercase font-medium">Date of Birth</label>
+                        <input type="date" id="birthdate" class="bg-white w-full border-2 border-black rounded-lg p-2">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="street" class="uppercase font-medium">House and Street No.</label>
+                        <input type="text" id="street" class="bg-white w-full border-2 border-black rounded-lg p-2">
+                    </div>
+                </div>
+                <div class="w-full justify-end flex">
+                    <button type="submit" class="bg-primary-tw py-2 w-32 rounded-lg text-primary-text-tw hover:bg-secondary-tw duration-300">Save changes</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

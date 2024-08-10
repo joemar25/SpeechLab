@@ -18,6 +18,7 @@ module.exports = {
 
         'primary-text-tw': '#ECE6F0',
         'secondary-text-tw': '#000000',
+        'green-tw': '#00FF3C',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -32,6 +33,10 @@ module.exports = {
       boxShadow: {
         'sd': '0px 2px 20px 5px rgba(0, 0, 0, 0.3)',
         'inner-custom': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+      },
+      screens: {
+        'xs': '440px',
+
       }
     },
   },
