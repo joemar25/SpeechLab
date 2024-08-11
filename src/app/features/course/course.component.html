@@ -1,0 +1,90 @@
+<section class="flex flex-col max-w-[1200px] mx-auto">
+    <header class="flex flex-col px-3 pt-6 w-full text-white bg-amber-500 rounded-xl h-[150px] mb-4">
+      <div class="flex flex-wrap gap-4 justify-between items-end py-12 w-full">
+        <h1 class="text-lg font-extrabold">{{ courseTitle }}</h1>
+        <div class="flex gap-3 items-center text-xs font-medium">
+          <p class="self-stretch my-auto">{{ instructor }}</p>
+          <img loading="lazy" [src]="'https://cdn.builder.io/api/v1/image/assets/TEMP/376e475ed9f9b754b91dcc55d952718f2103538ab0a4bcba0392182bdc221b09?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea'" [alt]="instructor + '\'s profile picture'" class="object-contain shrink-0 self-stretch my-auto rounded-full aspect-[1.14] w-[40px]" />
+        </div> 
+      </div>
+    </header>
+  
+    <div class="grid grid-cols-4 gap-4">
+      <aside class="col-span-1">
+        <div class="bg-white rounded-xl shadow-[4px_4px_12px_rgba(0,0,0,0.25)] p-3 mb-4">
+          <h2 class="flex gap-2 items-center text-base font-bold text-black mb-2">
+            <img [src]="meetIconUrl" alt="Meet icon" class="w-5 h-5">
+            <span>Meet</span>
+          </h2>
+          <div class="flex justify-between items-center text-sm">
+            <p class="text-black">{{ meetingTime }}</p>
+            <a href="#" class="text-amber-500">JOIN</a>
+          </div>
+        </div>
+  
+        <div class="h-80 bg-white rounded-xl shadow-[4px_4px_12px_rgba(0,0,0,0.25)] p-3">
+          <h2 class="flex gap-2 items-center text-base font-bold text-black mb-2">
+            <span>Upcoming Tasks</span>
+          </h2>
+          @for (task of upcomingTasks; track task.id) {
+            <div class="flex justify-between items-start text-sm mb-2">
+              <p class="font-medium">{{ task.title }}</p>
+              <p [class]="getStatusColor(task.status)" class="text-xs font-bold">
+                {{ task.status | uppercase }}
+              </p>
+            </div>
+          }
+        </div>
+      </aside>
+  
+      <main class="col-span-3">
+        @for (item of lessonsAndTasks; track item.id) {
+          @if (item.itemType === 'task') {
+            <div 
+            [routerLink]="['/student/task/task-detail']"
+              (click)="toggleTaskStatus(item)"
+              class="bg-white rounded-xl shadow-[4px_4px_12px_rgba(0,0,0,0.25)] p-3 mb-4 cursor-pointer"
+            >
+              <div class="flex items-center gap-4">
+                <img [src]="getItemIcon(item.itemType)" 
+                     [alt]="item.itemType + ' icon'" 
+                     class="w-10 h-10">
+                <div class="flex-grow">
+                  <h2 class="text-base font-bold text-black">{{ item.title }}</h2>
+                  <p class="text-sm text-gray-600">
+                    {{ getItemDetails(item) }}
+                  </p>
+                  <!-- <p [class]="getStatusColor(item.status)" class="text-xs font-bold mt-1">
+                    {{ item.status | uppercase }}
+                  </p> -->
+                </div>
+                <button aria-label="More options" class="bg-transparent border-0 p-0 cursor-pointer">
+                  <img [src]="moreIconUrl" alt="More options" class="w-6 h-6">
+                </button>
+              </div>
+            </div>
+          } @else {
+            <div [routerLink]="['/student/lesson/lesson-detail']" class="bg-white rounded-xl shadow-[4px_4px_12px_rgba(0,0,0,0.25)] p-3 mb-4">
+              <div class="flex items-center gap-4">
+                <img [src]="getItemIcon(item.itemType)" 
+                     [alt]="item.itemType + ' icon'" 
+                     class="w-10 h-10">
+                <div class="flex-grow">
+                  <h2 class="text-base font-bold text-black">{{ item.title }}</h2>
+                  <!-- <p class="text-sm text-gray-600">
+                    {{ getItemDetails(item) }}
+                  </p> -->
+                  <!-- <p [class]="getStatusColor(item.status)" class="text-xs font-bold mt-1">
+                    {{ item.status | uppercase }}
+                  </p> -->
+                </div>
+                <button aria-label="More options" class="bg-transparent border-0 p-0 cursor-pointer">
+                  <img [src]="moreIconUrl" alt="More options" class="w-6 h-6">
+                </button>
+              </div>
+            </div>
+          }
+        }
+      </main>
+    </div>
+  </section>

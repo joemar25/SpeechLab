@@ -12,9 +12,7 @@ import { AssesmentCategoryComponent } from './features/student-layout/class-lab/
 import { VideoConferenceComponent } from './features/meet/video-conference/video-conference.component';
 import { TeacherSpeechLabComponent } from './features/teacher-layout/teacher-speech-lab/teacher-speech-lab.component';
 import { TeacherLayoutComponent } from './features/teacher-layout/teacher-layout.component';
-import { TaskListComponent } from './features/student-layout/task/task-list/task-list.component';
 import { TaskDetailComponent } from './features/student-layout/task/task-detail/task-detail.component';
-import { TaskLayoutComponent } from './features/student-layout/task/task-layout/task-layout.component';
 import { TeacherSelectionComponent } from './features/teacher-layout/teacher-selection/teacher-selection.component';
 import { TeacherAutoComponent } from './features/teacher-layout/teacher-auto/teacher-auto.component';
 import { TeacherManualComponent } from './features/teacher-layout/teacher-manual/teacher-manual.component';
@@ -28,6 +26,8 @@ import { RecordReportComponent } from './features/speech-analyzer/record-report/
 import { MeetLayoutComponent } from './features/meet/meet-layout.component';
 import { HomeLayoutComponent } from './shared/components/home-layout/home-layout.component';
 import { DictionaryComponent } from './features/dictionary/dictionary.component';
+import { CourseComponent } from './features/course/course.component';
+import { TaskComponent } from './features/student-layout/task/task.component';
 
 
 export const routes: Routes = [
@@ -46,9 +46,9 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'class-lab', component: ClassLabComponent },
             { path: 'profile', component: UserProfileComponent },
-            { path: 'task', component: TaskLayoutComponent},
+            { path: 'task', component: TaskComponent},
+            { path: 'course-details', component: CourseComponent},
             { path: 'task/task-detail', component: TaskDetailComponent},
-            { path: 'task/task-list', component: TaskListComponent},
             {path:'class-lab/teacher-led',component: TeacherLedComponent},
             {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
             {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},

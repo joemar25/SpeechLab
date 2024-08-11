@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -20,14 +21,16 @@ interface Lesson {
 
 type LessonOrTask = Lesson | Task;
 
+
 @Component({
-  selector: 'app-task-list',
+  selector: 'app-course',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.css'
+  templateUrl: './course.component.html',
+  styleUrl: './course.component.css'
 })
-export class TaskListComponent {
+export class CourseComponent {
+
   courseTitle = 'Introduction to Cyber Security';
   instructor = 'Michael Maxwell';
   meetingTime = '8:00AM- 9:30PM';

@@ -1,1 +1,46 @@
-<p>task works!</p>
+<section class="flex flex-col items-start w-full max-w-[466px]">
+    <!-- Main Heading -->
+    <h2 class="text-2xl font-bold text-black mb-4">Courses with Tasks</h2>
+    
+    <!-- Navigation Buttons -->
+    <nav class="flex gap-2 items-center w-full mb-4">
+      <button class="px-4 py-2 bg-amber-500 rounded-2xl flex-1 text-sm text-white">Beginner</button>
+      <button class="px-4 py-2 rounded-2xl bg-slate-800 flex-1 text-sm text-white">Intermediate</button>
+      <button class="px-4 py-2 rounded-2xl bg-slate-800 flex-1 text-sm text-white">Advanced</button>
+    </nav>
+    
+    <!-- Article -->
+    <article  [routerLink]="['/student/course-details']" class="relative flex flex-col w-full max-w-[350px] min-h-[300px] bg-white rounded-2xl shadow-[8px_8px_12px_rgba(0,0,0,0.4)] overflow-hidden">
+      <!-- Background Decoration -->
+      <div class="bg-amber-500 h-[120px] w-full"></div>
+      
+      <!-- Main Content -->
+      <div class="z-10 flex flex-col w-full p-4">
+        <!-- Status -->
+        <!-- <div class="flex gap-1 items-center text-sm font-semibold text-green-600 mb-4">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/526e76e20e5a37cec96a17a8b9d5f55a9a8e617060409078d20d4e4c36b78cf3?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-5 h-5 object-contain" alt="" />
+          <span>ENROLLED</span>
+        </div>
+         -->
+        <!-- Course Info -->
+        <div class="flex flex-col mt-4 w-full">
+          <div class="flex justify-between items-center w-full mb-4">
+            <!-- Instructor Info -->
+            <div class="flex items-center text-sm font-medium text-black">
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/376e475ed9f9b754b91dcc55d952718f2103538ab0a4bcba0392182bdc221b09?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-8 h-8 rounded-full mr-2" alt="Profile picture of Michael Maxwell" />
+              <span>Michael Maxwell</span>
+            </div>
+            
+            <!-- Course Icons -->
+            <div class="flex gap-2">
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a6b2e5ad638969760b507b4a6c41b32318d83f0bfeaa85e4f39269e5efc88c9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" />
+              <!-- <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8c672ab15af1b9fcd81d423e16e0af62a652bc8d01876e05daa381af4f94d163?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" /> -->
+            </div>
+          </div>
+          
+          <!-- Course Title -->
+          <h3 class="text-lg font-medium text-black">Introduction to Cyber Security</h3>
+        </div>
+      </div>
+    </article>
+  </section>
