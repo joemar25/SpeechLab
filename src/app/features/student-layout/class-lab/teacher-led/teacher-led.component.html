@@ -31,11 +31,14 @@
   <h2 class="text-3xl font-bold text-black">Courses</h2>
   <div class="flex flex-wrap gap-4 justify-between items-center mt-3 w-full text-sm text-black">
     <nav class="flex flex-wrap gap-2 items-center">
-      @for (category of difficulty; track category) {
-        <button class="px-3 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 transition-colors">
-          {{ category }}
-        </button>
-      }
+      <button
+        *ngFor="let level of difficulty"
+        [class.bg-neutral-300]="level === selectedDifficulty"
+        class="px-3 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 transition-colors"
+        (click)="onDifficultyChange(level)"
+      >
+        {{ level }}
+      </button>
     </nav>
     <button class="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 transition-colors">
       <span>All</span>
@@ -44,7 +47,7 @@
   </div>
   <div class="mt-6 w-full">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      @for (course of courses; track course.title) {
+      @for (course of displayedCourses; track course.title) {
         <article (click)="openModal(course)" class="flex flex-col rounded-xl bg-neutral-200 shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow">
           <img [src]="course.imageUrl" [alt]="course.title + ' course image'" class="w-full h-56 object-cover" />
           <div class="p-4">
@@ -56,12 +59,6 @@
               <img src="https://cdn-icons-png.flaticon.com/512/8212/8212730.png" class="w-5 h-5" alt="More options icon" />
             </div>
             <h3 class="text-lg font-medium mb-2">{{ course.title }}</h3>
-            <!-- <div class="flex items-center gap-2 mb-2">
-              <span class="text-xs font-semibold">{{ course.progress }}%</span>
-              <div class="w-full bg-zinc-300 rounded-full h-2">
-                <div class="bg-amber-500 h-2 rounded-full" [style.width]="course.progress + '%'"></div>
-              </div>
-            </div> -->
             <span class="text-sm text-black text-opacity-80">{{ course.level }}</span>
             <div class="flex justify-between items-center mt-3 text-xs">
               <span>{{ course.duration }} hours</span>
