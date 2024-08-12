@@ -28,6 +28,7 @@ import { HomeLayoutComponent } from './shared/components/home-layout/home-layout
 import { DictionaryComponent } from './features/dictionary/dictionary.component';
 import { CourseComponent } from './features/course/course.component';
 import { TaskComponent } from './features/student-layout/task/task.component';
+import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 
 
 export const routes: Routes = [
@@ -58,6 +59,7 @@ export const routes: Routes = [
         path: 'teacher', component: TeacherLayoutComponent,
         children: [
             { path: 'speechlab',component: TeacherSpeechLabComponent},
+            { path: 't-dashboard',component: TDashboardComponent },
             { path: 'teacher-selection', component: TeacherSelectionComponent },
             { path: 'teacher-auto', component: TeacherAutoComponent },
             { path: 'teacher-manual', component: TeacherManualComponent },
