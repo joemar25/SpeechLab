@@ -31,6 +31,7 @@ import { TaskComponent } from './features/student-layout/task/task.component';
 import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
+import { ManageClassComponent } from './features/teacher-layout/manage-class/manage-class.component';
 
 export const routes: Routes = [
     {
@@ -66,6 +67,7 @@ export const routes: Routes = [
         { path: 'teacher-manual', component: TeacherManualComponent },
         { path: 'seat-arrangement', component: SeatArrangementComponent },
         { path: 'manual-dashboard', component: ManualDashboardComponent },
+        { path: 'manage-class', component: ManageClassComponent },
       ]
     },
     {
