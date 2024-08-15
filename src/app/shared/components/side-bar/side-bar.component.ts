@@ -35,7 +35,7 @@ export class SideBarComponent {
     { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class' },
     { label: 'Manage Courses', icon: 'mdi:book-open-variant', route: '/teacher/manage-courses' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
-    { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/teacher/speech-lab' },
+    { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/teacher/speechlab' },
     { label: 'Dictionary', icon: 'mdi:dictionary', route: '/dictionary/d-search' },
     { label: 'Text to Speech', svgIcon: 'text-to-speech-icon', route: '/teacher/text-to-speech' },
     { label: 'Speech Access', icon: 'mdi:microphone', route: '/teacher/speech-access' },
@@ -44,7 +44,7 @@ export class SideBarComponent {
   AdminMenu: MenuItem[] = [
     { label: 'Manage Users', icon: 'mdi:account-cog', route: '/admin/manage-users' },
     { label: 'count', icon: 'mdi:account-cog', route: '/admin/count' },
-    { label: 'speechlab', icon: 'mdi:account-cog', route: '/admin/speech-lab' },
+    { label: 'speechlab', icon: 'mdi:account-cog', route: '/admin/speechlab' },
   ];
 
 

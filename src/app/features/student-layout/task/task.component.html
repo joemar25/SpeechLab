@@ -4,16 +4,22 @@
   
   <!-- Navigation Buttons -->
   <nav class="flex gap-2 items-center mb-4">
-    <button class="px-4 py-2 bg-amber-500 rounded-2xl flex-1 text-sm text-white">All</button>
-    <button class="px-4 py-2 rounded-2xl bg-slate-800 flex-1 text-sm text-white">Beginner</button>
-    <button class="px-4 py-2 rounded-2xl bg-slate-800 flex-1 text-sm text-white">Intermediate</button>
-    <button class="px-4 py-2 rounded-2xl bg-slate-800 flex-1 text-sm text-white">Advanced</button>
+    <button 
+      *ngFor="let level of difficultyLevels"
+      (click)="filterCourses(level)"
+      [class.bg-amber-500]="selectedLevel === level"
+      [class.bg-slate-800]="selectedLevel !== level"
+      class="px-4 py-2 rounded-2xl flex-1 text-sm text-white">
+      {{ level }}
+    </button>
   </nav>
   
   <!-- Courses with Tasks -->
   <div class="flex flex-row flex-wrap gap-4 w-full">
-    <!-- Course 1 -->
-    <article [routerLink]="['/student/course-details']" class="relative flex flex-col w-full max-w-[350px] min-h-[300px] bg-white rounded-2xl shadow-[8px_8px_12px_rgba(0,0,0,0.4)] overflow-hidden">
+    <article 
+      *ngFor="let course of filteredCourses"
+      [routerLink]="['/student/course-details']" 
+      class="relative flex flex-col w-full max-w-[350px] min-h-[300px] bg-white rounded-2xl shadow-[8px_8px_12px_rgba(0,0,0,0.4)] overflow-hidden">
       <!-- Background Decoration -->
       <div class="bg-amber-500 h-[120px] w-full"></div>
       
@@ -22,65 +28,25 @@
         <!-- Instructor Info -->
         <div class="flex justify-between items-center w-full mb-4">
           <div class="flex items-center text-sm font-medium text-black">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/376e475ed9f9b754b91dcc55d952718f2103538ab0a4bcba0392182bdc221b09?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-8 h-8 rounded-full mr-2" alt="Profile picture of Michael Maxwell" />
-            <span>Michael Maxwell</span>
+            <img [src]="course.instructorImage" class="w-8 h-8 rounded-full mr-2" [alt]="'Profile picture of ' + course.instructor" />
+            <span>{{ course.instructor }}</span>
           </div>
           <div class="flex gap-2">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a6b2e5ad638969760b507b4a6c41b32318d83f0bfeaa85e4f39269e5efc88c9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" />
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a6b2e5ad638969760b507b4a6c41b32318d83f0bfeaa85e4f39269e5efc88c9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" />
           </div>
         </div>
         <!-- Course Title -->
-        <h3 class="text-lg font-medium text-black">DOJ Certification</h3>
-        <!-- Tasks List -->
-        <ul class="list-disc list-inside mt-2">
-          <li>Task 1: Complete introductory module</li>
-          <li>Task 2: Submit initial assignment</li>
-          <li>Task 3: Attend review session</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- Course 2 -->
-    <article [routerLink]="['/student/course-details']" class="relative flex flex-col w-full max-w-[350px] min-h-[300px] bg-white rounded-2xl shadow-[8px_8px_12px_rgba(0,0,0,0.4)] overflow-hidden">
-      <div class="bg-amber-500 h-[120px] w-full"></div>
-      <div class="z-10 flex flex-col w-full p-4">
-        <div class="flex justify-between items-center w-full mb-4">
-          <div class="flex items-center text-sm font-medium text-black">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/376e475ed9f9b754b91dcc55d952718f2103538ab0a4bcba0392182bdc221b09?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-8 h-8 rounded-full mr-2" alt="Profile picture of Michael Maxwell" />
-            <span>Michael Maxwell</span>
-          </div>
-          <div class="flex gap-2">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a6b2e5ad638969760b507b4a6c41b32318d83f0bfeaa85e4f39269e5efc88c9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" />
+        <h3 class="mt-2 text-lg font-bold text-black mb-2">{{ course.title }}</h3>
+        <!-- Course Level and Rating -->
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-600">{{ course.level }}</span>
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            <span class="ml-1 text-sm font-medium text-gray-600">{{ course.rating.toFixed(1) }}</span>
           </div>
         </div>
-        <h3 class="text-lg font-medium text-black">Prompt Engineering</h3>
-        <ul class="list-disc list-inside mt-2">
-          <li>Task 1: Complete the prompt design exercise</li>
-          <li>Task 2: Submit prompt review</li>
-          <li>Task 3: Participate in prompt optimization workshop</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- Course 3 -->
-    <article [routerLink]="['/student/course-details']" class="relative flex flex-col w-full max-w-[350px] min-h-[300px] bg-white rounded-2xl shadow-[8px_8px_12px_rgba(0,0,0,0.4)] overflow-hidden">
-      <div class="bg-amber-500 h-[120px] w-full"></div>
-      <div class="z-10 flex flex-col w-full p-4">
-        <div class="flex justify-between items-center w-full mb-4">
-          <div class="flex items-center text-sm font-medium text-black">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/376e475ed9f9b754b91dcc55d952718f2103538ab0a4bcba0392182bdc221b09?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-8 h-8 rounded-full mr-2" alt="Profile picture of Michael Maxwell" />
-            <span>Michael Maxwell</span>
-          </div>
-          <div class="flex gap-2">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2a6b2e5ad638969760b507b4a6c41b32318d83f0bfeaa85e4f39269e5efc88c9?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" class="w-6 h-6 object-contain" alt="" />
-          </div>
-        </div>
-        <h3 class="text-lg font-medium text-black">Machine Learning Basics</h3>
-        <ul class="list-disc list-inside mt-2">
-          <li>Task 1: Complete basic ML algorithm tutorial</li>
-          <li>Task 2: Implement ML model in a project</li>
-          <li>Task 3: Review ML model performance</li>
-        </ul>
       </div>
     </article>
   </div>

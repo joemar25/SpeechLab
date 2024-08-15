@@ -31,6 +31,7 @@ import { TaskComponent } from './features/student-layout/task/task.component';
 import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
+import { ASpeechlabComponent } from './features/admin-layout/a-speechlab/a-speechlab.component';
 
 export const routes: Routes = [
     {
@@ -96,7 +97,7 @@ export const routes: Routes = [
           { path: 'dashboard', component: ADashboardComponent },
           { path: 'manage-users', component: ADashboardComponent },
           { path: 'count', component: CourseComponent },
-          { path: 'speech-lab', component: TeacherLayoutComponent },
+          { path: 'speechlab', component: ASpeechlabComponent },
         ]
       }      
   ];

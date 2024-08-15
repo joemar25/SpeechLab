@@ -14,15 +14,16 @@
   </header>
   <main class="mt-8 w-full overflow-hidden">
     <div class="courses-container" [class]="animationClass">
-      @for (Category of category; track Category.title) {
+      @for (category of displayedCategories; track category.title) {
         <article class="course-item">
-          <img [src]="Category.imageUrl" [alt]="Category.title + ' course background'" class="object-cover w-full rounded-xl" />
+          <img [src]="category.imageUrl" [alt]="category.title + ' course background'" class="object-cover w-full rounded-xl" />
           <h3 class="absolute inset-0 flex items-center justify-center text-sm font-bold text-center text-white bg-slate-800 bg-opacity-90 rounded-xl">
-            {{ Category.title }}
+            {{ category.title }}
           </h3>
         </article>
       }
     </div>
+    
   </main>
 </section>
 
