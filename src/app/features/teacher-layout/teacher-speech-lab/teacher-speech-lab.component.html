@@ -1,30 +1,207 @@
-<section class="flex rounded-none max-md:pr-2 min-h-[600px]">
-    <div class="flex flex-col md:flex-row gap-6 max-md:flex-col w-screen">
-        <div class="flex flex-row w-full">
-            <div class="flex flex-col bg-[#162238] rounded-2xl rounded-tr-none rounded-br-none min-h-[500px] w-full md:w-[55%] p-6 justify-center items-center">
-                <header class="flex flex-col w-full text-center">
-                    <div class="flex flex-col self-center mt-6 max-w-full">
-                        <div class="flex flex-wrap gap-5 justify-center items-start w-full">
-                            <div class="pl-6 flex flex-col items-start w-full">
-                                <div class="flex flex-col items-start self-stretch pt-2 pr-5 w-full text-white">
-                                    <h1 class="text-4xl font-extrabold">Speech Laboratory</h1>
-                                    <p class="mt-1.5 text-sm">Practice, Repeat, and Read Aloud with Engaging</p>
-                                    <p class="mt-1.5 text-sm">Audio Modules.</p>
-                                </div>
-                                <div class="flex flex-col mt-4 w-full">
-                                    <button [routerLink]="['/teacher/teacher-selection']" class="flex justify-start items-start text-2xl font-medium text-white rounded-xl w-full">
-                                        <span class="px-10 py-5 rounded-xl font-light" style="background-color: #bd8a1d;">Let's get started</span>
-                                    </button>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </header>
-            </div>
-            <div class="flex items-center justify-center bg-[#162238] rounded-2xl rounded-tl-none rounded-bl-none w-full md:w-[45%] p-6">
-                <img src="../assets/SVG/meeting.svg" alt="Meeting">
-            </div>
-        </div>
+<section class="relative flex flex-col items-start px-5 pt-1 rounded-3xl bg-slate-800 pb-[20px] max-md:pb-24">
+  <!-- Overlay for 1v1 mode -->
+  <div *ngIf="selectedMode === '1v1'" class="absolute inset-0 bg-gray-300 opacity-75 z-10 pointer-events-none"></div>
+
+  <!-- Mode Buttons -->
+  <div class="grid grid-cols-3 gap-10 max-w-full w-full px-1 pt-3 z-20">
+    <div class="flex flex-row gap-4 items-start">
+      <button (click)="selectMode('1v1')" 
+        [ngClass]="{
+          'bg-[#bd8a1d]': selectedMode === '1v1',
+          'opacity-100': selectedMode === '1v1' || selectedMode === '',
+          'opacity-50': selectedMode !== '1v1' && selectedMode !== ''
+        }" 
+        class="flex gap-2 px-2.5 py-3 rounded-md text-sm font-semibold text-center text-white whitespace-nowrap shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] w-[92px] hover:bg-[#bd8a1d] transition-colors duration-300">
+        <img loading="lazy" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/50e02dbc2b2121ddb10445a03a6e1b2f94db88f067c7c49341243a5e3b44d50d?apiKey=377401e3604042c7b3deecb062253d04" 
+          alt="1v1 Icon" class="object-contain w-full aspect-[1.57] max-w-[25px]" />
+        <span>1v1</span>
+      </button>
+      <button (click)="selectMode('Group')" 
+        [ngClass]="{
+          'bg-[#bd8a1d]': selectedMode === 'Group', 
+          'opacity-10': selectedMode === '1v1',
+          'bg-slate-800': selectedMode !== 'Group'
+        }" 
+        class="flex gap-2 px-2.5 py-3 rounded-md text-sm font-semibold text-center text-white whitespace-nowrap shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] w-[92px] hover:bg-[#bd8a1d] transition-colors duration-300">
+        <img loading="lazy" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/50e02dbc2b2121ddb10445a03a6e1b2f94db88f067c7c49341243a5e3b44d50d?apiKey=377401e3604042c7b3deecb062253d04" 
+          alt="Group Icon" class="object-contain shrink-0 self-start aspect-[1.57] w-[25px]" />
+        <span>Group</span>
+      </button>
     </div>
+    
+    <!-- Grey out central section if 1v1 mode is selected -->
+    <div class="flex flex-col items-center" [ngClass]="{'opacity-10': selectedMode === '1v1'}">
+      <div class="flex flex-col max-w-[160px]">
+        <div class="flex flex-col w-full">
+          <figure class="flex flex-col w-full">
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/de1dd13f51d229ffb675ed29855fd80d8b29f808ea1910a2bd776720e536f5ca?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" class="object-contain w-full aspect-[2.5]" alt="Descriptive Image"/>
+          </figure>
+        </div>
+        <div class="flex flex-col justify-center p-2.5 w-full">
+          <div class="flex flex-col w-full">
+            <div class="flex w-full border border-white border-solid bg-slate-800 min-h-[60px]" role="presentation"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-end">
+      <button (click)="selectMode('Custom')" 
+        [ngClass]="{
+          'bg-[#bd8a1d]': selectedMode === 'Custom',
+          'opacity-10': selectedMode === '1v1',
+          'bg-slate-800': selectedMode !== 'Custom'
+        }" 
+        class="flex gap-3 px-3.5 py-2.5 rounded-md text-sm font-semibold text-center shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] text-white w-[183px] hover:bg-[#bd8a1d] transition-colors duration-300">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/da1b4e3d79d8c86fd94c892afb9d4a77b33b5efb2b86b1a92e3ceaa27ffc84b1?apiKey=377401e3604042c7b3deecb062253d04" 
+             alt="Custom Icon" 
+             class="object-contain shrink-0 self-start aspect-[1.38] w-[22px]" />
+        <span class="grow shrink w-[118px]">Custom Selection</span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="flex flex-wrap gap-10 justify-left items-center max-w-full w-[945px]">
+    <button class="flex gap-3.5 px-3 py-2.5 rounded-md bg-slate-800 text-sm font-semibold text-center shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] text-white w-[153px] hover:bg-[#bd8a1d] transition-colors duration-300">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/864227636b40a5bc6e69012ff7ecb57972d004db28d499c21578efceef63c425?apiKey=377401e3604042c7b3deecb062253d04" alt="Manage Units Icon" class="object-contain shrink-0 aspect-[0.95] w-[19px]" />
+        <span>Manage Units</span>
+    </button>
+  </div>
+
+  <!-- Student selection grids -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 w-full max-md:max-w-full pl-10 pr-5 justify-center pb-10 pt-3 z-20">
+    <div class="flex justify-center grid grid-cols-4 gap-3 pt-2 pb-2 w-full">
+      <div *ngFor="let student of leftColumnStudents; let i = index" 
+        (click)="!isDefaultStudent(student) && selectStudent(i)" 
+        [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student),
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student),
+          'pointer-events-none': isDefaultStudent(student) || (selectedMode !== '1v1' && selectedStudents.length > 0)
+        }" 
+        class="flex flex-col items-center text-[10px] max-w-[70px] cursor-pointer transition-transform duration-300"
+        [ngStyle]="{
+          'padding': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? '5px' : '0px',
+          'transform': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'scale(1.3)' : 'scale(1)',
+          'filter': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'grayscale(0%) sepia(100%) saturate(500%) hue-rotate(0deg)' : 'none',
+          'border': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? '2px solid #E4D00A' : 'none',
+          'opacity': isDefaultStudent(student) ? '0.5' : '1'
+        }">
+        <header [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student), 
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student)
+        }" class="font-semibold text-center">{{ student.name }}</header>
+        <img loading="lazy" 
+             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d8e0427cb6667a1177a696dc94559f5248cefda7689717190c8b5dfb664ef46c?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04"
+             class="object-contain self-stretch mt-1.5 w-full aspect-[1]" 
+             alt="Student photo"
+             [ngStyle]="{
+               'filter': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'sepia(100%) saturate(10000%) hue-rotate(40deg)' : 'none'
+             }"/>
+        <footer [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student), 
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student)
+        }" class="text-center">{{ student.id }}</footer>
+      </div>
+    </div>
+
+    <div class="flex justify-right items-right grid grid-cols-3 gap-[1px] pt-2 pb-2 pl-20">
+      <div *ngFor="let student of rightColumnStudents; let i = index" 
+        (click)="!isDefaultStudent(student) && selectStudent(student.index)" 
+        [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student),
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student),
+          'pointer-events-none': isDefaultStudent(student) || (selectedMode !== '1v1' && selectedStudents.length > 0)
+        }" 
+        class="flex flex-col items-center text-[10px] max-w-[70px] cursor-pointer transition-transform duration-300"
+        [ngStyle]="{
+          'padding': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? '5px' : '0px',
+          'transform': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'scale(1.3)' : 'scale(1)',
+          'filter': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'grayscale(0%) sepia(100%) saturate(500%) hue-rotate(0deg)' : 'none',
+          'border': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? '1px solid #E4D00A' : 'none',
+          'opacity': isDefaultStudent(student) ? '0.5' : '1'
+        }">
+        <header [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student), 
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student)
+        }" class="font-semibold text-center">{{ student.name }}</header>
+        <img loading="lazy" 
+             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d8e0427cb6667a1177a696dc94559f5248cefda7689717190c8b5dfb664ef46c?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04"
+             class="object-contain self-stretch mt-1.5 w-full aspect-[1]" 
+             alt="Student photo"
+             [ngStyle]="{
+               'filter': selectedStudents.includes(student.index) && !isDefaultStudent(student) ? 'sepia(100%) saturate(10000%) hue-rotate(40deg)' : 'none'
+             }"/>
+        <footer [ngClass]="{
+          'text-[#E4D00A]': selectedStudents.includes(student.index) && !isDefaultStudent(student), 
+          'text-white': !selectedStudents.includes(student.index) || isDefaultStudent(student)
+        }" class="text-center">{{ student.id }}</footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm/Cancel Buttons -->
+  <div *ngIf="selectedMode === '1v1' && selectedStudents.length === 1" 
+       class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex items-center justify-center">
+    <div class="flex gap-4">
+      <button (click)="confirmSelection()" 
+              class="bg-[#121a2d] text-white font-semibold py-2 px-4 rounded transition-colors duration-300 hover:bg-[#bd8a1d] shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)]">
+        Confirm
+      </button>
+      <button (click)="cancelSelection()" 
+              class="bg-[#121a2d] text-white font-semibold py-2 px-4 rounded transition-colors duration-300 hover:bg-[#bd8a1d] shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)]">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Section -->
+  <div class="flex justify-center items-center w-full">
+    <div class="flex gap-10 items-center">
+      <button class="w-[50px] h-[50px] rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6202745fe2fe4faa3970c27eec3ce93a70ccec4e80bf7e2af2bdda450320472?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04"           
+          class="object-cover w-full h-full"
+          alt="Profile image 1"
+        />
+      </button>
+      <button class="w-[50px] h-[50px] rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/eeda947e34629e5cebbec8a69daa47d0998aab52b49d260bed5de80ed6e26ac7?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04"
+          class="object-cover w-full h-full"
+          alt="Profile image 2"
+        />
+      </button>
+    </div>
+  </div>
 </section>
+
+<!--selection section-->
+  <div *ngIf="showSelectionSection" class="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-white bg-white ">
+        <button class="flex right-2 text-black rounded-full p-2 pb-3" aria-label="Close" (click)="showSelectionSection = false">
+            &times;
+        </button>
+        <div class="flex flex-col justify-center w-full max-w-[294px] px-5 pb-5">
+            <div class="flex overflow-hidden flex-col w-full rounded-3xl bg-slate-800 shadow-[0px_6px_12px_rgba(27,105,253,0.392)]">
+              <button class="gap-2.5 self-stretch px-10 py-3.5 rounded-3xl bg-slate-800 min-h-[55px]" aria-label="Select a Module">
+                Select a Module
+              </button>
+            </div>
+            <div class="flex gap-3.5 items-center self-center mt-5 text-black whitespace-nowrap">
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/f0b6c53702a07574b5502ffbc6a6f0847f6b2ce78421e7d78810e911183ccd4c?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" class="object-contain shrink-0 self-stretch my-auto aspect-[66.67] w-[68px]" alt="" />
+              <span class="self-stretch my-auto w-[27px]">OR</span>
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c1ea0f94103fb9d465677ee613bb90b0258a1182cb3ebf5c67c03dbffcb745ed?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" class="object-contain shrink-0 self-stretch my-auto aspect-[66.67] w-[67px]" alt="" />
+            </div>
+            <div class="flex overflow-hidden flex-col mt-5 w-full rounded-3xl bg-slate-800 shadow-[0px_6px_12px_rgba(27,105,253,0.392)]">
+              <button class="gap-2.5 self-stretch px-10 py-3.5 rounded-3xl bg-slate-800 min-h-[55px]" aria-label="Share your Screen">
+                Share your Screen
+              </button>
+            </div>
+          </div>
+    </div>
+  </div>
+ 
