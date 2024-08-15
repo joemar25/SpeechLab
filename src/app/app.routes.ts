@@ -31,7 +31,13 @@ import { TaskComponent } from './features/student-layout/task/task.component';
 import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
-import { ManageClassComponent } from './features/teacher-layout/manage-class/manage-class.component';
+import { ManageClassLayoutComponent } from './features/teacher-layout/manage-class-layout/manage-class-layout.component';
+import { ClassListComponent } from './features/teacher-layout/manage-class-layout/class-list/class-list.component';
+import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/manage-class/manage-class.component';
+import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/class-detail/class-detail.component';
+import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
+
+
 
 export const routes: Routes = [
     {
@@ -67,7 +73,15 @@ export const routes: Routes = [
         { path: 'teacher-manual', component: TeacherManualComponent },
         { path: 'seat-arrangement', component: SeatArrangementComponent },
         { path: 'manual-dashboard', component: ManualDashboardComponent },
-        { path: 'manage-class', component: ManageClassComponent },
+        { path: 'manage-class', component: ManageClassLayoutComponent,
+          children: [
+            { path: '', redirectTo: 'manage-class', pathMatch: 'full' },
+            { path: '', component: ManageClassComponent}, //dae ko kinagan ki path name pang peke lang para mag redirect sa manage-class component
+            { path: 'class-list/:id', component: ClassListComponent},
+            { path: 'class-detail/:id', component: ClassDetailComponent}, //sa backend kagan nalang ki ID for specific target class. { path: 'class-detail/:id', component: ClassDetailComponent},
+            { path: 'class-assignment', component: ClassAssignmentComponent},
+          ]
+         },
       ]
     },
     {

@@ -19,6 +19,8 @@ module.exports = {
         'primary-text-tw': '#ECE6F0',
         'secondary-text-tw': '#000000',
         'green-tw': '#00FF3C',
+
+        'background-tw': '#EDEDED',
       },
       borderRadius: {
         '4xl': '2rem',
