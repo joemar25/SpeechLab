@@ -36,6 +36,7 @@ import { ClassListComponent } from './features/teacher-layout/manage-class-layou
 import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/manage-class/manage-class.component';
 import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/class-detail/class-detail.component';
 import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
+import { SelectModuleComponent } from './features/teacher-layout/teacher-speech-lab/select-module/select-module.component';
 
 
 
@@ -73,6 +74,7 @@ export const routes: Routes = [
         { path: 'teacher-manual', component: TeacherManualComponent },
         { path: 'seat-arrangement', component: SeatArrangementComponent },
         { path: 'manual-dashboard', component: ManualDashboardComponent },
+        { path: 'select-module', component: SelectModuleComponent },
         { path: 'manage-class', component: ManageClassLayoutComponent,
           children: [
             { path: '', redirectTo: 'manage-class', pathMatch: 'full' },
