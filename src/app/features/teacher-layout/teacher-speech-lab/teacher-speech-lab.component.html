@@ -200,11 +200,17 @@
               <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c1ea0f94103fb9d465677ee613bb90b0258a1182cb3ebf5c67c03dbffcb745ed?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" class="object-contain shrink-0 self-stretch my-auto aspect-[66.67] w-[67px]" alt="" />
             </div>
             <div class="flex overflow-hidden flex-col mt-5 w-full rounded-3xl bg-slate-800 shadow-[0px_6px_12px_rgba(27,105,253,0.392)]">
-              <button class="gap-2.5 self-stretch px-10 py-3.5 rounded-3xl bg-slate-800 min-h-[55px]" aria-label="Share your Screen">
+              <button (click)="startScreenShare()" class="gap-2.5 self-stretch px-10 py-3.5 rounded-3xl bg-slate-800 min-h-[55px] text-white" aria-label="Share your Screen">
                 Share your Screen
               </button>
             </div>
           </div>
     </div>
   </div>
- 
+
+
+  <!-- Add this where you want to display the shared screen -->
+<div *ngIf="screenShareStream" class="screen-share-container">
+  <video #screenShareVideo autoplay class="screen-share-video"></video>
+</div>
+  

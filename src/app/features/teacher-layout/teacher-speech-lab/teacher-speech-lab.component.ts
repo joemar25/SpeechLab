@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +9,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './teacher-speech-lab.component.html',
   styleUrl: './teacher-speech-lab.component.css'
 })
-export class TeacherSpeechLabComponent {
+export class TeacherSpeechLabComponent implements OnDestroy, AfterViewInit {
+  @ViewChild('screenShareVideo') screenShareVideo!: ElementRef<HTMLVideoElement>;
+
+shareScreen(arg0: string) {
+throw new Error('Method not implemented.');
+}
 
   selectedMode: string = '';
   selectedStudents: number[] = [];
@@ -58,6 +63,8 @@ selectedStudentName: string = '';
   { name: 'Isa Ason', id: '038' },
   { name: 'Lucas Thomas', id: '039' }
   ];
+  screenShareStream: any;
+  showScreenShareOptions: boolean = false;
 
   constructor() {
     this.fillWithDefaultStudents();
@@ -166,6 +173,44 @@ fillWithDefaultStudents() {
     this.showSelectionSection = false;
     this.selectedStudentName = '';
   }
-
   
+  ngAfterViewInit() {
+    if (this.screenShareStream && this.screenShareVideo) {
+      this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
+    }
+  }
+
+  async startScreenShare() {
+    try {
+      const mediaDevices = navigator.mediaDevices as any;
+      this.screenShareStream = await mediaDevices.getDisplayMedia({
+        video: {
+          cursor: "always"
+        },
+        audio: false
+      });
+  
+      // Here you would typically send this stream to your video conferencing solution
+      console.log("Screen sharing started");
+      
+      // For demonstration, we'll just log the stream
+      console.log(this.screenShareStream);
+  
+      // Add event listener for when the user stops sharing
+      this.screenShareStream.getVideoTracks()[0].addEventListener('ended', () => {
+        console.log("Screen sharing stopped");
+        this.screenShareStream = null;
+      });
+  
+    } catch (err) {
+      console.error("Error: " + err);
+    }
+  }
+  
+  
+  ngOnDestroy() {
+    if (this.screenShareStream) {
+      this.screenShareStream.getTracks().forEach((track: { stop: () => any; }) => track.stop());
+    }
+  }
 }
