@@ -21,6 +21,9 @@ throw new Error('Method not implemented.');
   maxStudents: number = 42;
   showSelectionSection: boolean = false;
 selectedStudentName: string = '';
+isScreenSharing: boolean = false;
+showToast: boolean = false;
+  toastMessage: string = '';
 
   students = [
     { name: 'John Doe', id: '001' },
@@ -69,33 +72,36 @@ selectedStudentName: string = '';
   constructor() {
     this.fillWithDefaultStudents();
   }
-
-fillWithDefaultStudents() {
-  const defaultStudentCount = this.maxStudents - this.students.length;
-  for (let i = 0; i < defaultStudentCount; i++) {
-    this.students.push({
-      name: 'Student Name',
-      id: `Absent - ${i + 1}` 
-    });
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
   }
-}
+
+  fillWithDefaultStudents() {
+    const defaultStudentCount = this.maxStudents - this.students.length;
+    for (let i = 0; i < defaultStudentCount; i++) {
+      this.students.push({
+        name: 'Student Name',
+        id: `Absent - ${i + 1}` 
+      });
+    }
+  }
 
 
   isDefaultStudent(student: any): boolean {
     return student.id.startsWith('Absent - ');
-  }  
+  }   
 
-  get leftColumnStudents() {
-    return this.students
-      .filter((_, index) => index % 7 < 4) 
-      .map((student, index) => ({ ...student, index }));
-  }
+  // get leftColumnStudents() {
+  //   return this.students
+  //     .filter((_, index) => index % 7 < 4) 
+  //     .map((student, index) => ({ ...student, index }));
+  // }
   
-  get rightColumnStudents() {
-    return this.students
-      .filter((_, index) => index % 7 >= 4)
-      .map((student, index) => ({ ...student, index: index + this.students.length / 2 }));
-  }
+  // get rightColumnStudents() {
+  //   return this.students
+  //     .filter((_, index) => index % 7 >= 4)
+  //     .map((student, index) => ({ ...student, index: index + this.students.length / 2 }));
+  // }
   
 
   selectMode(mode: string) {
@@ -145,17 +151,26 @@ fillWithDefaultStudents() {
 }
 
 
-  confirmSelection() {
-    if (this.selectedStudents.length === 1) {
-      const selectedStudent = this.students[this.selectedStudents[0]];
-      this.selectedStudentName = selectedStudent.name;
-      this.showSelectionSection = true;
-    }
-    // Keep the existing code
-    console.log('Confirmed student selection:', this.selectedStudents);
-    this.selectedStudents = [];
-    this.selectedMode = '';
+confirmSelection() {
+  if (this.selectedMode === '1v1' && this.selectedStudents.length === 1) {
+    const selectedStudent = this.students[this.selectedStudents[0]];
+    this.selectedStudentName = selectedStudent.name;
+    this.showSelectionSection = true;
+
+    // Show toast message
+    this.toastMessage = `Selected student: ${selectedStudent.name} (ID: ${selectedStudent.id})`;
+    this.showToast = true;
+
+    // Hide toast after 3 seconds
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
   }
+  console.log('Confirmed student selection:', this.selectedStudents);
+  this.selectedStudents = [];
+  this.selectedMode = '';
+}
+
 
   cancelSelection() {
     this.selectedStudents = [];
@@ -174,43 +189,58 @@ fillWithDefaultStudents() {
     this.selectedStudentName = '';
   }
   
-  ngAfterViewInit() {
-    if (this.screenShareStream && this.screenShareVideo) {
-      this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
-    }
-  }
+  // ngAfterViewInit() {
+  //   if (this.screenShareStream && this.screenShareVideo) {
+  //     this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
+  //   }
+  // }
 
   async startScreenShare() {
+    if (this.isScreenSharing) {
+      console.log("Screen is already being shared");
+      return;
+    }
+  
     try {
       const mediaDevices = navigator.mediaDevices as any;
       this.screenShareStream = await mediaDevices.getDisplayMedia({
-        video: {
-          cursor: "always"
-        },
+        video: true,
         audio: false
       });
   
-      // Here you would typically send this stream to your video conferencing solution
-      console.log("Screen sharing started");
-      
-      // For demonstration, we'll just log the stream
-      console.log(this.screenShareStream);
+      this.isScreenSharing = true;
+      this.showSelectionSection = false;
+  
+      // Use setTimeout to ensure the video element is available in the DOM
+      setTimeout(() => {
+        if (this.screenShareVideo && this.screenShareVideo.nativeElement) {
+          this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
+        }
+      }, 0);
   
       // Add event listener for when the user stops sharing
       this.screenShareStream.getVideoTracks()[0].addEventListener('ended', () => {
         console.log("Screen sharing stopped");
-        this.screenShareStream = null;
+        this.stopScreenShare();
       });
   
     } catch (err) {
       console.error("Error: " + err);
+      this.isScreenSharing = false;
     }
   }
-  
   
   ngOnDestroy() {
     if (this.screenShareStream) {
       this.screenShareStream.getTracks().forEach((track: { stop: () => any; }) => track.stop());
     }
+  }
+
+  stopScreenShare() {
+    if (this.screenShareStream) {
+      this.screenShareStream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
+      this.screenShareStream = null;
+    }
+    this.isScreenSharing = false;
   }
 }
