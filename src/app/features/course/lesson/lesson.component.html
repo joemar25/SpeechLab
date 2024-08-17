@@ -1,1 +1,83 @@
-<p>lesson works!</p>
+<section class="flex flex-col max-w-[1000px] mt-14 mx-auto px-6 lg:px-0">
+    <div class="flex flex-row gap-6 items-start">
+      <!-- Main Content Area -->
+      <article class="flex-grow w-3/5">
+        <header class="flex flex-col w-full bg-white shadow-lg rounded-lg p-6">
+          <!-- Title and Instructor Info -->
+          <div class="flex items-center gap-4 mb-4">
+            <img [src]="lesson.imageUrl" alt="Lesson Image" class="w-12 h-12 rounded-full object-cover shadow-sm" />
+            <div>
+              <h1 class="text-2xl font-bold text-gray-800">{{ lesson.title }}</h1>
+              <p class="text-sm text-gray-500">{{ lesson.instructor }}</p>
+            </div>
+          </div>
+          <!-- Date and Description -->
+          <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+            <time [attr.datetime]="lesson.date" class="italic">{{ lesson.date | date:'mediumDate' }}</time>
+          </div>
+          <p class="text-gray-700 mb-6 leading-relaxed">{{ lesson.description }}</p>
+          <!-- Attachments -->
+          <div class="mb-6">
+            <h2 class="text-lg font-medium text-gray-800 mb-2">Attachments</h2>
+            <div class="w-full p-4 bg-gray-100 rounded-lg">
+              <ul class="space-y-2">
+                <li *ngFor="let attachment of lesson.attachments" class="flex items-center gap-3">
+                  <img [src]="attachment.icon" alt="{{ attachment.type }} icon" class="w-6 h-6" />
+                  <span class="text-sm text-gray-700">{{ attachment.name }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Class Comments -->
+          <div class="mb-6">
+            <h2 class="text-lg font-medium text-gray-800 mb-2 flex items-center gap-2">
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/08c1eab93afdf73390a3c95f42d5d299b7e639b93fdb31604fed7f2ab9b25d8b?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Class Comments Icon" class="w-5 h-5 object-contain" />
+              Class Comments
+            </h2>
+            <form (ngSubmit)="addClassComment()" class="flex items-center gap-2 mb-4">
+              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/89ed1257f487daa7c79c1a087eaa78278a1f8cd3c007e8d900af34b19be52380?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Your Avatar" class="w-8 h-8 rounded-full object-cover shadow-sm" />
+              <input id="classCommentInput" [(ngModel)]="newClassComment" name="classComment" type="text" class="flex-grow h-10 rounded-lg px-4 border border-gray-300 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" placeholder="Add a class comment" />
+              <button type="submit" aria-label="Submit comment" class="bg-amber-600 text-white px-4 py-2 rounded-lg shadow hover:bg-amber-700 transition-colors">
+                Submit
+              </button>
+            </form>
+            <ul class="space-y-4">
+              <li *ngFor="let comment of classComments" class="flex items-start gap-3">
+                <img [src]="comment.user.avatar" alt="{{ comment.user.name }}'s avatar" class="w-8 h-8 rounded-full object-cover shadow-sm" />
+                <div>
+                  <p class="text-sm font-semibold text-gray-800">{{ comment.user.name }}</p>
+                  <p class="text-sm text-gray-600">{{ comment.comment }}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </header>
+      </article>
+  
+      <!-- Sidebar: Private Comments -->
+      <aside class="w-2/5 bg-white shadow-lg rounded-lg p-6">
+        <div class="mb-6">
+          <h3 class="text-lg font-medium text-gray-800 mb-4 flex items-center gap-2">
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a6aa839617a6a2bbd05cfc127f534dd9743e4aa33d07cea0af4a1bd011aeb1e8?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Private Comments Icon" class="w-5 h-5 object-contain" />
+            Private Comments
+          </h3>
+          <form (ngSubmit)="addPrivateComment()" class="flex items-center gap-2 mb-4">
+            <input id="privateCommentInput" [(ngModel)]="newPrivateComment" name="privateComment" type="text" class="flex-grow h-10 rounded-lg px-4 border border-gray-300 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" placeholder="Add a private comment" />
+            <button type="submit" aria-label="Submit comment" class="bg-amber-600 text-white px-4 py-2 rounded-lg shadow hover:bg-amber-700 transition-colors">
+              Submit
+            </button>
+          </form>
+          <ul class="space-y-4">
+            <li *ngFor="let comment of privateComments" class="flex items-start gap-3">
+              <img [src]="comment.user.avatar" alt="{{ comment.user.name }}'s avatar" class="w-8 h-8 rounded-full object-cover shadow-sm" />
+              <div>
+                <p class="text-sm font-semibold text-gray-800">{{ comment.user.name }}</p>
+                <p class="text-sm text-gray-600">{{ comment.comment }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+  

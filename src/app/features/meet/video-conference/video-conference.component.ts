@@ -8,6 +8,7 @@ interface ChatMessage {
   time: string;
   message: string;
 }
+
 @Component({
   selector: 'app-video-conference',
   standalone: true,
@@ -15,11 +16,16 @@ interface ChatMessage {
   templateUrl: './video-conference.component.html',
   styleUrl: './video-conference.component.css'
 })
-export class VideoConferenceComponent {
+export class VideoConferenceComponent implements OnInit {
   meetingJoined = false;
   participantCount = 0;
   chatMessages: ChatMessage[] = [];
   newMessage = '';
+
+  // New properties for video controls
+  isMicOn: boolean = true;
+  isVideoOn: boolean = true;
+  isScreenShared: boolean = false;
 
   ngOnInit() {
     this.loadMockChatMessages();
@@ -58,5 +64,31 @@ export class VideoConferenceComponent {
         message: 'Hi there!'
       }
     ];
+  }
+
+  // New methods for video controls
+  toggleMic() {
+    this.isMicOn = !this.isMicOn;
+    // Add logic to actually toggle the microphone
+    console.log('Microphone toggled:', this.isMicOn ? 'on' : 'off');
+  }
+
+  toggleVideo() {
+    this.isVideoOn = !this.isVideoOn;
+    // Add logic to actually toggle the video
+    console.log('Video toggled:', this.isVideoOn ? 'on' : 'off');
+  }
+
+  toggleScreenShare() {
+    this.isScreenShared = !this.isScreenShared;
+    // Add logic to actually toggle screen sharing
+    console.log('Screen sharing toggled:', this.isScreenShared ? 'on' : 'off');
+  }
+
+  endCall() {
+    // Add logic to end the call
+    console.log('Call ended');
+    this.meetingJoined = false;
+    this.participantCount = 0;
   }
 }

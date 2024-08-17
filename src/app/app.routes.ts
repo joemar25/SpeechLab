@@ -28,6 +28,7 @@ import { HomeLayoutComponent } from './shared/components/home-layout/home-layout
 import { DictionaryComponent } from './features/dictionary/dictionary.component';
 import { CourseComponent } from './features/course/course.component';
 import { TaskComponent } from './features/student-layout/task/task.component';
+import { LessonComponent } from './features/course/lesson/lesson.component';
 
 
 export const routes: Routes = [
@@ -48,6 +49,7 @@ export const routes: Routes = [
             { path: 'profile', component: UserProfileComponent },
             { path: 'task', component: TaskComponent},
             { path: 'course-details', component: CourseComponent},
+            { path: 'lesson-details', component: LessonComponent},
             { path: 'task/task-detail', component: TaskDetailComponent},
             {path:'class-lab/teacher-led',component: TeacherLedComponent},
             {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
