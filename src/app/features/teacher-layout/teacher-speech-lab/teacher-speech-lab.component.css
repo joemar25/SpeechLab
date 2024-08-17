@@ -1,0 +1,16 @@
+button:hover {
+    background-color: #bd8a1d;
+}
+
+.screen-share-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .screen-share-video {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }

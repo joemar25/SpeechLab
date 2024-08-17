@@ -1,0 +1,82 @@
+<div class="w-full flex justify-center px-4">
+    <div class="w-full h-full flex flex-col gap-4">
+        <div class="w-full h-60 rounded-xl overflow-hidden">
+            <div class="w-full h-1/2">
+                <img class="w-full h-full object-cover" src="assets/images/manage-class/class-list1.png" alt="">
+            </div>
+            <div class="w-full h-1/2 bg-primary-tw px-4 py-4">
+                <div class="text-primary-text-tw flex flex-col gap-2">
+                    <p class="text-lg font-normal text-secondary-tw capitalize">Logical Reasoning</p>
+                    <p class="text-base font-normal capitalize">Course/block: BUCS 1A</p>
+                    <p class="text-base font-normal uppercase">m - w- f (9:00 AM - 12:00 pM)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full h-3/5 flex flex-row ">
+            <!-- Bottom left -->
+            <div
+                class="w-full max-w-44 h-full flex flex-col gap-4 px-4 pb-6 sticky top-0 overflow-y-auto scroll-bar-none">
+                <div
+                    class="w-full h-fit py-4 bg-white flex flex-col justify-center items-center gap-3 rounded-xl shadow-lg overflow border border-gray-300">
+                    <div class="flex justify-evenly items-center w-full px-2">
+                        <p class="text-sm pl-2">Class Code</p>
+                        <iconify-icon class="cursor-pointer" icon="pepicons-pencil:dots-y" width="20"
+                            height="20"></iconify-icon>
+                    </div>
+                    <p class="text-xl">Kze5gy</p>
+                    <button class="flex justify-center items-center gap-1 text-blue-500 text-xs ">
+                        <iconify-icon icon="iconamoon:copy-duotone" width="15" height="15"></iconify-icon>
+                        Copy code
+                    </button>
+                </div>
+                <div
+                    class="w-full h-fit py-4 flex flex-col gap-4 bg-white rounded-xl shadow-lg overflow border border-gray-300">
+                    <div class="flex justify-center items-center gap-2">
+                        <svg class="text-primary-tw" width="24" height="24" viewBox="0 0 34 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M28.2656 0.857422C29.0012 0.857422 29.7066 1.15844 30.2267 1.69426C30.7469 2.23008 31.0391 2.9568 31.0391 3.71456V18.0003C31.0391 19.586 29.8049 20.8574 28.2656 20.8574H33.8125V23.7146H0.53125V20.8574H6.07812C5.34256 20.8574 4.63713 20.5564 4.11701 20.0206C3.59689 19.4848 3.30469 18.758 3.30469 18.0003V3.71456C3.30469 2.12885 4.53887 0.857422 6.07812 0.857422H28.2656ZM28.2656 3.71456H6.07812V18.0003H28.2656V3.71456ZM17.1719 12.286C20.2365 12.286 22.7188 13.5717 22.7188 15.1431V16.5717H11.625V15.1431C11.625 13.5717 14.1072 12.286 17.1719 12.286ZM17.1719 5.14314C17.9074 5.14314 18.6129 5.44416 19.133 5.97997C19.6531 6.51579 19.9453 7.24252 19.9453 8.00028C19.9453 8.75804 19.6531 9.48477 19.133 10.0206C18.6129 10.5564 17.9074 10.8574 17.1719 10.8574C15.6326 10.8574 14.3984 9.58599 14.3984 8.00028C14.3984 6.41456 15.6465 5.14314 17.1719 5.14314Z"
+                                fill="currentColor" />
+                        </svg>
+                        <h1>
+                            Meet
+                        </h1>
+
+                        <iconify-icon class="cursor-pointer" icon="pepicons-pencil:dots-y" width="20"
+                            height="20"></iconify-icon>
+
+                    </div>
+                    <div class="w-full px-4 flex justify-center">
+                        <button class="w-full bg-primary-tw text-primary-text-tw rounded-full py-1">Join</button>
+                    </div>
+                </div>
+                <div class="w-full h-fit py-4 px-4 bg-white rounded-xl shadow-lg overflow border border-gray-300">
+                    <div class="w-full h-full flex flex-col gap-1 text-gray-500">
+                        <h1 class="text-secondary-text-tw">Upcoming</h1>
+                        <small>Due Wednesday</small>
+                        <small>09:00 AM - Assignment</small>
+                        <small class="text-blue-500">View All</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Right -->
+            <div class="w-full h-full px-4 py-2 pb-8">
+                <div class="w-full h-fit flex flex-col gap-4">
+                    @for (item of arrayList; track $index) {
+                    <div
+                        class="w-full h-32 flex flex-col bg-white shadow-md border border-gray-300  rounded-xl ">
+                        <div class="w-full h-full px-8 pt-4">
+                            <p class="text-base font-normal">{{item.title}}</p>
+                        </div>
+                        <div class="w-full h-16 px-8 flex justify-start items-center border-t-2 border-gray-300">
+                            <p class="text-sm text-gray-500 font-medium">{{item.comment}} Comments</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
