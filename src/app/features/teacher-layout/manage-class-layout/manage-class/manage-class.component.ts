@@ -51,6 +51,7 @@ export class ManageClassComponent {
   ];
 
   dropDown: { [key: string]: boolean } = {};
+  
   toggleDropdown(uid:string) {
     this.dropDown[uid] = !this.dropDown[uid];
     console.log(this.dropDown[uid], uid);

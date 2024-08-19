@@ -36,6 +36,13 @@ import { ClassListComponent } from './features/teacher-layout/manage-class-layou
 import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/manage-class/manage-class.component';
 import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/class-detail/class-detail.component';
 import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
+import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-courses-layout/manage-courses-layout.component';
+import { AllCoursesComponent } from './features/teacher-layout/manage-courses-layout/all-courses/all-courses.component';
+import { BeginnerComponent } from './features/teacher-layout/manage-courses-layout/beginner/beginner.component';
+import { IntermediateComponent } from './features/teacher-layout/manage-courses-layout/intermediate/intermediate.component';
+import { AdvancedComponent } from './features/teacher-layout/manage-courses-layout/advanced/advanced.component';
+import { StudentWorkComponent } from './features/teacher-layout/manage-class-layout/class-assignment/student-work/student-work.component';
+import { InstructionComponent } from './features/teacher-layout/manage-class-layout/class-assignment/instruction/instruction.component';
 
 
 
@@ -79,9 +86,24 @@ export const routes: Routes = [
             { path: '', component: ManageClassComponent}, //dae ko kinagan ki path name pang peke lang para mag redirect sa manage-class component
             { path: 'class-list/:id', component: ClassListComponent},
             { path: 'class-detail/:id', component: ClassDetailComponent}, //sa backend kagan nalang ki ID for specific target class. { path: 'class-detail/:id', component: ClassDetailComponent},
-            { path: 'class-assignment', component: ClassAssignmentComponent},
+            { path: 'class-assignment/:id', component: ClassAssignmentComponent, // specified assignment id
+              children: [
+                { path: 'instructions', component: InstructionComponent}, // mga aki kang assignment na route
+                { path: 'student-work', component: StudentWorkComponent},
+              ]
+            },
           ]
          },
+         {
+          path: 'manage-courses', component: ManageCoursesLayoutComponent,
+          children: [
+            { path: '', redirectTo: 'all-courses', pathMatch: 'full' },
+            { path: 'all-courses', component: AllCoursesComponent},
+            { path: 'beginner', component: BeginnerComponent},
+            { path: 'intermediate', component: IntermediateComponent},
+            { path: 'advanced', component: AdvancedComponent},
+          ]
+         }
       ]
     },
     {

@@ -66,14 +66,73 @@
                 <div class="w-full h-fit flex flex-col gap-4">
                     @for (item of arrayList; track $index) {
                     <div
-                        class="w-full h-32 flex flex-col bg-white shadow-md border border-gray-300  rounded-xl ">
-                        <div class="w-full h-full px-8 pt-4">
-                            <p class="text-base font-normal">{{item.title}}</p>
+                        class="w-full h-32 flex flex-col bg-white shadow-md border border-gray-300  rounded-xl cursor-pointer">
+                        <div [routerLink]="['/teacher/manage-class/class-assignment/{{item.id}}/instructions']"
+                            class="w-full h-full px-8 pt-4">
+                            <p class="text-base font-normal">{{ item.title }}</p>
                         </div>
-                        <div class="w-full h-16 px-8 flex justify-start items-center border-t-2 border-gray-300">
-                            <p class="text-sm text-gray-500 font-medium">{{item.comment}} Comments</p>
+
+
+                        <div (click)="openCommentModal(item.id)"
+                            class="w-full h-16 cursor-pointer px-8 flex justify-between items-center bg-gray-100 rounded-b-xl border-t-2 border-gray-300">
+                            <p class="text-sm text-gray-500 font-medium
+                            hover:underline">{{item.comment}} Comments</p>
+                            <iconify-icon class="text-gray-500" icon="fontisto:comment" width="25"
+                                height="25"></iconify-icon>
                         </div>
                     </div>
+                    <!-- Modal for Comment -->
+                    @if (comments[item.id]) {
+                    <div @fadeAnimation class="w-full h-full fixed top-0 right-0 z-[100] background">
+                        <div class="w-full h-full flex justify-center items-center">
+                            <div (clickOutside)="closeCommentModal(item.id)"
+                                class="flex flex-col gap-4 h-fit w-full ml-[20%] max-w-screen-md min-h-32 max-h-[80%] bg-white relative rounded-lg p-4">
+                                <iconify-icon (click)="closeCommentModal(item.id)"
+                                    class="absolute top-0 right-0  cursor-pointer hover:scale-105 duration-300"
+                                    icon="iconamoon:close-thin" width="35" height="35"></iconify-icon>
+                                <h1 class="absolute top-2 left-4">Class Comments:</h1>
+                                <div class="w-full h-fit min-h-32 max-h-[80%] overflow-y-auto rounded-md bg-[#D9D9D9] mt-6 p-2">
+                                    @for (comment of commentList; track $index) {
+                                    <div class="w-full max-w-[60%] h-fit flex flex-col pb-6">
+                                        <p class="ml-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore,
+                                            excepturi est eos explicabo, voluptatibus quaerat soluta qui magni amet
+                                            nesciunt aspernatur enim. Reprehenderit dignissimos eveniet optio sapiente
+                                            cupiditate, suscipit nesciunt!</p>
+                                        <div class="w-full flex justify-start items-center gap-4">
+                                            <img src="assets/images/manage-class/profileicon.png" alt="">
+                                            <p class="capitalize text-gray-700 text-sm">{{comment.user}} name</p>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                                <div class="flex justify-center items-center gap-4 ">
+                                    @if (profile) {
+                                    <!-- if warang profile si user -->
+                                    <img class="border border-gray-400 rounded-full"
+                                        src="assets/images/manage-class/profileicon.png" alt="">
+                                    }@else {
+                                    <!-- if may profile si user -->
+                                    <img class="border border-gray-400 rounded-full"
+                                        src="assets/images/manage-class/profileicon.png" alt="">
+                                    }
+                                    <form class="w-full flex justify-between items-center gap-3">
+                                        <input type="text"
+                                            class="w-full h-10 outline-none rounded-2xl px-4 bg-[#D9D9D9] shadow-inner-custom">
+                                        <button type="submit">
+                                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M1.90781 17.6642L19.3578 10.1842C20.1678 9.83418 20.1678 8.69418 19.3578 8.34418L1.90781 0.864177C1.24781 0.574177 0.517812 1.06418 0.517812 1.77418L0.507812 6.38418C0.507812 6.88418 0.877812 7.31418 1.37781 7.37418L15.5078 9.26418L1.37781 11.1442C0.877812 11.2142 0.507812 11.6442 0.507812 12.1442L0.517812 16.7542C0.517812 17.4642 1.24781 17.9542 1.90781 17.6642Z"
+                                                    fill="#0C0C0C" />
+                                            </svg>
+
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
                     }
                 </div>
             </div>
