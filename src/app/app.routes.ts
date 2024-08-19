@@ -28,6 +28,7 @@ import { HomeLayoutComponent } from './shared/components/home-layout/home-layout
 import { DictionaryComponent } from './features/dictionary/dictionary.component';
 import { CourseComponent } from './features/course/course.component';
 import { TaskComponent } from './features/student-layout/task/task.component';
+import { LessonComponent } from './features/course/lesson/lesson.component';
 import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
@@ -43,6 +44,7 @@ import { IntermediateComponent } from './features/teacher-layout/manage-courses-
 import { AdvancedComponent } from './features/teacher-layout/manage-courses-layout/advanced/advanced.component';
 import { StudentWorkComponent } from './features/teacher-layout/manage-class-layout/class-assignment/student-work/student-work.component';
 import { InstructionComponent } from './features/teacher-layout/manage-class-layout/class-assignment/instruction/instruction.component';
+import { SelectModuleComponent } from './features/teacher-layout/teacher-speech-lab/select-module/select-module.component';
 
 
 
@@ -80,6 +82,7 @@ export const routes: Routes = [
         { path: 'teacher-manual', component: TeacherManualComponent },
         { path: 'seat-arrangement', component: SeatArrangementComponent },
         { path: 'manual-dashboard', component: ManualDashboardComponent },
+        { path: 'select-module', component: SelectModuleComponent },
         { path: 'manage-class', component: ManageClassLayoutComponent,
           children: [
             { path: '', redirectTo: 'manage-class', pathMatch: 'full' },
@@ -130,6 +133,17 @@ export const routes: Routes = [
     {
         path: 'admin', component: AdminLayoutComponent, // or another component for admin layout
         children: [
+            { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent},
+            { path: 'class-lab', component: ClassLabComponent },
+            { path: 'profile', component: UserProfileComponent },
+            { path: 'task', component: TaskComponent},
+            { path: 'course-details', component: CourseComponent},
+            { path: 'lesson-details', component: LessonComponent},
+            { path: 'task/task-detail', component: TaskDetailComponent},
+            {path:'class-lab/teacher-led',component: TeacherLedComponent},
+            {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
+            {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: ADashboardComponent },
           { path: 'manage-users', component: ADashboardComponent },

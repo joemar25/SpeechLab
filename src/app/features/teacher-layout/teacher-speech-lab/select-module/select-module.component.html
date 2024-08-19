@@ -1,0 +1,15 @@
+<section class="flex flex-col text-4xl font-medium text-amber-500 whitespace-nowrap">
+    <!-- Loop through the modules array and display each module -->
+    <article *ngFor="let module of modules" class="flex relative flex-col justify-center mt-5 w-full min-h-[160px] max-md:max-w-full">
+      <h2 class="absolute gap-2.5 px-6 pt-5 pb-24 max-w-full h-40 rounded-3xl bg-slate-800 min-h-[160px] w-[1420px] max-md:px-5 max-md:pb-24">
+        {{ module.title }}
+      </h2>
+      <img 
+        loading="lazy" 
+        [src]="module.imageSrc" 
+        [alt]="module.altText" 
+        class="object-contain z-0 self-end max-w-full rounded-3xl aspect-[2.77] w-[446px]" 
+      />
+    </article>
+  </section>
+  

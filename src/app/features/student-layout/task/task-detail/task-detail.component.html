@@ -1,80 +1,91 @@
-<section class="flex flex-col max-w-[1000px] mx-auto px-4">
+<section class="flex flex-col max-w-[1000px] mt-10 px-4">
   <div class="flex flex-row gap-4 items-start">
     <article class="flex-grow w-3/5">
-      <header class="flex flex-col w-full">
-        <div class="flex items-center gap-3 text-xl font-bold text-black">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/175a9cd8db2e790c5f7f616834083cd240f530b1e1a1d197775f040f18d5f525?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-10 h-10 object-contain" />
-          <h1>What is Cyber Security?</h1>
+      <header class="flex flex-col w-full bg-white shadow-lg rounded-lg p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <img [src]="lesson.imageUrl" alt="Lesson Image" class="w-12 h-12 rounded-full object-cover shadow-sm" />
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">{{ lesson.title }}</h1>
+            <p class="text-sm text-gray-500">{{ lesson.instructor }}</p>
+          </div>
         </div>
-        <p class="mt-1 text-sm font-medium text-black">Michael Maxwell</p>
-        <div class="flex justify-between items-center mt-1 text-xs">
-          <time datetime="2024-07-08" class="font-medium text-black">July 8, 2024</time>
-          <p class="font-bold text-zinc-700">Due July 10, 11:59 PM</p>
+        <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+          <time [attr.datetime]="lesson.date" class="italic">{{ lesson.date | date:'mediumDate' }}</time>
+          <p class="font-bold text-zinc-700">{{ lesson.dueDate }}</p>
         </div>
-        <hr class="my-2 w-full" />
-        <div class="text-sm font-bold text-black">
-          <p>What is the primary objective of cybersecurity?</p>
-          <ol class="list-[lower-alpha] pl-4 mt-1">
-            <li>To increase internet speed</li>
-            <li>To ensure software runs smoothly</li>
-            <li>To protect systems, networks, and data from digital attacks</li>
-            <li>To design websites</li>
-          </ol>
+        <p class="text-gray-700 mb-6 leading-relaxed">{{ lesson.question }}</p>
+        <ol class="list-decimal list-inside text-gray-700 space-y-1 pl-6">
+          <li *ngFor="let option of lesson.options">{{ option }}</li>
+        </ol>
+        <div class="mt-6">
+          <h2 class="text-lg font-medium text-gray-800 mb-2">Attachments</h2>
+          <div class="w-full p-4 bg-gray-100 rounded-lg">
+            <ul class="space-y-2">
+              <li *ngFor="let attachment of lesson.attachments" class="flex items-center gap-3">
+                <img [src]="attachment.icon" alt="{{ attachment.type }} icon" class="w-6 h-6" />
+                <span class="text-sm text-gray-700">{{ attachment.name }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <p class="mt-2 text-sm font-medium text-black">Attachments:</p>
-        <div class="mt-1 w-full p-3 border border-gray-300 rounded-lg" role="region" aria-label="Attachments area">
-          <ul class="space-y-1">
-            <li class="flex items-center gap-2">
-              <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF icon" class="w-5 h-5"/>
-              <span class="text-xs">Cybersecurity_Basics.pdf</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <img src="https://cdn-icons-png.flaticon.com/512/337/337932.png" alt="Word document icon" class="w-5 h-5"/>
-              <span class="text-xs">Assignment_Guidelines.docx</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <img src="https://cdn-icons-png.flaticon.com/512/337/337958.png" alt="PowerPoint icon" class="w-5 h-5"/>
-              <span class="text-xs">Cyber_Threats_Overview.pptx</span>
+        <div class="mt-6">
+          <h2 class="text-lg font-medium text-gray-800 mb-2 flex items-center gap-2">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/08c1eab93afdf73390a3c95f42d5d299b7e639b93fdb31604fed7f2ab9b25d8b?apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Class Comments Icon" class="w-5 h-5 object-contain" />
+            Class Comments
+          </h2>
+          <form (ngSubmit)="addClassComment()" class="flex items-center gap-3 mb-4">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/89ed1257f487daa7c79c1a087eaa78278a1f8cd3c007e8d900af34b19be52380?apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Your Avatar" class="w-10 h-10 rounded-full object-cover shadow-sm" />
+            <input id="commentInput" [(ngModel)]="newClassComment" name="classComment" type="text" class="flex-grow h-10 rounded-lg px-4 border border-gray-300 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" placeholder="Add a class comment" />
+            <button type="submit" aria-label="Submit comment" class="bg-amber-600 text-white px-4 py-2 rounded-lg shadow hover:bg-amber-700 transition-colors">
+              Submit
+            </button>
+          </form>
+          <ul class="space-y-4">
+            <li *ngFor="let comment of classComments" class="flex items-start gap-3">
+              <img [src]="comment.user.avatar" alt="{{ comment.user.name }}'s avatar" class="w-10 h-10 rounded-full object-cover shadow-sm" />
+              <div>
+                <p class="text-sm font-semibold text-gray-800">{{ comment.user.name }}</p>
+                <p class="text-sm text-gray-600">{{ comment.comment }}</p>
+              </div>
             </li>
           </ul>
         </div>
-        <div class="flex items-center gap-2 mt-2 text-sm font-bold text-black">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/08c1eab93afdf73390a3c95f42d5d299b7e639b93fdb31604fed7f2ab9b25d8b?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-5 h-5 object-contain" />
-          <h2>Class Comments</h2>
-        </div>
-        <form class="flex items-center gap-2 mt-1 p-2  border-gray-300 rounded-xl">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/89ed1257f487daa7c79c1a087eaa78278a1f8cd3c007e8d900af34b19be52380?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-6 h-6 object-contain" />
-          <label for="commentInput" class="sr-only">Add a class comment</label>
-          <input id="commentInput" type="text" class="flex-grow h-7 rounded-xl text-xs px-2 border border-gray-300" placeholder="Add a class comment" />
-          <button type="submit" aria-label="Submit comment" class="bg-gray-100 p-1 rounded-full hover:bg-gray-200 transition-colors">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a42bc410c2a9ba024eb0765b003629cefa24876936b846dce54cd9d33f4b45e2?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-5 h-5 object-contain" />
-          </button>
-        </form>
       </header>
     </article>
-    
+
     <aside class="w-2/5 text-black rounded-xl">
       <div class="bg-white border-2 rounded-xl shadow-sm p-3">
         <header class="flex justify-between items-center">
           <h2 class="text-lg font-extrabold">Your Work</h2>
-          <p class="text-sm font-bold text-right">Missing</p>
+          <p class="text-sm font-bold text-right">{{ workStatus }}</p>
         </header>
         <div class="mt-3">
-          <button class="border-2 w-full bg-white rounded-xl py-2 px-3 text-sm font-bold flex items-center justify-center gap-2">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb1699744d9465a1b38f478f134789ba40e0029cadace6a5988878caf499a5f8?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-5 h-5 object-contain" />
-            <span>Add your work here</span>
-          </button>
+          <label class="block mb-2 text-sm font-medium text-gray-700" for="file-upload">Add your work here</label>
+          <input type="file" id="file-upload" (change)="handleFileUpload($event)" class="sr-only" />
+          <label for="file-upload" class="cursor-pointer flex items-center justify-center gap-2 border-2 border-gray-300 bg-white rounded-xl py-2 px-3 text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb1699744d9465a1b38f478f134789ba40e0029cadace6a5988878caf499a5f8?apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Add Work Icon" class="w-5 h-5 object-contain" />
+            <span>Select a file to upload</span>
+          </label>
         </div>
-        <div class="mt-3">
+        <div *ngIf="uploadedFile" class="mt-6 flex items-center gap-4">
+          <img [src]="uploadedFile.thumbnail" alt="PDF Thumbnail" class="w-16 h-16 rounded-lg object-cover shadow-sm" />
+          <span class="text-sm font-medium text-gray-700">{{ uploadedFile.name }}</span>
+        </div>
+        <div class="mt-10">
           <h3 class="flex items-center gap-2 text-sm font-bold">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a6aa839617a6a2bbd05cfc127f534dd9743e4aa33d07cea0af4a1bd011aeb1e8?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="" class="w-5 h-5 object-contain" />
-            <span>Private Comments</span>
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a6aa839617a6a2bbd05cfc127f534dd9743e4aa33d07cea0af4a1bd011aeb1e8?apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Private Comments Icon" class="w-5 h-5 object-contain" />
+            Private Comments
           </h3>
-          <textarea class="w-full mt-1 border-2 bg-white rounded-xl h-16 text-xs p-2" aria-label="Private comments"></textarea>
+          <form (ngSubmit)="submitPrivateComment()" class="mt-2 space-y-4">
+            <div class="flex items-start gap-3">
+              <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Your Avatar" class="w-10 h-10 rounded-full object-cover shadow-sm" />
+              <input id="privateCommentInput" [(ngModel)]="newPrivateComment" name="privateComment" type="text" class="flex-grow h-10 rounded-lg px-4 border border-gray-300 text-sm text-gray-700 placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500" placeholder="Add a private comment" />
+            </div>
+            <button type="submit" class="w-full text-sm font-medium text-center text-white rounded-xl bg-slate-800 py-2">
+              Submit
+            </button>
+          </form>
         </div>
-        <button class="w-full mt-3 text-sm font-medium text-center text-white rounded-xl bg-slate-800 py-2">
-          Submit
-        </button>
       </div>
     </aside>
   </div>
