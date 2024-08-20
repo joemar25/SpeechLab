@@ -33,127 +33,150 @@ import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-das
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
 import { ManageClassLayoutComponent } from './features/teacher-layout/manage-class-layout/manage-class-layout.component';
-import { ClassListComponent } from './features/teacher-layout/manage-class-layout/class-list/class-list.component';
-import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/manage-class/manage-class.component';
-import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/class-detail/class-detail.component';
-import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
 import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-courses-layout/manage-courses-layout.component';
 import { AllCoursesComponent } from './features/teacher-layout/manage-courses-layout/all-courses/all-courses.component';
 import { BeginnerComponent } from './features/teacher-layout/manage-courses-layout/beginner/beginner.component';
 import { IntermediateComponent } from './features/teacher-layout/manage-courses-layout/intermediate/intermediate.component';
 import { AdvancedComponent } from './features/teacher-layout/manage-courses-layout/advanced/advanced.component';
-import { StudentWorkComponent } from './features/teacher-layout/manage-class-layout/class-assignment/student-work/student-work.component';
-import { InstructionComponent } from './features/teacher-layout/manage-class-layout/class-assignment/instruction/instruction.component';
 import { SelectModuleComponent } from './features/teacher-layout/teacher-speech-lab/select-module/select-module.component';
+import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
+import { InstructionComponent } from './features/teacher-layout/manage-class-layout/class-assignment/instruction/instruction.component';
+import { StudentWorkComponent } from './features/teacher-layout/manage-class-layout/class-assignment/student-work/student-work.component';
+import { AttendanceComponent } from './features/teacher-layout/manage-class-layout/manage/attendance/attendance.component';
+import { ClassworkComponent } from './features/teacher-layout/manage-class-layout/manage/classwork/classwork/classwork.component';
+import { GradesComponent } from './features/teacher-layout/manage-class-layout/manage/grades/grades/grades.component';
+import { PeopleComponent } from './features/teacher-layout/manage-class-layout/manage/people/people/people.component';
+
+import { ManageComponent } from './features/teacher-layout/manage-class-layout/manage/manage.component';
+import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/stream/class-detail/class-detail.component';
+import { ClassListComponent } from './features/teacher-layout/manage-class-layout/stream/class-list/class-list.component';
+import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/stream/manage-class/manage-class.component';
+import { StreamComponent } from './features/teacher-layout/manage-class-layout/stream/stream.component';
 
 
 
 export const routes: Routes = [
-    {
-      path: '',
-      redirectTo: '/login',
-      pathMatch: 'full'
-    },
-    {
-      path: 'login', component: AutheenticationComponent,
-    },
-    {
-      path: 'student', component: StudentLayoutComponent,
-      children: [
-        { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
-        { path: 'dashboard', component: DashboardComponent},
-        { path: 'class-lab', component: ClassLabComponent },
-        { path: 'profile', component: UserProfileComponent },
-        { path: 'task', component: TaskComponent},
-        { path: 'course-details', component: CourseComponent},
-        { path: 'task/task-detail', component: TaskDetailComponent},
-        {path:'class-lab/teacher-led',component: TeacherLedComponent},
-        {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
-        {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},
-      ]
-    },
-    {
-      path: 'teacher', component: TeacherLayoutComponent,
-      children: [
-        { path: 'speechlab',component: TeacherSpeechLabComponent},
-        { path: 't-dashboard',component: TDashboardComponent },
-        { path: 'teacher-selection', component: TeacherSelectionComponent },
-        { path: 'teacher-auto', component: TeacherAutoComponent },
-        { path: 'teacher-manual', component: TeacherManualComponent },
-        { path: 'seat-arrangement', component: SeatArrangementComponent },
-        { path: 'manual-dashboard', component: ManualDashboardComponent },
-        { path: 'select-module', component: SelectModuleComponent },
-        { path: 'manage-class', component: ManageClassLayoutComponent,
-          children: [
-            { path: '', redirectTo: 'manage-class', pathMatch: 'full' },
-            { path: '', component: ManageClassComponent}, //dae ko kinagan ki path name pang peke lang para mag redirect sa manage-class component
-            { path: 'class-list/:id', component: ClassListComponent},
-            { path: 'class-detail/:id', component: ClassDetailComponent}, //sa backend kagan nalang ki ID for specific target class. { path: 'class-detail/:id', component: ClassDetailComponent},
-            { path: 'class-assignment/:id', component: ClassAssignmentComponent, // specified assignment id
-              children: [
-                { path: 'instructions', component: InstructionComponent}, // mga aki kang assignment na route
-                { path: 'student-work', component: StudentWorkComponent},
-              ]
-            },
-          ]
-         },
-         {
-          path: 'manage-courses', component: ManageCoursesLayoutComponent,
-          children: [
-            { path: '', redirectTo: 'all-courses', pathMatch: 'full' },
-            { path: 'all-courses', component: AllCoursesComponent},
-            { path: 'beginner', component: BeginnerComponent},
-            { path: 'intermediate', component: IntermediateComponent},
-            { path: 'advanced', component: AdvancedComponent},
-          ]
-         }
-      ]
-    },
-    {
-      path: 'dictionary', component: HomeLayoutComponent,
-      children: [
-        { path: 'd-search',component: DictionaryComponent},
-      ]
-    },
-    {
-      path: 'speech-analyzer', component: SpeechAnalyzerComponent,
-      children: [
-        { path: 'record-speech',component: RecordSpeechComponent},
-        { path: 'record-list',component: RecordListComponent},
-        { path: 'record-report',component: RecordReportComponent},
-      ]
-    },
-    {
-      path: 'meet', component: TeacherLayoutComponent ,
-      children: [
-        {path: 'video-conference', component: VideoConferenceComponent},
-      ]
-    },
-    // Admin routes
-    {
-        path: 'admin', component: AdminLayoutComponent, // or another component for admin layout
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login', component: AutheenticationComponent,
+  },
+  {
+    path: 'student', component: StudentLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'class-lab', component: ClassLabComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'task', component: TaskComponent },
+      { path: 'course-details', component: CourseComponent },
+      { path: 'task/task-detail', component: TaskDetailComponent },
+      { path: 'class-lab/teacher-led', component: TeacherLedComponent },
+      { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
+      { path: 'class-lab/self-assesment/assesment-category', component: AssesmentCategoryComponent },
+    ]
+  },
+  {
+    path: 'teacher', component: TeacherLayoutComponent,
+    children: [
+      { path: 'speechlab', component: TeacherSpeechLabComponent },
+      { path: 't-dashboard', component: TDashboardComponent },
+      { path: 'teacher-selection', component: TeacherSelectionComponent },
+      { path: 'teacher-auto', component: TeacherAutoComponent },
+      { path: 'teacher-manual', component: TeacherManualComponent },
+      { path: 'seat-arrangement', component: SeatArrangementComponent },
+      { path: 'manual-dashboard', component: ManualDashboardComponent },
+      { path: 'select-module', component: SelectModuleComponent },
+      {
+        path: 'manage-class', component: ManageClassLayoutComponent,
         children: [
-            { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent},
-            { path: 'class-lab', component: ClassLabComponent },
-            { path: 'profile', component: UserProfileComponent },
-            { path: 'task', component: TaskComponent},
-            { path: 'course-details', component: CourseComponent},
-            { path: 'lesson-details', component: LessonComponent},
-            { path: 'task/task-detail', component: TaskDetailComponent},
-            {path:'class-lab/teacher-led',component: TeacherLedComponent},
-            {path:'class-lab/self-assesment',component: SelfAssesmentComponent},
-            {path:'class-lab/self-assesment/assesment-category',component: AssesmentCategoryComponent},
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          { path: 'dashboard', component: ADashboardComponent },
-          { path: 'manage-users', component: ADashboardComponent },
-          { path: 'count', component: CourseComponent },
-          { path: 'speech-lab', component: TeacherLayoutComponent },
+          {
+            path: 'manage', component: ManageComponent,
+            children: [
+              { path: 'classwork', component: ClassworkComponent },
+              { path: 'people', component: PeopleComponent },
+              { path: 'grades', component: GradesComponent },
+              { path: 'attendance', component: AttendanceComponent },
+            ]
+          },
+          {
+            path: 'stream', component: StreamComponent,
+            children: [
+              { path: '', component: ManageClassComponent },
+              { path: 'class-list/:id', component: ClassListComponent },
+              { path: 'class-detail/:id', component: ClassDetailComponent },
+            ]
+          },
+          {
+            path: 'class-assignment/:id', component: ClassAssignmentComponent,
+            children: [
+              { path: 'instructions', component: InstructionComponent },
+              { path: 'student-work', component: StudentWorkComponent },
+            ]
+          },
+          { path: '', redirectTo: 'stream', pathMatch: 'full' },
         ]
-      }      
-  ];
+      },
+      {
+        path: 'manage-courses', component: ManageCoursesLayoutComponent,
+        children: [
+          { path: '', redirectTo: 'all-courses', pathMatch: 'full' },
+          { path: 'all-courses', component: AllCoursesComponent },
+          { path: 'beginner', component: BeginnerComponent },
+          { path: 'intermediate', component: IntermediateComponent },
+          { path: 'advanced', component: AdvancedComponent },
+        ]
+      }
+    ]
+  },
+  {
+    path: 'dictionary', component: HomeLayoutComponent,
+    children: [
+      { path: 'd-search', component: DictionaryComponent },
+    ]
+  },
+  {
+    path: 'speech-analyzer', component: SpeechAnalyzerComponent,
+    children: [
+      { path: 'record-speech', component: RecordSpeechComponent },
+      { path: 'record-list', component: RecordListComponent },
+      { path: 'record-report', component: RecordReportComponent },
+    ]
+  },
+  {
+    path: 'meet', component: TeacherLayoutComponent,
+    children: [
+      { path: 'video-conference', component: VideoConferenceComponent },
+    ]
+  },
+  // Admin routes
+  {
+    path: 'admin', component: AdminLayoutComponent, // or another component for admin layout
+    children: [
+      { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'class-lab', component: ClassLabComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'task', component: TaskComponent },
+      { path: 'course-details', component: CourseComponent },
+      { path: 'lesson-details', component: LessonComponent },
+      { path: 'task/task-detail', component: TaskDetailComponent },
+      { path: 'class-lab/teacher-led', component: TeacherLedComponent },
+      { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
+      { path: 'class-lab/self-assesment/assesment-category', component: AssesmentCategoryComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: ADashboardComponent },
+      { path: 'manage-users', component: ADashboardComponent },
+      { path: 'count', component: CourseComponent },
+      { path: 'speech-lab', component: TeacherLayoutComponent },
+    ]
+  }
+];
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

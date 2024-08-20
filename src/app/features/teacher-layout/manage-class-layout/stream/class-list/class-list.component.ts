@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AddClassService } from '../../../../../app-services/modal-services/manage-class/add-class.service';
-import { AddClassComponent } from "../../../modal/manage-class/add-class/add-class.component";
-import { ClickOutsideDirective } from '../../../../shared/directives/click-outside.directive';
+import { AddClassService } from '../../../../../../app-services/modal-services/manage-class/add-class.service';
+import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+import { AddClassComponent } from '../../../../modal/manage-class/add-class/add-class.component';
+
+
+
 
 @Component({
   selector: 'app-class-list',

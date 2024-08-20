@@ -38,7 +38,7 @@
             <div
                 class="w-full h-fit bg-primary-tw relative flex justify-between overflow-visible items-start p-3 px-6 rounded-lg">
                 <div class="flex flex-col gap-2 text-primary-text-tw">
-                    <p
+                    <p  [routerLink]="'/teacher/manage-class/stream/class-detail/' + item.id"
                         class="cursor-pointer text-secondary-tw text-base uppercase hover:text-secondary-tint-tw duration-300">
                         {{item.className}}
                     </p>
@@ -60,7 +60,7 @@
                                 role="menuitem" tabindex="-1" id="menu-item-0">Dropdown {{item.id}}</div>
                             <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
                                 role="menuitem" tabindex="-1" id="menu-item-1" 
-                                [routerLink]="'/teacher/manage-class/class-detail/' + item.id">Open Class</div>
+                                [routerLink]="'/teacher/manage-class/stream/class-detail/' + item.id">Open Class</div>
                             <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
                                 role="menuitem" tabindex="-1" id="menu-item-2">Show All</div>
                             <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"

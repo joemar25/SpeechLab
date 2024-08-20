@@ -1,13 +1,17 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ClickOutsideDirective } from '../../../../shared/directives/click-outside.directive';
-import { RouterModule } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+import { ModalService } from '../../../../../../app-services/modal-services/manage-class/modal.service';
+import { PollModalComponent } from '../components/poll-modal/poll-modal.component';
+import { SurveyModalComponent } from '../components/survey-modal/survey-modal.component';
+import { EvaluationFormModalComponent } from '../components/evaluation-form-modal/evaluation-form-modal.component';
 
 @Component({
   selector: 'app-class-detail',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, RouterModule],
+  imports: [CommonModule, ClickOutsideDirective, RouterModule, PollModalComponent, SurveyModalComponent, EvaluationFormModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './class-detail.component.html',
   styleUrl: './class-detail.component.css',
@@ -24,8 +28,18 @@ import { RouterModule } from '@angular/router';
     ]),
   ],
 })
-export class ClassDetailComponent {
+export class ClassDetailComponent implements OnInit{
   profile:boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private modalService: ModalService
+  ) {}
+  activeRouteId: string | null = ''
+
+  ngOnInit(): void {
+    this.activeRouteId = this.route.snapshot.paramMap.get('id');
+  }
 
   arrayList: any[] = [
     { id: 1, title: 'Announcement to class', comment: 12 },
@@ -59,5 +73,33 @@ export class ClassDetailComponent {
     this.comments[id] = false;
   }
 
+  dropdown: boolean = false;
+  openDropdown(){
+    this.dropdown = !this.dropdown;
+  }
+  closeDropdown(){
+    this.dropdown = false;
+  }
+
+  poll: boolean = false;
+  survey: boolean = false;
+  evaluation: boolean = false;
+
+
+    isModalOpen: { [key: string]: boolean } = {
+      poll: false,
+      survey: false,
+      evaluation: false,
+    };
+    
+    modalId: string | null = null;
   
+    toggleModal(category: string, id: string | null) {
+      this.isModalOpen[category] = !this.isModalOpen[category];
+      if (this.isModalOpen[category]) {
+        this.modalId = id || null;
+      } else {
+        this.modalId = null;
+      }
+    }
 }

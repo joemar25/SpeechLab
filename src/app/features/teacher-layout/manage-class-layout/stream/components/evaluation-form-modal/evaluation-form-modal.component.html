@@ -1,0 +1,54 @@
+<div class="w-full h-full flex justify-center items-center fixed top-0 left-0 z-[100] bg-gray-800 bg-opacity-50">
+    <div
+        class="relative ml-[20%] flex flex-col bg-white rounded-lg overflow-hidden shadow-lg w-full h-full max-h-[80%] max-w-screen-lg">
+        <button class="absolute top-2 right-2" (click)="closeModal()">
+            <iconify-icon icon="iconamoon:close-thin" width="35" height="35"></iconify-icon>
+        </button>
+
+        <div class="h-full w-full overflow-y-auto p-6">
+            <div class="space-y-8">
+                <!-- Repeatable question block -->
+                <h2 class="text-lg font-semibold mb-4">Evaluation</h2>
+                <div *ngFor="let question of questions; let i = index" class="flex">
+                    <div class="w-1/2 pr-4">
+                        <div class="w-full flex gap-2 justify-center items-center">
+                            <h2 class="text-lg font-semibold mb-4">Q{{ i + 1 }}.</h2>
+                            <input type="text" [(ngModel)]="question.description" placeholder="Enter description"
+                                class="w-full p-2 border border-gray-700 outline-none rounded">
+                            <button (click)="removeQuestion(i)" class="text-red-500 ">
+                                <iconify-icon class="" icon="iconamoon:close-thin" width="30"
+                                    height="30"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w-1/2 pl-4">
+                        <h2 class="text-lg font-semibold mb-4">Options for Q{{ i + 1 }}.</h2>
+                        <div class="space-y-2">
+                            <!-- Repeatable option inputs (up to 4) -->
+                            <div *ngFor="let option of question.options; let j = index"
+                                class="flex items-center space-x-2">
+                                <input type="radio" class="mr-2" [name]="'question' + i">
+                                <input type="text" [(ngModel)]="question.options[j]" [placeholder]="'Option ' + (j + 1)"
+                                    class="w-full p-2 border border-gray-700 outline-none rounded">
+                                <!-- Add remove icon next to each option -->
+                                <button (click)="removeOption(i, j)" class="text-red-500">
+                                    <iconify-icon icon="iconamoon:close-thin" width="30" height="30"></iconify-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <button *ngIf="question.options.length < 4" (click)="addOption(i, $event)"
+                            class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Add Option</button>
+                    </div>
+                </div>
+                <!-- End of repeatable question block -->
+            </div>
+
+            <button (click)="addQuestion($event)" class="mt-8 bg-green-500 text-white px-4 py-2 rounded">Add
+                Question</button>
+        </div>
+        <div class="flex justify-end items-end space-x-4 p-4 border-t">
+            <button (click)="save($event)" class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+            <button (click)="cancel($event)" class="bg-red-500 text-white px-4 py-2 rounded">Cancel</button>
+        </div>
+    </div>
+</div>

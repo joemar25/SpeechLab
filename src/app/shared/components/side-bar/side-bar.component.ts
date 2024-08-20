@@ -32,7 +32,7 @@ export class SideBarComponent {
   ];
   
   teacherMenu: MenuItem[] = [
-    { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class' },
+    { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class/' },
     { label: 'Manage Courses', icon: 'mdi:book-open-variant', route: '/teacher/manage-courses' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
     { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/teacher/speechlab' },

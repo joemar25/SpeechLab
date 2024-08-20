@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+
 
 @Component({
   selector: 'app-student-work',

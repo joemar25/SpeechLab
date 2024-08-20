@@ -64,21 +64,50 @@
             <!-- Bottom Right -->
             <div class="w-full h-full px-4 py-2 pb-8">
                 <div class="w-full h-fit flex flex-col gap-4">
+                    <div class="w-full flex justify-end items-center">
+                        <div class="relative inline-block text-left">
+                            <button type="button" (click)="openDropdown()"
+                                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-primary-tw text-sm 
+                                font-medium text-white hover:bg-secondary-tw focus:outline-none duration-300 ease-in-out">
+                                + Create New
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            @if(dropdown){
+                            <div (clickOutside)="closeDropdown()"
+                                class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none p-2">
+                                <div class="py-1" role="menu" aria-orientation="vertical"
+                                    aria-labelledby="options-menu">
+                                    <button (click)="toggleModal('poll', activeRouteId)"
+                                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                                        role="menuitem">Poll</button>
+                                    <button (click)="toggleModal('survey', activeRouteId)"
+                                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                                        role="menuitem">Survey</button>
+                                    <button (click)="toggleModal('evaluation', activeRouteId)"
+                                        class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+                                        role="menuitem">Evaluation Form</button>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
                     @for (item of arrayList; track $index) {
-                    <div
-                        class="w-full h-32 flex flex-col bg-white shadow-md border border-gray-300  rounded-xl cursor-pointer">
-                        <div [routerLink]="['/teacher/manage-class/class-assignment/{{item.id}}/instructions']"
-                            class="w-full h-full px-8 pt-4">
-                            <p class="text-base font-normal">{{ item.title }}</p>
+                    <div class="w-full h-32 flex flex-col bg-white shadow-md border border-gray-300  rounded-xl">
+                        <div class="w-full h-full px-8 pt-4">
+                            <p routerLink="/teacher/manage-class/class-assignment/{{item.id}}/instructions"
+                                class="text-base font-normal cursor-pointer hover:underline">
+                                {{ item.title }}
+                            </p>
                         </div>
 
 
-                        <div (click)="openCommentModal(item.id)"
-                            class="w-full h-16 cursor-pointer px-8 flex justify-between items-center bg-gray-100 rounded-b-xl border-t-2 border-gray-300">
-                            <p class="text-sm text-gray-500 font-medium
+                        <div
+                            class="w-full h-16 px-8 flex justify-between items-center bg-gray-100 rounded-b-xl border-t-2 border-gray-300">
+                            <p (click)="openCommentModal(item.id)" class="text-sm text-gray-500 font-medium  cursor-pointer
                             hover:underline">{{item.comment}} Comments</p>
-                            <iconify-icon class="text-gray-500" icon="fontisto:comment" width="25"
-                                height="25"></iconify-icon>
+                            <iconify-icon (click)="openCommentModal(item.id)" class="text-gray-500  cursor-pointer"
+                                icon="fontisto:comment" width="25" height="25"></iconify-icon>
                         </div>
                     </div>
                     <!-- Modal for Comment -->
@@ -91,10 +120,13 @@
                                     class="absolute top-0 right-0  cursor-pointer hover:scale-105 duration-300"
                                     icon="iconamoon:close-thin" width="35" height="35"></iconify-icon>
                                 <h1 class="absolute top-2 left-4">Class Comments:</h1>
-                                <div class="w-full h-fit min-h-32 max-h-[80%] overflow-y-auto rounded-md bg-[#D9D9D9] mt-6 p-2">
+                                <!-- list of comment -->
+                                <div
+                                    class="w-full h-fit min-h-32 max-h-[80%] overflow-y-auto rounded-md bg-[#D9D9D9] mt-6 p-2">
                                     @for (comment of commentList; track $index) {
                                     <div class="w-full max-w-[60%] h-fit flex flex-col pb-6">
-                                        <p class="ml-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore,
+                                        <p class="ml-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                            Labore,
                                             excepturi est eos explicabo, voluptatibus quaerat soluta qui magni amet
                                             nesciunt aspernatur enim. Reprehenderit dignissimos eveniet optio sapiente
                                             cupiditate, suscipit nesciunt!</p>
@@ -105,6 +137,7 @@
                                     </div>
                                     }
                                 </div>
+                                <!-- input for comment -->
                                 <div class="flex justify-center items-center gap-4 ">
                                     @if (profile) {
                                     <!-- if warang profile si user -->
@@ -137,5 +170,29 @@
                 </div>
             </div>
         </div>
+        @if (isModalOpen['poll']) {
+            <div @fadeAnimation class="w-full h-full flex justify-center items-center fixed top-0 right-0 z-[100] background">
+                <app-poll-modal [id]="modalId" (closeModalEvent)="toggleModal('poll', modalId)">
+                </app-poll-modal>
+            </div>
+            }
+            @if (isModalOpen['survey']) {
+            <div @fadeAnimation class="w-full h-full fixed top-0 right-0 z-[100] background">
+                <div>
+                    <div (clickOutside)="toggleModal('survey', modalId)" class="w-full h-full flex justify-center items-center">
+                        <app-survey-modal [id]="modalId" (closeModalEvent)="toggleModal('survey', modalId)">
+                        </app-survey-modal>
+                    </div>
+                </div>
+            </div>
+            }
+            @if (isModalOpen['evaluation']) {
+            <div @fadeAnimation class="w-full h-full flex justify-center items-center fixed top-0 right-0 z-[100] background">
+                <app-evaluation-form-modal [id]="modalId" (closeModalEvent)="toggleModal('evaluation', modalId)">
+                </app-evaluation-form-modal>
+            </div>
+            }
     </div>
+    
 </div>
+
