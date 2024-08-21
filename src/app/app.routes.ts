@@ -18,7 +18,6 @@ import { TeacherAutoComponent } from './features/teacher-layout/teacher-auto/tea
 import { TeacherManualComponent } from './features/teacher-layout/teacher-manual/teacher-manual.component';
 import { SeatArrangementComponent } from './features/teacher-layout/seat-arrangement/seat-arrangement.component';
 import { ManualDashboardComponent } from './features/teacher-layout/manual-dashboard/manual-dashboard.component';
-
 import { SpeechAnalyzerComponent } from './features/speech-analyzer/speech-analyzer.component';
 import { RecordSpeechComponent } from './features/speech-analyzer/record-speech/record-speech.component';
 import { RecordListComponent } from './features/speech-analyzer/record-list/record-list.component';
@@ -98,7 +97,7 @@ export const routes: Routes = [
           { path: 'dashboard', component: ADashboardComponent },
           { path: 'manage-users', component: ADashboardComponent },
           { path: 'count', component: CourseComponent },
-          { path: 'speechlab', component: ASpeechlabComponent },
+          // { path: 'speechlab', component: ASpeechlabComponent },
         ]
       }      
   ];
