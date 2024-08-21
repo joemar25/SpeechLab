@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TeacherSpeechLabComponent implements OnDestroy, AfterViewInit {
   @ViewChild('screenShareVideo') screenShareVideo!: ElementRef<HTMLVideoElement>;
+  searchQuery: any;
 
 shareScreen(arg0: string) {
 throw new Error('Method not implemented.');
@@ -24,7 +25,10 @@ selectedStudentName: string = '';
 isScreenSharing: boolean = false;
 showToast: boolean = false;
   toastMessage: string = '';
+  showManageUnitsPanel: boolean = false;
+  seatingArrangement: any = {}; 
 
+  
   students = [
     { name: 'John Doe', id: '001' },
   { name: 'Jane Smith', id: '002' },
@@ -91,18 +95,6 @@ showToast: boolean = false;
     return student.id.startsWith('Absent - ');
   }   
 
-  // get leftColumnStudents() {
-  //   return this.students
-  //     .filter((_, index) => index % 7 < 4) 
-  //     .map((student, index) => ({ ...student, index }));
-  // }
-  
-  // get rightColumnStudents() {
-  //   return this.students
-  //     .filter((_, index) => index % 7 >= 4)
-  //     .map((student, index) => ({ ...student, index: index + this.students.length / 2 }));
-  // }
-  
 
   selectMode(mode: string) {
     if (this.selectedMode === mode) {
@@ -188,12 +180,7 @@ confirmSelection() {
     this.showSelectionSection = false;
     this.selectedStudentName = '';
   }
-  
-  // ngAfterViewInit() {
-  //   if (this.screenShareStream && this.screenShareVideo) {
-  //     this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
-  //   }
-  // }
+
 
   async startScreenShare() {
     if (this.isScreenSharing) {
@@ -210,15 +197,13 @@ confirmSelection() {
   
       this.isScreenSharing = true;
       this.showSelectionSection = false;
-  
-      // Use setTimeout to ensure the video element is available in the DOM
+
       setTimeout(() => {
         if (this.screenShareVideo && this.screenShareVideo.nativeElement) {
           this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
         }
       }, 0);
-  
-      // Add event listener for when the user stops sharing
+
       this.screenShareStream.getVideoTracks()[0].addEventListener('ended', () => {
         console.log("Screen sharing stopped");
         this.stopScreenShare();
@@ -242,5 +227,48 @@ confirmSelection() {
       this.screenShareStream = null;
     }
     this.isScreenSharing = false;
+  }
+
+  toggleManageUnits() {
+    this.showManageUnitsPanel = !this.showManageUnitsPanel;
+  }
+
+  getStudentForSeat(row: number, col: number): string | null {
+    return this.seatingArrangement[row][col];
+  }
+
+  assignStudentToSeat(studentId: string, row: number, col: number) {
+    this.seatingArrangement[row][col] = studentId;
+  }
+
+  cancelChanges(): void {
+    // Reset any changes made to the seating arrangement here
+    this.seatingArrangement = {}; // Example reset
+
+    // Close the Manage Units panel
+    this.showManageUnitsPanel = false;
+  }
+  saveChanges(): void {
+    this.seatingArrangement = {}; 
+
+ 
+    this.showManageUnitsPanel = false;
+  }
+
+  getSeatingPlaceholders(): string[] {
+    return Array.from({ length: this.maxStudents }, (_, i) => `Seat ${i + 1}`);
+  }
+
+  getFilteredStudents(): any[] {
+    const query = this.searchQuery.toLowerCase();
+    return this.students.filter(student =>
+      student.name.toLowerCase().includes(query) || 
+      student.id.toLowerCase().includes(query)
+    );
+  }
+
+  onSearchInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery = input.value;
   }
 }
