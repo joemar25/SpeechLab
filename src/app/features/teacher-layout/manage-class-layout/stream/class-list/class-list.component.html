@@ -1,0 +1,83 @@
+<div class="w-full h-full flex flex-col">
+    <!-- header part -->
+    <div class="w-full h-fit relative flex justify-between items-start">
+        <button (click)="openDropdown(1)"
+            class="flex justify-evenly items-center bg-primary-tw text-primary-text-tw py-1 pl-2 w-20 rounded-xl">
+            All <iconify-icon icon="iconamoon:arrow-down-2-thin" width="25" height="25"></iconify-icon>
+        </button>
+        <!-- dropdown trigger using the UID-->
+        @if (dropDown[1]) {
+        <div @fadeAnimation (clickOutside)="closeDropdown(1)"
+            class="absolute left-10 z-50 top-12 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="py-2 relative px-2" role="none">
+                <iconify-icon class="absolute -top-4 left-1 cursor-pointer text-white" icon="iwwa:arrow-up" width="25"
+                    height="25"></iconify-icon>
+                <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700" role="menuitem"
+                    tabindex="-1" id="menu-item-0">Dropdown 1</div>
+                <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700" role="menuitem"
+                    tabindex="-1" id="menu-item-1">Filter</div>
+                <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700" role="menuitem"
+                    tabindex="-1" id="menu-item-2">Show All</div>
+                <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700" role="menuitem"
+                    tabindex="-1" id="menu-item-2">History</div>
+            </div>
+        </div>
+        }
+        <button (click)="openAddClassModal()"
+            class="flex justify-evenly items-center gap-1 bg-primary-tw text-primary-text-tw py-1 px-2 rounded-xl">
+            <iconify-icon class="mt-0.5" icon="iconoir:plus" width="25" height="25"></iconify-icon>Create Class
+        </button>
+    </div>
+
+    <!-- body -->
+    <div class="w-full h-full p-4">
+        <div class="w-full h-full flex flex-col flex-1 gap-4">
+            <!-- First item -->
+            @for (item of classList; track $index) {
+            <div
+                class="w-full h-fit bg-primary-tw relative flex justify-between overflow-visible items-start p-3 px-6 rounded-lg">
+                <div class="flex flex-col gap-2 text-primary-text-tw">
+                    <p  [routerLink]="'/teacher/manage-class/stream/class-detail/' + item.id"
+                        class="cursor-pointer text-secondary-tw text-base uppercase hover:text-secondary-tint-tw duration-300">
+                        {{item.className}}
+                    </p>
+                    <p class="text-sm capitalize">{{item.course}} - {{item.year}}</p>
+                    <p class="text-sm uppercase">{{item.schedule}}</p>
+                </div>
+                <div class="w-[35%] absolute right-0 top-0 flex overflow-visible h-full">
+                    <!-- Trigger icon for dropdown by UID -->
+                    <iconify-icon (click)="openDropdown(item.id)" class="cursor-pointer text-primary-text-tw px-4 pt-2"
+                        icon="pepicons-pencil:dots-y" width="35" height="35"></iconify-icon>
+                        <img class="w-full h-full rounded-lg object-cover" [src]="item.src" alt="">
+                    <!-- Dropdown -->
+                    @if (dropDown[item.id]) {
+                    <div @fadeAnimation (clickOutside)="closeDropdown(item.id)"
+                        class="absolute z-50 -left-48 top-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <div class="py-2 relative px-2" role="none">
+                            <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="menu-item-0">Dropdown {{item.id}}</div>
+                            <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="menu-item-1" 
+                                [routerLink]="'/teacher/manage-class/stream/class-detail/' + item.id">Open Class</div>
+                            <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="menu-item-2">Show All</div>
+                            <div class="block w-full cursor-pointer hover:bg-gray-300 duration-300 px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="menu-item-2">History</div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+@if (addCLass) {
+<div @fadeAnimation class="w-full h-full background-dim z-50 fixed top-0 left-0 flex justify-center items-center">
+    <app-add-class (close)="closeModal()"></app-add-class>
+</div>
+}

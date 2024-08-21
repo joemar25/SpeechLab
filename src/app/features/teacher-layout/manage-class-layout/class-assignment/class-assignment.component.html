@@ -1,0 +1,16 @@
+<div class="w-full h-full">
+    <div class="w-full h-full flex flex-col gap-4">
+        <div class="w-full flex justify-between items-center">
+            <div class="w-full h-fit flex justify-start items-center gap-4">
+                <button routerLink="/teacher/manage-class/class-assignment/{{routeId}}/instructions" routerLinkActive="active-route" class="w-32 bg-primary-tw p-1 rounded-md text-primary-text-tw">Instruction</button>
+                <button routerLink="/teacher/manage-class/class-assignment/{{routeId}}/student-work" routerLinkActive="active-route" class="w-32 bg-primary-tw p-1 rounded-md text-primary-text-tw">Student Work</button>
+            </div>
+            <button (click)="back()">
+                <iconify-icon icon="ant-design:backward-outlined" width="35" height="35"></iconify-icon>
+            </button>
+        </div>
+        <div class="w-full h-full overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-<div class="h-dvh w-dvw flex bg-tertiary-tw overflow-hidden">
-    <div class="h-full w-fit z-20 flex-shrink-0">
+<div class="h-dvh w-dvw flex bg-background-tw overflow-hidden">
+    <div class="h-full w-fit z-[1000] flex-shrink-0">
         <div class="w-full h-full bg-primary-tw text-primary-text-tw overflow-y-auto">
             <app-side-bar></app-side-bar>
         </div>
@@ -13,12 +13,12 @@
                 <!-- Contents for student/s page -->
                 <router-outlet></router-outlet>
                 @if (notification) {
-                <div @fadeAnimation class="w-full h-full z-50 fixed top-0 left-0 flex justify-center items-center">
+                <div @fadeAnimation class="w-full h-full z-50 background-dim fixed top-0 left-0 flex justify-center items-center">
                     <app-notification (close)="closeNotification()"></app-notification>
                 </div>
                 }
                 @if (settings) {
-                <div @fadeAnimation class="w-full h-full z-50 fixed top-0 left-0 flex justify-center items-center">
+                <div @fadeAnimation class="w-full h-full z-50 background-dim fixed top-0 left-0 flex justify-center items-center">
                     <app-manage-settings (close)="closeManageSettings()"></app-manage-settings>
                 </div>
                 }

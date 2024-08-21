@@ -6,7 +6,8 @@
     "axe/forms": [
       "default",
       {
-        "label": "off"
+        "label": "off",
+        "select-name": "off"
       }
     ],
     "axe/name-role-value": [
@@ -32,6 +33,7 @@
       {
         "list": "off"
       }
-    ]
+    ],
+    "no-inline-styles": "off"
   }
 }
