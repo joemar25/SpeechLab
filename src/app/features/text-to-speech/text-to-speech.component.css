@@ -1,0 +1,55 @@
+/* text-to-speech.component.css */
+
+.snackbar-enter {
+    animation: snackbar-enter 0.3s ease-out;
+  }
+  
+  .snackbar-exit {
+    animation: snackbar-exit 0.3s ease-in;
+  }
+  
+  @keyframes snackbar-enter {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes snackbar-exit {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+
+  .dropdown-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .dropdown-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .dropdown-exit {
+    opacity: 1;
+  }
+  
+  .dropdown-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  

@@ -1,0 +1,24 @@
+<div class="bg-white rounded-t-lg sm:rounded-lg shadow-lg w-full max-w-lg p-4 sm:p-6">
+    <div class="flex justify-between items-center border-b pb-2 mb-4">
+      <h3 class="text-xl font-semibold">Chat with {{ selectedChat.name }} ({{ selectedChat.class }})</h3>
+    </div>
+  
+    <!-- Chat Messages -->
+    <div class="overflow-y-auto max-h-48 mb-4">
+      <div *ngFor="let message of messages" class="mb-4" [ngClass]="{ 'justify-end': message.sender === 'student', 'justify-start': message.sender === selectedChat.type }">
+        <div class="flex items-start relative" [ngClass]="{ 'ml-auto': message.sender === 'student' }">
+          <img *ngIf="message.sender === 'teacher' && selectedChat.type === 'teacher'" src="https://via.placeholder.com/40" alt="Teacher Profile" class="w-10 h-10 rounded-full object-cover mr-3">
+          <div [ngClass]="{'bg-gray-100 text-gray-800': message.sender === 'teacher', 'bg-blue-500 text-white': message.sender === 'student'}" class="p-3 rounded-lg">
+            <p class="text-sm">{{ message.text }}</p>
+            <p class="text-xs mt-1" [ngClass]="{'text-gray-500': message.sender === 'teacher', 'text-gray-200': message.sender === 'student'}">{{ message.time }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Message Input -->
+    <div>
+      <input [(ngModel)]="newMessage" type="text" placeholder="Type a message..." class="w-full p-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" (keyup.enter)="sendMessage()">
+    </div>
+  </div>
+  

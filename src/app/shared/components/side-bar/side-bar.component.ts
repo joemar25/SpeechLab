@@ -25,14 +25,15 @@ export class SideBarComponent {
     { label: 'Class Lab', icon: 'ri:graduation-cap-fill', route: '/student/class-lab' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
     { label: 'Tasks', icon: 'mdi:format-list-bulleted', route: '/student/task'},
-    { label: 'Speech Lab', svgIcon: 'speech-lab-icon'},
+    { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/student/speechlab'},
     { label: 'Dictionary', icon: 'ic:sharp-dashboard',route: '/dictionary/d-search' },
-    { label: 'Text to Speech', svgIcon: 'text-to-speech-icon' },
+    { label: 'Text to Speech', svgIcon: 'text-to-speech-icon', route: '/text-to-speech/text-record' },
     { label: 'Speech Analyzer', svgIcon: 'text-to-speech-icon', route : '/speech-analyzer/record-speech' },
   ];
   
   teacherMenu: MenuItem[] = [
-    { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class/' },
+    { label: 'Dashboard', icon: 'ic:sharp-dashboard', route: '/teacher/t-dashboard' },
+    { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class' },
     { label: 'Manage Courses', icon: 'mdi:book-open-variant', route: '/teacher/manage-courses' },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
     { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/teacher/speechlab' },

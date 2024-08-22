@@ -1,0 +1,25 @@
+/* dashboard.component.css */
+@keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    }
+    50% {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+    }
+  }
+  
+  .animate-float-slow {
+    animation: float-slow 3s ease-in-out infinite;
+  }
+  
+  /* Enhance shadow effect */
+  .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Optional: Add hover effect to enhance shadow further */
+  .hover\:shadow-3xl:hover {
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+  }

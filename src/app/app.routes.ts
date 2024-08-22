@@ -51,6 +51,8 @@ import { ClassDetailComponent } from './features/teacher-layout/manage-class-lay
 import { ClassListComponent } from './features/teacher-layout/manage-class-layout/stream/class-list/class-list.component';
 import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/stream/manage-class/manage-class.component';
 import { StreamComponent } from './features/teacher-layout/manage-class-layout/stream/stream.component';
+import { TextToSpeechComponent } from './features/text-to-speech/text-to-speech.component';
+import { SpeechLabComponent } from './features/student-layout/speech-lab/speech-lab.component';
 
 
 
@@ -76,6 +78,7 @@ export const routes: Routes = [
       { path: 'class-lab/teacher-led', component: TeacherLedComponent },
       { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
       { path: 'class-lab/self-assesment/assesment-category', component: AssesmentCategoryComponent },
+      { path: 'speechlab', component: SpeechLabComponent },
     ]
   },
   {
@@ -92,8 +95,6 @@ export const routes: Routes = [
       {
         path: 'manage-class', component: ManageClassLayoutComponent,
         children: [
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          { path: 'dashboard', component: ADashboardComponent },
           { path: 'manage-users', component: ADashboardComponent },
           { path: 'count', component: CourseComponent },
           // { path: 'speechlab', component: ASpeechlabComponent },
@@ -140,6 +141,12 @@ export const routes: Routes = [
     path: 'dictionary', component: HomeLayoutComponent,
     children: [
       { path: 'd-search', component: DictionaryComponent },
+    ]
+  },
+  {
+    path: 'text-to-speech', component: HomeLayoutComponent,
+    children: [
+      { path: 'text-record', component: TextToSpeechComponent },
     ]
   },
   {
