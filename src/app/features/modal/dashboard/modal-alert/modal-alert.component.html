@@ -1,0 +1,24 @@
+<div class="overflow-y-auto h-dvh w-dvw flex items-start  justify-center border-2 border-black">
+  <div class="relative bg-white p-8 rounded-lg shadow-xl ml-[20%] mt-[5%] h-[60%] w-full max-w-screen-xs flex flex-col justify-evenly items-center">
+    <iconify-icon (click)="close()" class="cursor-pointer absolute top-2 right-2 z-[100]" icon="lets-icons:close-square-duotone" width="35" height="35"></iconify-icon>
+    <!-- Title -->
+    <h2 class="text-xl font-bold mb-6 text-center">Alert students now!</h2>
+
+    <!-- Illustration -->
+    <div class="flex justify-center mb-6">
+      <div class="relative">
+        <div class="text-center mb-8">
+          <img src="assets/images/dashboard/alert.png" alt="No messages" class="mx-auto mb-4 w-72">
+        </div>
+      </div>
+    </div>
+
+    <!-- Create an Alert button -->
+    <button class="w-full text-secondary-text-tw font-semibold py-2 px-4 rounded-full flex items-center justify-center">
+      <svg class="w-8 h-8 mr-2 bg-primary-tw rounded-full text-primary-text-tw p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      </svg>
+      Create an Alert
+    </button>
+  </div>
+</div>

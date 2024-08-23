@@ -1,0 +1,39 @@
+<div class="overflow-y-auto h-dvh w-dvw flex items-center  justify-center border-2 border-black">
+  <div class="relative bg-white p-8 rounded-lg shadow-xl ml-[20%] h-[90%] w-full max-w-md flex flex-col justify-evenly items-center ">
+    <iconify-icon (click)="closeModal()" class="cursor-pointer absolute top-2 right-2 z-[100]" icon="lets-icons:close-square-duotone" width="35" height="35"></iconify-icon>
+    <!-- Title -->
+      <!-- Search bar -->
+      <div class=" relative w-full">
+        <input type="text" placeholder="Search" class="w-full py-2 pl-4 pr-10 rounded-full border border-gray-300 overflow-hidden bg-tertiary-tw focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button class="absolute right-3 top-2">
+          <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+      </div>
+  
+      <!-- User icons -->
+      <div class="flex justify-evenly  overflow-x-auto w-full">
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-tw text-primary-text-tw flex items-center justify-center text-xs mr-2">User 1</div>
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-tw text-primary-text-tw flex items-center justify-center text-xs mr-2">User 2</div>
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-tw text-primary-text-tw flex items-center justify-center text-xs mr-2">User 3</div>
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-tw text-primary-text-tw flex items-center justify-center text-xs mr-2">User 4</div>
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary-tw text-primary-text-tw flex items-center justify-center text-xs">User 5</div>
+      </div>
+  
+      <!-- Illustration and text -->
+      <div class="text-center mb-8">
+        <img src="assets/images/dashboard/chat.png" alt="No messages" class="mx-auto mb-4 w-64">
+        <p class="text-lg font-semibold mb-2">You don't have any messages yet</p>
+        <p class="text-gray-600">Start a message now</p>
+      </div>
+  
+      <!-- Private Chat button -->
+      <button class="w-full bg-navy-blue py-3 rounded-full flex items-center justify-center">
+        <svg class="w-10 h-10 mr-2 bg-primary-tw rounded-full text-primary-text-tw p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        Private Chat
+      </button>
+    </div>
+  </div>

@@ -53,6 +53,7 @@ import { ManageClassComponent } from './features/teacher-layout/manage-class-lay
 import { StreamComponent } from './features/teacher-layout/manage-class-layout/stream/stream.component';
 import { TextToSpeechComponent } from './features/text-to-speech/text-to-speech.component';
 import { SpeechLabComponent } from './features/student-layout/speech-lab/speech-lab.component';
+import { DashboardTeacherComponent } from './features/teacher-layout/dashboard-teacher/dashboard-teacher.component';
 
 
 
@@ -92,6 +93,7 @@ export const routes: Routes = [
       { path: 'seat-arrangement', component: SeatArrangementComponent },
       { path: 'manual-dashboard', component: ManualDashboardComponent },
       { path: 'select-module', component: SelectModuleComponent },
+      { path: 'new-dashboard', component: DashboardTeacherComponent },
       {
         path: 'manage-class', component: ManageClassLayoutComponent,
         children: [
