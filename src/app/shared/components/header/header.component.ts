@@ -1,22 +1,23 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 import { NotificationService } from '../../../../app-services/modal-services/notification.service';
 import { ManageSettingsService } from '../../../../app-services/modal-services/manage-settings.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, ClickOutsideDirective, CommonModule],
+  imports: [RouterModule, ClickOutsideDirective, CommonModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   animations: [
     trigger('fadeAnimation', [
       transition(':enter', [
-        style({ opacity: 0 }),
+        style({ opacity: 0 }),  
         animate('200ms', style({ opacity: 1 }))
       ]),
       transition(':leave', [  
@@ -32,11 +33,50 @@ export class HeaderComponent implements OnInit, OnDestroy{
   private timeInterval: any;
 
 
+  searchTerm: string = '';
+  suggestions = [
+    { label: 'Go to Dashboard', route: '/student/dashboard' },
+    { label: 'Go to SpeechLab', route: '/student/speechlab' },
+    // Add more suggestions here
+  ];
+  filteredSuggestions = this.suggestions;
+  showSuggestions: boolean = false;  // Declare showSuggestions property
+
+
   constructor(
     private notificationService: NotificationService,
-    private settingsModal: ManageSettingsService
+    private settingsModal: ManageSettingsService,
+    private router: Router
   ) { }
 
+
+  filterSuggestions() {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredSuggestions = this.suggestions.filter(suggestion =>
+      suggestion.label.toLowerCase().includes(term)
+    );
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+    this.clearSearch();
+  }
+
+  clearSearch() {
+    this.searchTerm = ''; // Clear the search box after navigation
+    this.showSuggestions = false; // Hide the suggestions after navigation
+    this.filteredSuggestions = this.suggestions; // Reset the suggestions
+  }
+
+  onFocus() {
+    this.showSuggestions = true; // Show suggestions when input is focused
+  }
+
+  onBlur() {
+    setTimeout(() => {
+      this.showSuggestions = false; // Hide suggestions when input loses focus
+    }, 200); // Delay to allow click events to register
+  }
   ngOnInit() {
     // Update the current time every second
     this.timeInterval = setInterval(() => {

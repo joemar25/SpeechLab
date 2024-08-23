@@ -64,12 +64,11 @@
   </div>
   
   <div class="flex flex-wrap gap-10 justify-left items-center max-w-full w-[945px]">
-    <button class="flex gap-3.5 px-3 py-2.5 rounded-md bg-slate-800 text-sm font-semibold text-center shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] text-white w-[153px] hover:bg-[#bd8a1d] transition-colors duration-300">
+    <button (click)="toggleManageUnits()" class="flex gap-3.5 px-3 py-2.5 rounded-md bg-slate-800 text-sm font-semibold text-center shadow-[4px_4px_4px_4px_rgba(0,0,0,0.25)] text-white w-[153px] hover:bg-[#bd8a1d] transition-colors duration-300">
         <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/864227636b40a5bc6e69012ff7ecb57972d004db28d499c21578efceef63c425?apiKey=377401e3604042c7b3deecb062253d04" alt="Manage Units Icon" class="object-contain shrink-0 aspect-[0.95] w-[19px]" />
         <span>Manage Units</span>
     </button>
   </div>
-
   
   <!-- Student selection grid -->
   <div class="grid grid-cols-7 gap-3 w-full max-md:max-w-full pl-10 pr-5 justify-center pb-10 pt-3 z-20">
@@ -150,7 +149,72 @@
       </button>
     </div>
   </div>
-</section>
+
+  <div *ngIf="showManageUnitsPanel" class="fixed inset-0 flex items-center justify-end z-50 pr-10">
+    <div class="bg-[#1a2234] p-6 text-white w-screen h-screen max-w-[1150px] max-h-[700px] flex overflow-y-auto rounded-lg shadow-xl">
+      <!-- Left column: Manage Units Panel -->
+      <div class="w-1/4 pr-4 flex flex-col">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-m font-bold">Speech Lab Units</h2>
+            <p class="text-sm text-gray-400">Class name</p>
+          </div>
+          <div class="flex items-center cursor-pointer" (click)="autoArrange()">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/50defe3b59d835ad14d7f732baeb20780be82e1a4a8af34b279fbdb183fd87cb?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" alt="Auto Arrange Icon" class="w-5 h-5 mr-2" />
+            <span class="text-xs">Auto Arrange</span>
+          </div>
+        </div>
+  
+        <div class="relative mb-4">
+          <input type="text" placeholder="Search students" class="bg-white text-black rounded-full py-2 px-4 pr-10 w-full" [(ngModel)]="searchQuery" (input)="onSearchInputChange($event)" />
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/728315a4dee7886052f73849805a080167688f2df94a767b1b67861977e91d84?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" alt="Search Icon" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
+        </div>
+  
+        <div class="space-y-2 overflow-y-auto flex-grow">
+          <div *ngFor="let student of getFilteredStudents(); let i = index" 
+               class="flex items-center justify-between p-3 rounded-xl border border-gray-600" 
+               [ngClass]="{'bg-amber-500 text-black': i === 0, 'bg-[#1a2234] text-white': i !== 0}">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-md flex items-center justify-center mr-3">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d8e0427cb6667a1177a696dc94559f5248cefda7689717190c8b5dfb664ef46c?placeholderIfAbsent=true&apiKey=377401e3604042c7b3deecb062253d04" alt="Monitor" class="w-6 h-6" />
+              </div>
+              <div>
+                <p class="font-semibold text-sm">{{ student.name }}</p>
+                <p class="text-xs text-gray-400">{{ student.id }}</p>
+              </div>
+            </div>
+            <div class="flex flex-col items-center justify-center w-6 h-6">
+              <div class="w-1 h-1 bg-gray-400 rounded-full mb-0.5"></div>
+              <div class="w-1 h-1 bg-gray-400 rounded-full mb-0.5"></div>
+              <div class="w-1 h-1 bg-gray-400 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="w-3/4 pl-4 flex flex-col">
+        <div class="flex-grow bg-[#131927] rounded-xl p-4">
+          <!-- Seating Arrangement Grid -->
+          <div class="grid grid-cols-7 gap-2 h-full">
+            <div *ngFor="let seat of seatingArrangement; let i = index" 
+                 class="flex items-center justify-center border border-gray-600 rounded-md bg-[#1a2234] p-4 h-[100px]">
+              <div *ngIf="seat; else emptySeat">
+                <p class="text-sm font-semibold text-center">{{ seat.name }}</p>
+                <p class="text-xs text-gray-400 text-center">{{ seat.id }}</p>
+              </div>
+              <ng-template #emptySeat>
+                <p class="text-gray-400">Seat {{ i + 1 }}</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end mt-4 space-x-4">
+          <button (click)="saveChanges()" class="px-4 py-2 bg-amber-500 text-black rounded-md">Save</button>
+          <button (click)="cancelChanges()" class="px-4 py-2 bg-gray-600 text-white rounded-md">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!--selection section-->
   <div *ngIf="showSelectionSection" class="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">

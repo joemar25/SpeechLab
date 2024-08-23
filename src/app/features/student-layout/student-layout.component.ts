@@ -10,6 +10,8 @@ import { ManageSettingsService } from '../../../app-services/modal-services/mana
 import { ManageSettingsComponent } from '../modal/manage-settings/manage-settings.component';
 import { SuccessMessageComponent } from '../../shared/modal/success-message/success-message.component';
 import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.component';
+import { CommonModule } from '@angular/common';
+import { ChatComponent } from '../../shared/modal/chat/chat.component';
 
 @Component({
   selector: 'app-student-layout',
@@ -22,6 +24,8 @@ import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.com
     ManageSettingsComponent,
     SuccessMessageComponent,
     NoChangesComponent,
+    CommonModule,
+    ChatComponent,
   ],
   templateUrl: './student-layout.component.html',
   styleUrl: './student-layout.component.css',
@@ -81,5 +85,9 @@ export class StudentLayoutComponent implements OnInit, OnDestroy {
   closeNotification() {
     this.notificationService.toggleNotification(false);
   }
+  isChatVisible: boolean = false;
 
+  toggleChatModal() {
+    this.isChatVisible = !this.isChatVisible;
+  }
 }

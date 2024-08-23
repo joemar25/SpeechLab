@@ -1,16 +1,18 @@
 import { Component, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-teacher-speech-lab',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FormsModule ],
   templateUrl: './teacher-speech-lab.component.html',
   styleUrl: './teacher-speech-lab.component.css'
 })
 export class TeacherSpeechLabComponent implements OnDestroy, AfterViewInit {
   @ViewChild('screenShareVideo') screenShareVideo!: ElementRef<HTMLVideoElement>;
+  searchQuery: any;
 
 shareScreen(arg0: string) {
 throw new Error('Method not implemented.');
@@ -24,7 +26,10 @@ selectedStudentName: string = '';
 isScreenSharing: boolean = false;
 showToast: boolean = false;
   toastMessage: string = '';
+  showManageUnitsPanel: boolean = false;
+  seatingArrangement: (any | null)[] = new Array(42).fill(null);
 
+  
   students = [
     { name: 'John Doe', id: '001' },
   { name: 'Jane Smith', id: '002' },
@@ -86,23 +91,47 @@ showToast: boolean = false;
     }
   }
 
+ autoArrange() {
+  if (this.seatingArrangement.some(seat => seat !== null)) {
+    // If seating arrangement is not empty, shuffle the existing arrangement
+    this.shuffleSeatingArrangement();
+  } else {
+    // If seating arrangement is empty, perform the initial random assignment
+    this.initialAutoArrange();
+  }
+}
+
+private initialAutoArrange() {
+  const availableStudents = [...this.students.filter(student => !student.id.startsWith('Absent - '))];
+  this.seatingArrangement = new Array(42).fill(null);
+
+  for (let i = 0; i < 42 && availableStudents.length > 0; i++) {
+    const randomIndex = Math.floor(Math.random() * availableStudents.length);
+    this.seatingArrangement[i] = availableStudents.splice(randomIndex, 1)[0];
+  }
+
+  this.students = this.students.filter(student => student.id.startsWith('Absent - '));
+  this.students.push(...availableStudents);
+}
+
+private shuffleSeatingArrangement() {
+  const occupiedSeats = this.seatingArrangement.filter(seat => seat !== null);
+  const emptySeats = this.seatingArrangement.filter(seat => seat === null);
+
+  // Shuffle the occupied seats
+  for (let i = occupiedSeats.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [occupiedSeats[i], occupiedSeats[j]] = [occupiedSeats[j], occupiedSeats[i]];
+  }
+
+  // Combine shuffled occupied seats with empty seats
+  this.seatingArrangement = [...occupiedSeats, ...emptySeats];
+}
 
   isDefaultStudent(student: any): boolean {
     return student.id.startsWith('Absent - ');
   }   
 
-  // get leftColumnStudents() {
-  //   return this.students
-  //     .filter((_, index) => index % 7 < 4) 
-  //     .map((student, index) => ({ ...student, index }));
-  // }
-  
-  // get rightColumnStudents() {
-  //   return this.students
-  //     .filter((_, index) => index % 7 >= 4)
-  //     .map((student, index) => ({ ...student, index: index + this.students.length / 2 }));
-  // }
-  
 
   selectMode(mode: string) {
     if (this.selectedMode === mode) {
@@ -188,12 +217,7 @@ confirmSelection() {
     this.showSelectionSection = false;
     this.selectedStudentName = '';
   }
-  
-  // ngAfterViewInit() {
-  //   if (this.screenShareStream && this.screenShareVideo) {
-  //     this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
-  //   }
-  // }
+
 
   async startScreenShare() {
     if (this.isScreenSharing) {
@@ -210,15 +234,13 @@ confirmSelection() {
   
       this.isScreenSharing = true;
       this.showSelectionSection = false;
-  
-      // Use setTimeout to ensure the video element is available in the DOM
+
       setTimeout(() => {
         if (this.screenShareVideo && this.screenShareVideo.nativeElement) {
           this.screenShareVideo.nativeElement.srcObject = this.screenShareStream;
         }
       }, 0);
-  
-      // Add event listener for when the user stops sharing
+
       this.screenShareStream.getVideoTracks()[0].addEventListener('ended', () => {
         console.log("Screen sharing stopped");
         this.stopScreenShare();
@@ -242,5 +264,88 @@ confirmSelection() {
       this.screenShareStream = null;
     }
     this.isScreenSharing = false;
+  }
+
+  toggleManageUnits() {
+    this.showManageUnitsPanel = !this.showManageUnitsPanel;
+  }
+
+  getStudentForSeat(row: number, col: number): string | null {
+    return this.seatingArrangement[row][col];
+  }
+
+  assignStudentToSeat(studentId: string, row: number, col: number) {
+    this.seatingArrangement[row][col] = studentId;
+  }
+
+  saveChanges(): void {
+    // Update the main seating arrangement with the current arrangement
+    this.seatingArrangement = [...this.seatingArrangement];
+    
+    // Update the students array to reflect the new seating arrangement
+    this.updateStudentsArray();
+    
+    // Close the manage units panel
+    this.showManageUnitsPanel = false;
+    
+    // Optionally, show a confirmation toast
+    this.showToast = true;
+    this.toastMessage = "Seating arrangement saved successfully";
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+  
+  private updateStudentsArray(): void {
+    // Create a new array to hold the updated student list
+    const updatedStudents: any[] = [];
+    
+    // Add seated students first
+    this.seatingArrangement.forEach(student => {
+      if (student) {
+        updatedStudents.push(student);
+      }
+    });
+    
+    // Add remaining students (if any) who are not seated
+    this.students.forEach(student => {
+      if (!this.seatingArrangement.includes(student) && !student.id.startsWith('Absent - ')) {
+        updatedStudents.push(student);
+      }
+    });
+    
+    // Add default (absent) students to fill up to maxStudents
+    while (updatedStudents.length < this.maxStudents) {
+      updatedStudents.push({
+        name: 'Student Name',
+        id: `Absent - ${updatedStudents.length + 1}`
+      });
+    }
+    
+    // Update the students array
+    this.students = updatedStudents;
+  }
+
+  cancelChanges(): void {
+    // Implementation for cancelling changes
+    this.showManageUnitsPanel = false;
+  }
+
+
+  getSeatingPlaceholders(): string[] {
+    return Array.from({ length: this.maxStudents }, (_, i) => `Seat ${i + 1}`);
+  }
+
+  getFilteredStudents(): any[] {
+    const query = this.searchQuery.toLowerCase();
+    return this.students.filter(student =>
+      student.name.toLowerCase().includes(query) || 
+      student.id.toLowerCase().includes(query)
+    );
+  }
+
+  onSearchInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery = input.value;
   }
 }

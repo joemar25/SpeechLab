@@ -1,29 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CourseService, Course } from '../../../core/services/CourseService/course.service';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent {
-  courses = [
-    { title: 'DOJ Certification', level: 'Beginner', tasks: ['Complete introductory module', 'Submit initial assignment', 'Attend review session'] },
-    { title: 'Prompt Engineering', level: 'Intermediate', tasks: ['Complete the prompt design exercise', 'Submit prompt review', 'Participate in prompt optimization workshop'] },
-    { title: 'Machine Learning Basics', level: 'Advanced', tasks: ['Complete basic ML algorithm tutorial', 'Implement ML model in a project', 'Review ML model performance'] }
-  ];
-
-  filteredCourses = this.courses;
+export class TaskComponent implements OnInit {
+  courses: Course[] = [];
+  filteredCourses: Course[] = [];
   selectedLevel = 'All';
+  difficultyLevels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+
+  constructor(private courseService: CourseService) {}
+
+  ngOnInit() {
+    this.courseService.courses$.subscribe(courses => {
+      this.courses = courses;
+      this.filterCourses(this.selectedLevel);
+    });
+  }
 
   filterCourses(level: string) {
     this.selectedLevel = level;
     if (level === 'All') {
       this.filteredCourses = this.courses;
     } else {
-      this.filteredCourses = this.courses.filter(course => course.level === level);
+      this.filteredCourses = this.courses.filter(course => course.difficulty === level);
     }
   }
 }
