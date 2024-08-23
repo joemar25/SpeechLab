@@ -1,11 +1,12 @@
 import { Component, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-teacher-speech-lab',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FormsModule ],
   templateUrl: './teacher-speech-lab.component.html',
   styleUrl: './teacher-speech-lab.component.css'
 })
@@ -26,7 +27,7 @@ isScreenSharing: boolean = false;
 showToast: boolean = false;
   toastMessage: string = '';
   showManageUnitsPanel: boolean = false;
-  seatingArrangement: any = {}; 
+  seatingArrangement: (any | null)[] = new Array(42).fill(null);
 
   
   students = [
@@ -90,6 +91,42 @@ showToast: boolean = false;
     }
   }
 
+ autoArrange() {
+  if (this.seatingArrangement.some(seat => seat !== null)) {
+    // If seating arrangement is not empty, shuffle the existing arrangement
+    this.shuffleSeatingArrangement();
+  } else {
+    // If seating arrangement is empty, perform the initial random assignment
+    this.initialAutoArrange();
+  }
+}
+
+private initialAutoArrange() {
+  const availableStudents = [...this.students.filter(student => !student.id.startsWith('Absent - '))];
+  this.seatingArrangement = new Array(42).fill(null);
+
+  for (let i = 0; i < 42 && availableStudents.length > 0; i++) {
+    const randomIndex = Math.floor(Math.random() * availableStudents.length);
+    this.seatingArrangement[i] = availableStudents.splice(randomIndex, 1)[0];
+  }
+
+  this.students = this.students.filter(student => student.id.startsWith('Absent - '));
+  this.students.push(...availableStudents);
+}
+
+private shuffleSeatingArrangement() {
+  const occupiedSeats = this.seatingArrangement.filter(seat => seat !== null);
+  const emptySeats = this.seatingArrangement.filter(seat => seat === null);
+
+  // Shuffle the occupied seats
+  for (let i = occupiedSeats.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [occupiedSeats[i], occupiedSeats[j]] = [occupiedSeats[j], occupiedSeats[i]];
+  }
+
+  // Combine shuffled occupied seats with empty seats
+  this.seatingArrangement = [...occupiedSeats, ...emptySeats];
+}
 
   isDefaultStudent(student: any): boolean {
     return student.id.startsWith('Absent - ');
@@ -241,19 +278,59 @@ confirmSelection() {
     this.seatingArrangement[row][col] = studentId;
   }
 
-  cancelChanges(): void {
-    // Reset any changes made to the seating arrangement here
-    this.seatingArrangement = {}; // Example reset
-
-    // Close the Manage Units panel
-    this.showManageUnitsPanel = false;
-  }
   saveChanges(): void {
-    this.seatingArrangement = {}; 
+    // Update the main seating arrangement with the current arrangement
+    this.seatingArrangement = [...this.seatingArrangement];
+    
+    // Update the students array to reflect the new seating arrangement
+    this.updateStudentsArray();
+    
+    // Close the manage units panel
+    this.showManageUnitsPanel = false;
+    
+    // Optionally, show a confirmation toast
+    this.showToast = true;
+    this.toastMessage = "Seating arrangement saved successfully";
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+  
+  private updateStudentsArray(): void {
+    // Create a new array to hold the updated student list
+    const updatedStudents: any[] = [];
+    
+    // Add seated students first
+    this.seatingArrangement.forEach(student => {
+      if (student) {
+        updatedStudents.push(student);
+      }
+    });
+    
+    // Add remaining students (if any) who are not seated
+    this.students.forEach(student => {
+      if (!this.seatingArrangement.includes(student) && !student.id.startsWith('Absent - ')) {
+        updatedStudents.push(student);
+      }
+    });
+    
+    // Add default (absent) students to fill up to maxStudents
+    while (updatedStudents.length < this.maxStudents) {
+      updatedStudents.push({
+        name: 'Student Name',
+        id: `Absent - ${updatedStudents.length + 1}`
+      });
+    }
+    
+    // Update the students array
+    this.students = updatedStudents;
+  }
 
- 
+  cancelChanges(): void {
+    // Implementation for cancelling changes
     this.showManageUnitsPanel = false;
   }
+
 
   getSeatingPlaceholders(): string[] {
     return Array.from({ length: this.maxStudents }, (_, i) => `Seat ${i + 1}`);
