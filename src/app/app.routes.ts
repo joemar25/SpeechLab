@@ -41,20 +41,21 @@ import { ManageClassStreamComponent } from './features/teacher-layout/manage-cla
 import { ManageClassGradesComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/manage-class-grades.component';
 import { ManageClassStudentsComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-students/manage-class-students.component';
 import { ManageClassClassworkComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-classwork/manage-class-classwork.component';
-
-
+import { ASpeechlabComponent } from './features/admin-layout/a-speechlab/a-speechlab.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: '/login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
-    path: 'login', component: AutheenticationComponent,
+    path: 'login',
+    component: AutheenticationComponent,
   },
   {
-    path: 'student', component: StudentLayoutComponent,
+    path: 'student',
+    component: StudentLayoutComponent,
     children: [
       { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -65,12 +66,16 @@ export const routes: Routes = [
       { path: 'task/task-detail', component: TaskDetailComponent },
       { path: 'class-lab/teacher-led', component: TeacherLedComponent },
       { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
-      { path: 'class-lab/self-assesment/assesment-category', component: AssesmentCategoryComponent },
+      {
+        path: 'class-lab/self-assesment/assesment-category',
+        component: AssesmentCategoryComponent,
+      },
       { path: 'speechlab', component: SpeechLabComponent },
-    ]
+    ],
   },
   {
-    path: 'teacher', component: TeacherLayoutComponent,
+    path: 'teacher',
+    component: TeacherLayoutComponent,
     children: [
       { path: 'speechlab', component: TeacherSpeechLabComponent },
       { path: 't-dashboard', component: TDashboardComponent },
@@ -81,49 +86,63 @@ export const routes: Routes = [
       { path: 'manual-dashboard', component: ManualDashboardComponent },
       { path: 'select-module', component: SelectModuleComponent },
       { path: 'new-dashboard', component: DashboardTeacherComponent },
-      { path: 'manage-class', component: ManageClassLayoutComponent,
+      {
+        path: 'manage-class',
+        component: ManageClassLayoutComponent,
         children: [
           { path: '', component: ManageClassDashboardComponent },
-          { path: 'manage-class-stream', component: ManageClassStreamComponent,
+          {
+            path: 'manage-class-stream',
+            component: ManageClassStreamComponent,
             children: [
-              { path: 'manage-class-grades', component: ManageClassGradesComponent },
-              { path: 'manage-class-students', component: ManageClassStudentsComponent },
-              { path: 'manage-class-classwork', component: ManageClassClassworkComponent },
-            ]
-           },
-        ]
-       },
-    ]
+              {
+                path: 'manage-class-grades',
+                component: ManageClassGradesComponent,
+              },
+              {
+                path: 'manage-class-students',
+                component: ManageClassStudentsComponent,
+              },
+              {
+                path: 'manage-class-classwork',
+                component: ManageClassClassworkComponent,
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
-    path: 'dictionary', component: HomeLayoutComponent,
-    children: [
-      { path: 'd-search', component: DictionaryComponent },
-    ]
+    path: 'dictionary',
+    component: HomeLayoutComponent,
+    children: [{ path: 'd-search', component: DictionaryComponent }],
   },
   {
-    path: 'text-to-speech', component: HomeLayoutComponent,
-    children: [
-      { path: 'text-record', component: TextToSpeechComponent },
-    ]
+    path: 'text-to-speech',
+    component: HomeLayoutComponent,
+    children: [{ path: 'text-record', component: TextToSpeechComponent }],
   },
   {
-    path: 'speech-analyzer', component: SpeechAnalyzerComponent,
+    path: 'speech-analyzer',
+    component: SpeechAnalyzerComponent,
     children: [
       { path: 'record-speech', component: RecordSpeechComponent },
       { path: 'record-list', component: RecordListComponent },
       { path: 'record-report', component: RecordReportComponent },
-    ]
+    ],
   },
   {
-    path: 'meet', component: TeacherLayoutComponent,
+    path: 'meet',
+    component: TeacherLayoutComponent,
     children: [
       { path: 'video-conference', component: VideoConferenceComponent },
-    ]
+    ],
   },
   // Admin routes
   {
-    path: 'admin', component: AdminLayoutComponent, // or another component for admin layout
+    path: 'admin',
+    component: AdminLayoutComponent, // or another component for admin layout
     children: [
       { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -135,17 +154,20 @@ export const routes: Routes = [
       { path: 'task/task-detail', component: TaskDetailComponent },
       { path: 'class-lab/teacher-led', component: TeacherLedComponent },
       { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
-      { path: 'class-lab/self-assesment/assesment-category', component: AssesmentCategoryComponent },
+      {
+        path: 'class-lab/self-assesment/assesment-category',
+        component: AssesmentCategoryComponent,
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ADashboardComponent },
       { path: 'manage-users', component: ADashboardComponent },
       { path: 'count', component: CourseComponent },
-      { path: 'speech-lab', component: TeacherLayoutComponent },
-    ]
-  }
+      { path: 'speech-lab', component: ASpeechlabComponent },
+    ],
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
