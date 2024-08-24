@@ -25,7 +25,7 @@ export class SigninComponent {
         this.router.navigate(['/student/dashboard']);
         break;
       case 'teacher':
-        this.router.navigate(['/teacher/t-dashboard']);
+        this.router.navigate(['/teacher/new-dashboard']);
         break;
       case 'admin':
         this.router.navigate(['/admin/dashboard']);

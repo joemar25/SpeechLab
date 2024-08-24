@@ -31,28 +31,16 @@ import { LessonComponent } from './features/course/lesson/lesson.component';
 import { TDashboardComponent } from './features/teacher-layout/t-dashboard/t-dashboard.component';
 import { ADashboardComponent } from './features/admin-layout/a-dashboard/a-dashboard.component';
 import { AdminLayoutComponent } from './features/admin-layout/admin-layout.component';
-import { ManageClassLayoutComponent } from './features/teacher-layout/manage-class-layout/manage-class-layout.component';
-import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-courses-layout/manage-courses-layout.component';
-import { AllCoursesComponent } from './features/teacher-layout/manage-courses-layout/all-courses/all-courses.component';
-import { BeginnerComponent } from './features/teacher-layout/manage-courses-layout/beginner/beginner.component';
-import { IntermediateComponent } from './features/teacher-layout/manage-courses-layout/intermediate/intermediate.component';
-import { AdvancedComponent } from './features/teacher-layout/manage-courses-layout/advanced/advanced.component';
 import { SelectModuleComponent } from './features/teacher-layout/teacher-speech-lab/select-module/select-module.component';
-import { ClassAssignmentComponent } from './features/teacher-layout/manage-class-layout/class-assignment/class-assignment.component';
-import { InstructionComponent } from './features/teacher-layout/manage-class-layout/class-assignment/instruction/instruction.component';
-import { StudentWorkComponent } from './features/teacher-layout/manage-class-layout/class-assignment/student-work/student-work.component';
-import { AttendanceComponent } from './features/teacher-layout/manage-class-layout/manage/attendance/attendance.component';
-import { ClassworkComponent } from './features/teacher-layout/manage-class-layout/manage/classwork/classwork/classwork.component';
-import { GradesComponent } from './features/teacher-layout/manage-class-layout/manage/grades/grades/grades.component';
-import { PeopleComponent } from './features/teacher-layout/manage-class-layout/manage/people/people/people.component';
-
-import { ManageComponent } from './features/teacher-layout/manage-class-layout/manage/manage.component';
-import { ClassDetailComponent } from './features/teacher-layout/manage-class-layout/stream/class-detail/class-detail.component';
-import { ClassListComponent } from './features/teacher-layout/manage-class-layout/stream/class-list/class-list.component';
-import { ManageClassComponent } from './features/teacher-layout/manage-class-layout/stream/manage-class/manage-class.component';
-import { StreamComponent } from './features/teacher-layout/manage-class-layout/stream/stream.component';
 import { TextToSpeechComponent } from './features/text-to-speech/text-to-speech.component';
 import { SpeechLabComponent } from './features/student-layout/speech-lab/speech-lab.component';
+import { DashboardTeacherComponent } from './features/teacher-layout/dashboard-teacher/dashboard-teacher.component';
+import { ManageClassLayoutComponent } from './features/teacher-layout/manage-class-layout/manage-class-layout.component';
+import { ManageClassDashboardComponent } from './features/teacher-layout/manage-class-layout/manage-class-dashboard/manage-class-dashboard.component';
+import { ManageClassStreamComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-stream.component';
+import { ManageClassGradesComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/manage-class-grades.component';
+import { ManageClassStudentsComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-students/manage-class-students.component';
+import { ManageClassClassworkComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-classwork/manage-class-classwork.component';
 
 
 
@@ -92,49 +80,19 @@ export const routes: Routes = [
       { path: 'seat-arrangement', component: SeatArrangementComponent },
       { path: 'manual-dashboard', component: ManualDashboardComponent },
       { path: 'select-module', component: SelectModuleComponent },
-      {
-        path: 'manage-class', component: ManageClassLayoutComponent,
+      { path: 'new-dashboard', component: DashboardTeacherComponent },
+      { path: 'manage-class', component: ManageClassLayoutComponent,
         children: [
-          { path: 'manage-users', component: ADashboardComponent },
-          { path: 'count', component: CourseComponent },
-          // { path: 'speechlab', component: ASpeechlabComponent },
-          {
-            path: 'manage', component: ManageComponent,
+          { path: '', component: ManageClassDashboardComponent },
+          { path: 'manage-class-stream', component: ManageClassStreamComponent,
             children: [
-              { path: 'classwork', component: ClassworkComponent },
-              { path: 'people', component: PeopleComponent },
-              { path: 'grades', component: GradesComponent },
-              { path: 'attendance', component: AttendanceComponent },
+              { path: 'manage-class-grades', component: ManageClassGradesComponent },
+              { path: 'manage-class-students', component: ManageClassStudentsComponent },
+              { path: 'manage-class-classwork', component: ManageClassClassworkComponent },
             ]
-          },
-          {
-            path: 'stream', component: StreamComponent,
-            children: [
-              { path: '', component: ManageClassComponent },
-              { path: 'class-list/:id', component: ClassListComponent },
-              { path: 'class-detail/:id', component: ClassDetailComponent },
-            ]
-          },
-          {
-            path: 'class-assignment/:id', component: ClassAssignmentComponent,
-            children: [
-              { path: 'instructions', component: InstructionComponent },
-              { path: 'student-work', component: StudentWorkComponent },
-            ]
-          },
-          { path: '', redirectTo: 'stream', pathMatch: 'full' },
+           },
         ]
-      },
-      {
-        path: 'manage-courses', component: ManageCoursesLayoutComponent,
-        children: [
-          { path: '', redirectTo: 'all-courses', pathMatch: 'full' },
-          { path: 'all-courses', component: AllCoursesComponent },
-          { path: 'beginner', component: BeginnerComponent },
-          { path: 'intermediate', component: IntermediateComponent },
-          { path: 'advanced', component: AdvancedComponent },
-        ]
-      }
+       },
     ]
   },
   {

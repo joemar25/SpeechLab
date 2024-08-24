@@ -42,3 +42,25 @@
   .background{
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Reduced width of the vertical scrollbar */
+  height: 8px; /* Reduced height of the horizontal scrollbar */
+  text-transform: uppercase;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgb(221, 221, 221); /* Track color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #F5A425; /* Thumb color */
+  border-radius: 10px; /* Rounded corners */
+  border: none; /* Remove any border */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #F5A425; /* Thumb color on hover */
+}
