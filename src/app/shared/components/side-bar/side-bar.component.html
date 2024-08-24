@@ -1,44 +1,58 @@
-<div class="h-full w-[320px] duration-300 py-4 px-4 relative">
-  <div class="w-full h-full flex flex-col justify-between items-center gap-8">
+<div class="fixed top-0 left-0 h-screen z-50 duration-300 bg-[var(--color-primary)] shadow-lg" 
+     [ngClass]="{'w-64': !isCollapsed, 'w-35': isCollapsed}">
+  <button (click)="toggleSidebar()" 
+          class="absolute top-8 -right-4 bg-[var(--color-secondary)] rounded-full p-2 shadow-md focus:outline-none hover:brightness-90 z-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white transition-transform duration-300 ease-in-out"
+         [ngClass]="{'transform rotate-180': isCollapsed}"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
 
-    <div class="flex w-full justify-center items-center gap-3 pt-6 px-2">
-      <img src="assets/logo/CATSU_Logo.png" class="w-[70px] h-[70px] rounded-xl" alt="Logo">
-      <div class="flex flex-col">
-        <p class="font-semibold text-base text-secondary-tw">Catanduanes State University</p>
-      </div>
+  <div class="w-full h-full flex flex-col justify-between items-center py-4 px-2">
+    <div class="flex w-full justify-center items-center gap-3 mb-8">
+      <img src="assets/logo/CATSU_Logo.png" class="w-12 h-12 rounded-xl" alt="Logo">
+      <p class="font-semibold text-base text-white transition-opacity duration-300"
+         [ngClass]="{'opacity-0 w-0': isCollapsed, 'opacity-100': !isCollapsed}">
+        Catanduanes State University
+      </p>
     </div>
 
-    <div class="w-full flex flex-col gap-1">
+    <nav class="w-full flex flex-col gap-1 flex-grow">
       <div *ngFor="let item of currentMenu" 
            [routerLink]="item.route" 
            [routerLinkActive]="'active-route'"
-           class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer">
-        <iconify-icon *ngIf="item.icon" [icon]="item.icon" width="20" height="20"></iconify-icon>
-        <svg *ngIf="item.svgIcon" width="20" height="20" viewBox="0 0 31 31" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+           class="flex items-center gap-4 px-4 py-3 rounded-lg cursor-pointer transition-all duration-300 text-white hover:text-[var(--color-secondary)] hover:bg-[#1f2e4d]"
+           [ngClass]="{'justify-center': isCollapsed}">
+        <iconify-icon *ngIf="item.icon" [icon]="item.icon" width="24" height="24"></iconify-icon>
+        <svg *ngIf="item.svgIcon" width="24" height="24" viewBox="0 0 31 31" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path [attr.d]="getSvgPath(item.svgIcon)" />
         </svg>
-        <p class="font-medium duration-300 text-base">
+        <span class="font-medium text-base whitespace-nowrap transition-opacity duration-300"
+              [ngClass]="{'opacity-0 w-0': isCollapsed, 'opacity-100': !isCollapsed}">
           {{ item.label }}
-        </p>
+        </span>
       </div>
-    </div>
+    </nav>
     
-
-    <div class="w-full">
-      <div class="font-semibold uppercase glassmorphism pl-2 duration-300">Others</div>
+    <div class="w-full mt-auto">
+      <div class="font-semibold uppercase px-4 py-2 mb-2 transition-opacity duration-300 text-white"
+           [ngClass]="{'opacity-0': isCollapsed, 'opacity-100': !isCollapsed}">
+        Others
+      </div>
       <div class="flex flex-col gap-1">
         <div *ngFor="let item of othersMenu" 
              [routerLink]="item.route"
              (click)="item.label === 'Sign Out' ? signOut() : null"
-             class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer">
-          <iconify-icon *ngIf="item.icon" [icon]="item.icon" [class.rotate-180]="item.label === 'Sign Out'" width="20" height="20"></iconify-icon>
-          <p class="font-medium duration-300 text-base">
+             class="flex items-center gap-4 px-4 py-3 rounded-lg cursor-pointer transition-all duration-300 text-white hover:text-[var(--color-secondary)] hover:bg-[#1f2e4d]"
+             [ngClass]="{'justify-center': isCollapsed}">
+          <iconify-icon *ngIf="item.icon" [icon]="item.icon" [class.rotate-180]="item.label === 'Sign Out'" width="24" height="24"></iconify-icon>
+          <span class="font-medium text-base whitespace-nowrap transition-opacity duration-300"
+                [ngClass]="{'opacity-0 w-0': isCollapsed, 'opacity-100': !isCollapsed}">
             {{ item.label }}
-          </p>
+          </span>
         </div>
       </div>
     </div>
-    
   </div>
 </div>
-

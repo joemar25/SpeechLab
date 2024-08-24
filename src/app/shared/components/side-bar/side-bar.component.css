@@ -52,5 +52,7 @@
     scrollbar-width: none; /* Firefox */
   }
 
-
-  
+  .active-route {
+    color: var(--color-secondary) !important;
+    background-color: #1f2e4d;
+  }

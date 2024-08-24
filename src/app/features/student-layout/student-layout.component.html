@@ -1,15 +1,16 @@
 <div class="h-dvh w-dvw flex overflow-hidden">
-    <div class="h-full w-fit z-[1000] flex-shrink-0">
+    <div class="h-full z-[1000] flex-shrink-0 transition-all duration-300"
+         [ngClass]="{'w-64': !isSidebarCollapsed, 'w-20': isSidebarCollapsed}">
         <div class="w-full h-full bg-primary-tw text-primary-text-tw overflow-y-auto">
-            <app-side-bar></app-side-bar>
+            <app-side-bar (collapsedChange)="onSidebarCollapsedChange($event)"></app-side-bar>
         </div>
     </div>
     <div class="flex flex-col w-full h-full overflow-hidden">
-        <div class="h-[15dvh] w-full z-30 flex-shrink-0">
+        <div class="h-[15dvh] px-8  w-full z-30 flex-shrink-0">
             <app-header></app-header>
         </div>
         <div class="flex-grow overflow-y-auto">
-            <div class="w-full px-8 pb-4 relative">
+            <div class="w-full px-8 b-4 relative">
                 <!-- Contents for student/s page -->
                 <router-outlet></router-outlet>
                 @if (notification) {
@@ -22,28 +23,10 @@
                     <app-manage-settings (close)="closeManageSettings()"></app-manage-settings>
                 </div>
                 }
-
             </div>
         </div>
     </div>
 </div>
 
-<!-- Global Chat Overlay Icon with Pulse Effect -->
-<div class="fixed bottom-4 right-4 z-50">
-    <div class="relative flex items-center justify-center">
-      <!-- Pulse Effect Container -->
-      <div class="absolute w-full h-full flex items-center justify-center">
-        <div class="wave-pulse"></div>
-      </div>
-      <!-- Chat Icon Button -->
-      <button (click)="toggleChatModal()" 
-              class="bg-blue-500 text-white p-4 rounded-full shadow-lg focus:outline-none hover:bg-blue-600 relative z-10">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h8m-8 4h6m2-6a2 2 0 012 2v5a2 2 0 01-2 2H7l-4 4V8a2 2 0 012-2h12a2 2 0 012 2z" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Include the Chat Component -->
+<!-- Include the Chat Component -->
 <app-chat *ngIf="isChatVisible"></app-chat>

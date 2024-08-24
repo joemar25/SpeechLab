@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Output, EventEmitter } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +18,8 @@ interface MenuItem {
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent {
-  sideBar: boolean = false;  // This controls whether the sidebar is minimized or not
+  @Output() collapsedChange = new EventEmitter<boolean>();
+  isCollapsed: boolean = false;
 
   studentMenu: MenuItem[] = [
     { label: 'Dashboard', icon: 'ic:sharp-dashboard', route: '/student/dashboard' },
@@ -48,15 +49,13 @@ export class SideBarComponent {
     { label: 'speechlab', icon: 'mdi:account-cog', route: '/admin/speechlab' },
   ];
 
-
-  // General menu items that should be visible to all roles
   generalMenu: MenuItem[] = [
     { label: 'Report a Problem', icon: 'mdi:report-problem' },
     { label: 'Sign Out', icon: 'icon-park-outline:logout', route: '/login' },
   ];
 
   currentMenu: MenuItem[] = [];
-othersMenu: any;
+  othersMenu: MenuItem[] = [];
 
   constructor(private router: Router) {}
 
@@ -66,7 +65,7 @@ othersMenu: any;
 
   setMenuByRole() {
     const userRole = localStorage.getItem('userRole') as 'student' | 'teacher' | 'admin';
-    console.log('User Role:', userRole); // Add this line for debugging
+    console.log('User Role:', userRole);
     switch(userRole) {
       case 'student':
         this.currentMenu = [...this.studentMenu];
@@ -83,15 +82,12 @@ othersMenu: any;
     }
     this.othersMenu = [...this.generalMenu];
   }
-  
-  
-  
-  toggleSidebar() {
-    this.sideBar = !this.sideBar;  // Toggle sidebar state
-  }
 
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+    this.collapsedChange.emit(this.isCollapsed);
+  }
   signOut() {
-    // Implement sign out logic here
     this.router.navigate(['/login']);
   }
 

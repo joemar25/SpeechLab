@@ -10,14 +10,4 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'speechlabv2';
-
-  showChatModal: boolean = false;
-
-  openChatModal() {
-    this.showChatModal = true;
-  }
-
-  closeChatModal() {
-    this.showChatModal = false;
-  }
 }

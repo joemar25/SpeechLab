@@ -50,6 +50,8 @@ export class StudentLayoutComponent implements OnInit, OnDestroy {
   settings: boolean = false;
   success: boolean = false;
   noChanges: boolean = false;
+  isSidebarCollapsed = false;
+
 
   constructor(
     public notificationService: NotificationService,
@@ -77,7 +79,9 @@ export class StudentLayoutComponent implements OnInit, OnDestroy {
       this.successSubscription.unsubscribe();
     }
   }
-
+  onSidebarCollapsedChange(collapsed: boolean) {
+    this.isSidebarCollapsed = collapsed;
+  }
   closeManageSettings() {
     this.settingsModal.toggleSettings(false);
   }
