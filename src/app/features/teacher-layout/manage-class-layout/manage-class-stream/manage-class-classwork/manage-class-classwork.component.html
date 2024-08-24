@@ -1,4 +1,4 @@
-<div class="w-full h-full">
+<div class="w-full h-full relative">
     <div class="w-full  h-full flex flex-col gap-4 justify-center items-center">
         <div class="w-full h-full flex flex-col justify-start items-start gap-4 max-w-screen-lg">
             <div class="w-full h-fit overflow-visible relative justify-end items-center flex">
@@ -35,29 +35,33 @@
         </div>
 
     </div>
-</div>
+    <!-- classwork modals -->
 
-
-<!-- classwork modals -->
- 
-@if (showModal[1]) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
-    <div class="flex justify-center items-center z-[100] h-full w-full">
-        <app-class-work-assignment (closeModal)="closeModal(1)"></app-class-work-assignment>
+    @if (showModal[1]) {
+    <div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full">
+        <div class="flex justify-center items-center z-[100] w-full h-full">
+            <div class="w-full h-full">
+                <app-class-work-assignment (closeModal)="closeModal(1)"></app-class-work-assignment>
+            </div>
+        </div>
     </div>
-</div>
-}
-@if (showModal[2]) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
-    <div class="flex justify-center items-center z-[100] h-full w-full">
-        <app-class-work-quiz (closeModal)="closeModal(2)"></app-class-work-quiz>
+    }
+    @if (showModal[2]) {
+    <div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full">
+        <div class="flex justify-center items-center z-[100] w-full h-full">
+            <div class="w-full h-full">
+                <app-class-work-quiz (closeModal)="closeModal(2)"></app-class-work-quiz>
+            </div>
+        </div>
     </div>
-</div>
-}
-@if (showModal[3]) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
-    <div class="flex justify-center items-center z-[100] h-full w-full">
-        <app-class-work-evaluation (closeModal)="closeModal(3)"></app-class-work-evaluation>
+    }
+    @if (showModal[3]) {
+    <div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full border-2 border-black">
+        <div class="flex justify-center items-center z-[100] w-full h-full">
+            <div class="w-full h-full">
+                <app-class-work-evaluation (closeModal)="closeModal(3)"></app-class-work-evaluation>
+            </div>
+        </div>
     </div>
+    }
 </div>
-}
