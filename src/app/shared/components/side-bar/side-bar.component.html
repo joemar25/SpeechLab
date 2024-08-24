@@ -1,44 +1,68 @@
-<div class="h-full w-[320px] duration-300 py-4 px-4 relative">
-  <div class="w-full h-full flex flex-col justify-between items-center gap-8">
-
-    <div class="flex w-full justify-center items-center gap-3 pt-6 px-2">
-      <img src="assets/logo/CATSU_Logo.png" class="w-[70px] h-[70px] rounded-xl" alt="Logo">
-      <div class="flex flex-col">
-        <p class="font-semibold text-base text-secondary-tw">Catanduanes State University</p>
-      </div>
+<div class="h-full w-[320px] duration-300 py-4 px-4 relative flex flex-col">
+  <div class="flex w-full justify-center items-center gap-3 px-2 mb-6">
+    <img
+      src="assets/logo/CATSU_Logo.png"
+      class="w-[70px] h-[70px] rounded-xl"
+      alt="Logo"
+    />
+    <div class="flex flex-col">
+      <p class="font-semibold text-base text-secondary-tw">
+        Catanduanes State University
+      </p>
     </div>
+  </div>
 
-    <div class="w-full flex flex-col gap-1">
-      <div *ngFor="let item of currentMenu" 
-           [routerLink]="item.route" 
-           [routerLinkActive]="'active-route'"
-           class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer">
-        <iconify-icon *ngIf="item.icon" [icon]="item.icon" width="20" height="20"></iconify-icon>
-        <svg *ngIf="item.svgIcon" width="20" height="20" viewBox="0 0 31 31" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path [attr.d]="getSvgPath(item.svgIcon)" />
-        </svg>
+  <div class="w-full flex flex-col gap-1 mb-auto">
+    <div
+      *ngFor="let item of currentMenu"
+      [routerLink]="item.route"
+      [routerLinkActive]="'active-route'"
+      class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer"
+    >
+      <iconify-icon
+        *ngIf="item.icon"
+        [icon]="item.icon"
+        width="20"
+        height="20"
+      ></iconify-icon>
+      <svg
+        *ngIf="item.svgIcon"
+        width="20"
+        height="20"
+        viewBox="0 0 31 31"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path [attr.d]="getSvgPath(item.svgIcon)" />
+      </svg>
+      <p class="font-medium duration-300 text-base">
+        {{ item.label }}
+      </p>
+    </div>
+  </div>
+
+  <div class="w-full mt-auto">
+    <div class="font-semibold uppercase glassmorphism pl-2 duration-300">
+      Others
+    </div>
+    <div class="flex flex-col gap-1">
+      <div
+        *ngFor="let item of othersMenu"
+        [routerLink]="item.route"
+        (click)="item.label === 'Sign Out' ? signOut() : null"
+        class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer"
+      >
+        <iconify-icon
+          *ngIf="item.icon"
+          [icon]="item.icon"
+          [class.rotate-180]="item.label === 'Sign Out'"
+          width="20"
+          height="20"
+        ></iconify-icon>
         <p class="font-medium duration-300 text-base">
           {{ item.label }}
         </p>
       </div>
     </div>
-    
-
-    <div class="w-full">
-      <div class="font-semibold uppercase glassmorphism pl-2 duration-300">Others</div>
-      <div class="flex flex-col gap-1">
-        <div *ngFor="let item of othersMenu" 
-             [routerLink]="item.route"
-             (click)="item.label === 'Sign Out' ? signOut() : null"
-             class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer">
-          <iconify-icon *ngIf="item.icon" [icon]="item.icon" [class.rotate-180]="item.label === 'Sign Out'" width="20" height="20"></iconify-icon>
-          <p class="font-medium duration-300 text-base">
-            {{ item.label }}
-          </p>
-        </div>
-      </div>
-    </div>
-    
   </div>
 </div>
-

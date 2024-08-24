@@ -15,39 +15,102 @@ interface MenuItem {
   imports: [RouterLink, RouterLinkActive, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent {
-  sideBar: boolean = false;  // This controls whether the sidebar is minimized or not
+  sideBar: boolean = false; // This controls whether the sidebar is minimized or not
 
   studentMenu: MenuItem[] = [
-    { label: 'Dashboard', icon: 'ic:sharp-dashboard', route: '/student/dashboard' },
-    { label: 'Class Lab', icon: 'ri:graduation-cap-fill', route: '/student/class-lab' },
+    {
+      label: 'Dashboard',
+      icon: 'ic:sharp-dashboard',
+      route: '/student/dashboard',
+    },
+    {
+      label: 'Class Lab',
+      icon: 'ri:graduation-cap-fill',
+      route: '/student/class-lab',
+    },
     { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
-    { label: 'Tasks', icon: 'mdi:format-list-bulleted', route: '/student/task'},
-    { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/student/speechlab'},
-    { label: 'Dictionary', icon: 'ic:sharp-dashboard',route: '/dictionary/d-search' },
-    { label: 'Text to Speech', svgIcon: 'text-to-speech-icon', route: '/text-to-speech/text-record' },
-    { label: 'Speech Analyzer', svgIcon: 'text-to-speech-icon', route : '/speech-analyzer/record-speech' },
-  ];
-  
-  teacherMenu: MenuItem[] = [
-    { label: 'Dashboard', icon: 'ic:sharp-dashboard', route: '/teacher/new-dashboard' },
-    { label: 'Manage Class', icon: 'mdi:account-group', route: '/teacher/manage-class' },
-    { label: 'Manage Courses', icon: 'mdi:book-open-variant', route: '/teacher/manage-courses' },
-    { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
-    { label: 'Speech Lab', svgIcon: 'speech-lab-icon', route: '/teacher/speechlab' },
-    { label: 'Dictionary', icon: 'mdi:dictionary', route: '/dictionary/d-search' },
-    { label: 'Text to Speech', svgIcon: 'text-to-speech-icon', route: '/teacher/text-to-speech' },
-    { label: 'Speech Access', icon: 'mdi:microphone', route: '/teacher/speech-access' },
-  ];
-  
-  AdminMenu: MenuItem[] = [
-    { label: 'Manage Users', icon: 'mdi:account-cog', route: '/admin/manage-users' },
-    { label: 'count', icon: 'mdi:account-cog', route: '/admin/count' },
-    { label: 'speechlab', icon: 'mdi:account-cog', route: '/admin/speechlab' },
+    {
+      label: 'Tasks',
+      icon: 'mdi:format-list-bulleted',
+      route: '/student/task',
+    },
+    {
+      label: 'Speech Lab',
+      svgIcon: 'speech-lab-icon',
+      route: '/student/speechlab',
+    },
+    {
+      label: 'Dictionary',
+      icon: 'ic:sharp-dashboard',
+      route: '/dictionary/d-search',
+    },
+    {
+      label: 'Text to Speech',
+      svgIcon: 'text-to-speech-icon',
+      route: '/text-to-speech/text-record',
+    },
+    {
+      label: 'Speech Analyzer',
+      svgIcon: 'text-to-speech-icon',
+      route: '/speech-analyzer/record-speech',
+    },
   ];
 
+  teacherMenu: MenuItem[] = [
+    {
+      label: 'Dashboard',
+      icon: 'ic:sharp-dashboard',
+      route: '/teacher/new-dashboard',
+    },
+    {
+      label: 'Manage Class',
+      icon: 'mdi:account-group',
+      route: '/teacher/manage-class',
+    },
+    {
+      label: 'Manage Courses',
+      icon: 'mdi:book-open-variant',
+      route: '/teacher/manage-courses',
+    },
+    { label: 'Meet', svgIcon: 'meet-icon', route: '/meet/video-conference' },
+    {
+      label: 'Speech Lab',
+      svgIcon: 'speech-lab-icon',
+      route: '/teacher/speechlab',
+    },
+    {
+      label: 'Dictionary',
+      icon: 'mdi:dictionary',
+      route: '/dictionary/d-search',
+    },
+    {
+      label: 'Text to Speech',
+      svgIcon: 'text-to-speech-icon',
+      route: '/teacher/text-to-speech',
+    },
+    {
+      label: 'Speech Access',
+      icon: 'mdi:microphone',
+      route: '/teacher/speech-access',
+    },
+  ];
+
+  AdminMenu: MenuItem[] = [
+    {
+      label: 'Manage Users',
+      icon: 'mdi:account-cog',
+      route: '/admin/manage-users',
+    },
+    { label: 'Count', icon: 'mdi:account-cog', route: '/admin/count' },
+    {
+      label: 'Speechlab',
+      icon: 'mdi:account-cog',
+      route: '/admin/speech-lab',
+    },
+  ];
 
   // General menu items that should be visible to all roles
   generalMenu: MenuItem[] = [
@@ -56,7 +119,7 @@ export class SideBarComponent {
   ];
 
   currentMenu: MenuItem[] = [];
-othersMenu: any;
+  othersMenu: any;
 
   constructor(private router: Router) {}
 
@@ -65,9 +128,12 @@ othersMenu: any;
   }
 
   setMenuByRole() {
-    const userRole = localStorage.getItem('userRole') as 'student' | 'teacher' | 'admin';
+    const userRole = localStorage.getItem('userRole') as
+      | 'student'
+      | 'teacher'
+      | 'admin';
     console.log('User Role:', userRole); // Add this line for debugging
-    switch(userRole) {
+    switch (userRole) {
       case 'student':
         this.currentMenu = [...this.studentMenu];
         break;
@@ -83,11 +149,9 @@ othersMenu: any;
     }
     this.othersMenu = [...this.generalMenu];
   }
-  
-  
-  
+
   toggleSidebar() {
-    this.sideBar = !this.sideBar;  // Toggle sidebar state
+    this.sideBar = !this.sideBar; // Toggle sidebar state
   }
 
   signOut() {
