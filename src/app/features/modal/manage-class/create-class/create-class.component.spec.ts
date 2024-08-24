@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClassCommentsComponent } from './class-comments.component';
+import { CreateClassComponent } from './create-class.component';
 
-describe('ClassCommentsComponent', () => {
-  let component: ClassCommentsComponent;
-  let fixture: ComponentFixture<ClassCommentsComponent>;
+describe('CreateClassComponent', () => {
+  let component: CreateClassComponent;
+  let fixture: ComponentFixture<CreateClassComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClassCommentsComponent]
+      imports: [CreateClassComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ClassCommentsComponent);
+    fixture = TestBed.createComponent(CreateClassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

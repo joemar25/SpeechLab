@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { ManageSettingsService } from '../../../app-services/modal-services/manage-settings.service';
 import { NotificationService } from '../../../app-services/modal-services/notification.service';
 import { NotificationComponent } from "../../shared/modal/notification/notification.component";
-import { ManageSettingsComponent } from "../modal/manage-settings/manage-settings.component";
+import { ManageSettingsComponent } from '../modal/manage-settings/manage-settings.component';
 
 @Component({
   selector: 'app-teacher-layout',

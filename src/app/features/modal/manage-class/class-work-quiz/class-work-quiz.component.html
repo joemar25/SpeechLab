@@ -1,0 +1,140 @@
+<div class="overflow-y-auto h-dvh w-dvw flex items-start justify-center">
+    <div class="w-full h-full flex items-start justify-center">
+        <div class="relative bg-white p-8 rounded-lg shadow-xl mt-[5%] ml-[20%] h-[80%] border border-black
+            w-full max-w-6xl flex flex-col justify-evenly items-start ">
+            <iconify-icon (click)="close()" class="cursor-pointer absolute top-0 right-0 z-[100]"
+                icon="lets-icons:close-square-duotone" width="35" height="35">
+            </iconify-icon>
+
+            <div class="w-full h-full flex flex-col gap-4">
+                <!-- description section remains unchanged -->
+                <!-- description -->
+                <div class="w-full h-fit flex flex-row gap-4">
+                    <!-- first column -->
+                    <div class="flex flex-col w-full h-fit gap-2">
+                        <input type="text" placeholder="Quiz Title"
+                            class="px-4 border border-black rounded-xl p-2 w-full">
+                        <textarea name="description" placeholder="Description"
+                            class="px-4 border border-black rounded-xl p-2 w-full resize-none h-24"></textarea>
+                    </div>
+
+                    <!-- second column -->
+                    <div class="flex flex-col w-full h-fit gap-2">
+                        <input type="time" placeholder="Time Limit"
+                            class="px-4 border border-black rounded-xl p-2 w-full">
+                        <input type="date" placeholder="Deadline"
+                            class="px-4 border border-black rounded-xl p-2 w-full">
+                        <div class="relative">
+                            <select id="course"
+                                class="w-full py-2 pl-4 pr-10 rounded-xl border border-black  appearance-none">
+                                <option>Select Course</option>
+                                <option>Course 1</option>
+                                <option>Course 2</option>
+                                <option>Course 3</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- third column -->
+                    <div
+                        class="flex flex-col font-medium w-full max-w-56 h-fit max-h-full overflow-y-auto gap-2 p-2 rounded-xl border border-black">
+                        <h1>Quiz Settings</h1>
+                        <div class="w-full flex flex-row gap-1.5 px-1">
+                            <input type="checkbox" class="w-4 h-4 border border-gray-700 mt-1">
+                            <p class="text-sm">Randomized Question</p>
+                        </div>
+                        <div class="w-full flex flex-row gap-1.5 px-1">
+                            <input type="checkbox" class="w-4 h-4 border border-gray-700 mt-1">
+                            <p class="text-sm">Allow backtracking</p>
+                        </div>
+                        <div class="w-full flex flex-row justify-center items-center gap-1.5 px-1">
+                            <input type="checkbox" class="w-4 h-4 border border-gray-700 mt-1">
+                            <p class="text-sm">Allow review after submission</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- questions -->
+                <!-- Questions -->
+                <div class="w-full min-h-96 h-full max-h-96 overflow-y-auto scroll-none border border-black rounded-xl p-4">
+                    <div *ngFor="let question of questions; let i = index"
+                        class="w-full h-fit flex flex-col gap-2 mb-4 pb-4 border-b border-gray-300 last:border-b-0">
+                        <div class="w-full h-fit flex flex-row gap-4">
+                            <div class="w-full h-fit flex flex-col gap-2">
+                                <div class="w-full h-fit flex flex-row justify-between items-center">
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm font-medium">Question no.{{i + 1}}</p>
+                                        <div class="relative">
+                                            <select [(ngModel)]="question.mode"
+                                                class="w-full pl-4 pr-10 rounded-xl border border-black appearance-none text-xs py-1">
+                                                <option value="">Mode of Question</option>
+                                                <option value="truefalse">True or False</option>
+                                                <option value="enumeration">Enumeration</option>
+                                                <option value="multiplechoice">Multiple Choice</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                                <svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button (click)="deleteQuestion(i)" 
+                                        class="text-red-500 px-2 py-1 rounded text-sm">
+                                        <iconify-icon icon="ph:trash-thin" width="20" height="20"></iconify-icon>
+                                    </button>
+                                </div>
+                                <div class="w-full h-24">
+                                    <textarea [(ngModel)]="question.text"
+                                        class="px-4 bg-white border border-black rounded-xl p-2 w-full h-full resize-none"></textarea>
+                                </div>
+                            </div>
+                            <div class="w-full h-fit p-2 rounded-xl">
+                                <p class="text-sm font-medium pb-4">Options</p>
+                                <div class="w-full h-full grid grid-cols-2 justify-start items-start gap-4">
+                                    <div *ngFor="let option of question.options; let j = index"
+                                        class="w-full flex items-center gap-2 mb-1 border border-black px-4 py-1 rounded-xl">
+                                        <input type="checkbox" class="w-4 h-4 border border-black">
+                                        <input [(ngModel)]="option.text" type="text"
+                                            class="w-full px-2 py-1 text-black rounded"
+                                            placeholder="Option {{j + 1}}">
+                                        <button (click)="removeOption(i, j)" 
+                                            class="text-red-500 px-2 py-1 rounded text-sm">
+                                            <iconify-icon icon="ph:trash-thin" width="20" height="20"></iconify-icon>
+                                        </button>
+                                    </div>
+                                    <button *ngIf="question.options.length < 4" (click)="addOption(i)"
+                                        class="bg-blue-500 w-32 text-white px-2 py-2 rounded-xl mt-1 text-sm">
+                                        Add Option
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- buttons -->
+            <div class="w-full h-fit max-h-16 flex justify-between items-center p-4">
+                <button (click)="addQuestion()"
+                    class="bg-primary-tw hover:bg-secondary-tw duration-300 py-2 w-32 rounded-xl text-primary-text-tw">Add
+                    Question</button>
+                <div class="flex justify-center items-center gap-4">
+                    <button (click)="cancel()"
+                        class="bg-primary-tw hover:bg-secondary-tw duration-300 py-2 w-32 rounded-xl text-primary-text-tw">Cancel</button>
+                    <button type="submit"
+                        class="bg-primary-tw hover:bg-secondary-tw duration-300 py-2 w-32 rounded-xl text-primary-text-tw">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

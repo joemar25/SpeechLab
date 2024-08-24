@@ -1,1 +1,14 @@
-<p>manage-class-stream works!</p>
+<div class="w-full h-full">
+    <div class="w-full h-full flex flex-col">
+        <div class="w-full h-fit flex-shrink-0 flex flex-row gap-4">
+            @for (route of activeRoutes; track $index) {
+            <button class="w-28 rounded-lg py-1.5 bg-primary-tw text-primary-text-tw"
+            [routerLink]="route.link" routerLinkActive="active-router">{{route.name}}</button>
+            }
+        </div>
+        <div class="w-full h-full p-4 overflow-y-auto">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

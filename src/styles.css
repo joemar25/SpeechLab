@@ -64,3 +64,15 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #F5A425; /* Thumb color on hover */
 }
+
+
+.active-router {
+  background-color: #F5A425; /* Thumb color on hover */
+}
+
+.scroll-none::-webkit-scrollbar{
+  scrollbar-width: none;
+}
+.scroll-none::-webkit-scrollbar{
+  display: none;
+}
