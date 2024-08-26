@@ -9,9 +9,6 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.css',
-  animations: [
-
-  ],
 })
 export class NotificationComponent {
  @Output() close = new EventEmitter<void>();
