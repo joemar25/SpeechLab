@@ -1,5 +1,5 @@
-<div class="overflow-y-auto h-dvh w-dvw flex items-start  justify-center">
-    <div class="relative bg-white p-8 rounded-lg shadow-xl mt-[5%] ml-[20%] h-fit 
+<div class="overflow-y-auto h-dvh w-dvw flex items-center  justify-center">
+    <div class="relative bg-white p-8 rounded-lg ml-[20%] h-fit 
         w-full max-w-xl flex flex-col justify-evenly items-start ">
         <iconify-icon (click)="closeModal()" class="cursor-pointer absolute top-2 right-2 z-[100]"
             icon="lets-icons:close-square-duotone" width="35" height="35"></iconify-icon>
@@ -79,9 +79,9 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full flex flex-row gap-4 justify-end pt-6">
-                <button class="bg-red-500 py-2 w-32 rounded-lg text-primary-text-tw hover:bg-red-700 duration-300">Cancel</button>
+            <div class="w-full flex flex-row  gap-4 justify-end pt-6">
                 <button class="bg-primary-tw py-2 w-32 rounded-lg text-primary-text-tw hover:bg-secondary-tw duration-300">Create</button>
+                <button (click)="closeModal()" class="bg-primary-tw py-2 w-32 rounded-lg text-primary-text-tw hover:bg-red-700 duration-300">Cancel</button>
             </div>
         </div>
     </div>

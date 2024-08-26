@@ -1,0 +1,19 @@
+<div class="w-full h-full custom-scrollbar flex flex-col gap-4 overflow-y-auto justify-center items-center">
+    <div class="w-full h-full flex flex-col gap-2">
+        <!-- items -->
+        @for (item of quiz; track $index) {
+        <div
+            class="w-full h-fit flex flex-row gap-4 justify-between items-center bg-white border border-gray-300 rounded-lg p-4 relative">
+            <div class="w-fit h-full flex flex-row gap-4 justify-start items-center">
+                <img class="w-12" src="/assets/images/manage-class/quiz.png" alt="">
+                <div class="flex flex-col">
+                    <h1 class="font-semibold">{{item.title}}</h1>
+                    <p class="text-sm text-gray-700">{{item.due}}</p>
+                </div>
+            </div>
+            <p [routerLink]="['/teacher/manage-class/manage-class-stream/manage-class-grades/quiz/quiz-result', item.id]"
+                class="text-sm text-secondary-text-tw cursor-pointer pr-4 font-medium hover:text-secondary-tw duration-300 hover:scale-95">View</p>
+        </div>
+        }
+    </div>
+</div>

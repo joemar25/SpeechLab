@@ -1,0 +1,50 @@
+<div class="h-full w-full relative">
+    <!-- Table Container -->
+    <div class="w-full h-full bg-white rounded-lg overflow-hidden flex flex-col">
+        <table class="w-full bg-white rounded-lg table-fixed">
+            <thead class="sticky top-0 z-10 bg-secondary-tw text-white">
+                <tr>
+                    <th class="px-6 py-2 font-semibold text-left">Name</th>
+                    <th class="px-6 py-2 font-semibold text-left whitespace-nowrap">Submission Date</th>
+                    <th class="px-6 py-2 font-semibold text-left whitespace-nowrap">Submission Status</th>
+                    <th class="px-6 py-2 font-semibold text-left">Grades</th>
+                    <th class="w-32 px-6 py-2 font-semibold text-left">Action</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="flex-grow overflow-y-auto custom-scrollbar">
+            <table class="w-full table-fixed">
+                <tbody class="divide-y divide-gray-200">
+                    <tr *ngFor="let task of taskList" class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-left">{{ task.name }}</td>
+                        <td class="px-6 py-4 text-left">{{ task.date }}</td>
+                        <td class="px-6 py-4 text-left">
+                            <span class="inline-block px-4 py-1 text-center text-white rounded-full w-36"
+                                [ngClass]="{'bg-green-500': task.status === 'Turned in', 'bg-red-500': task.status === 'Not submitted'}">
+                                {{ task.status }}
+                            </span>
+                        </td>
+                        <td class=" px-6 py-4 text-left">{{ task.grade }}</td>
+                        <td class="w-32 px-6 py-4 text-left">
+                            <span class="w-4 h-4 rounded-sm cursor-pointer">
+                                <p (click)="openModal(task.id, $event)"
+                                    class="font-medium hover:text-secondary-tw text-secondary-text-tw duration-300">View
+                                </p>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (selectedTaskId != null) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full background">
+    <div class="flex justify-center items-center z-[100] w-full h-full">
+        <div class="w-full h-full">
+            <app-task-view [taskId]="selectedTaskId"  (closeModal)="closeModal()"></app-task-view>
+        </div>
+    </div>
+</div>
+}
