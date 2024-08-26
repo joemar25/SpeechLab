@@ -1,88 +1,115 @@
 <div class="flex flex-col items-center justify-center min-h-screen rounded-2xl bg-gray-100 p-4">
-    <div class="relative w-full max-w-5xl mb-8">
-      <!-- Monitor frame -->
-      <div class="bg-gray-800 rounded-2xl p-4 shadow-2xl">
-        <!-- Screen -->
-        <div class="relative w-full pb-[56.25%] bg-black rounded-lg overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-700 opacity-80"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-white text-center p-6 rounded-lg shadow-md backdrop-blur-lg w-full max-w-2xl">
-              <h2 class="text-3xl font-bold mb-4 animate-pulse">Teacher's Module</h2>
-              <p class="text-xl animate-fade-in">{{ currentModuleContent }}</p>
-            </div>
+  <div class="relative w-full max-w-5xl mb-8">
+    <!-- Monitor frame -->
+    <div class="bg-gray-800 rounded-2xl p-4 shadow-2xl">
+      <!-- Screen -->
+      <div class="relative w-full pb-[56.25%] bg-black rounded-lg overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-700 opacity-80"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-white text-center p-6 rounded-lg shadow-md backdrop-blur-lg w-full max-w-2xl">
+            <h2 class="text-3xl font-bold mb-4 animate-pulse">Teacher's Module</h2>
+            <p class="text-xl animate-fade-in">{{ currentModuleContent }}</p>
           </div>
-        </div>
-        <!-- Monitor bottom bar -->
-        <div class="mt-2 flex justify-between items-center">
-          <div class="flex space-x-2">
-            <!-- Monitor buttons -->
-            <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
-            <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
-            <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
-          </div>
-          <!-- Power LED -->
-          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
         </div>
       </div>
-      <!-- Monitor stand -->
-      <div class="bg-gray-700 h-16 w-32 mx-auto -mt-1 rounded-b-3xl shadow-lg"></div>
-      <!-- Stand base -->
-      <div class="bg-gray-800 h-4 w-48 mx-auto rounded-full shadow-md"></div>
-    </div>
-  
-    <!-- Student Control Panel -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8 w-full max-w-md">
-      <h3 class="text-lg font-semibold mb-4 text-center">Speech Lab Controls</h3>
-      <div class="flex justify-around items-center">
-        <!-- Raise/Lower Hand Button -->
-        <div class="flex flex-col items-center">
-          <button
-            class="p-3 bg-gray-200 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none group"
-            [ngClass]="{'bg-yellow-200 hover:bg-yellow-300': isHandRaised, 'hover:bg-yellow-100': !isHandRaised}"
-            (click)="toggleHandRaise()"
-            aria-label="Raise or Lower Hand"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600 group-hover:text-yellow-700" [ngClass]="{'text-yellow-700': isHandRaised}" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M9 3a1 1 0 012 0v5.5a.5.5 0 001 0V4a1 1 0 112 0v4.5a.5.5 0 001 0V6a1 1 0 112 0v5a7 7 0 11-14 0V9a1 1 0 012 0v2.5a.5.5 0 001 0V4a1 1 0 012 0v4.5a.5.5 0 001 0V3z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <span class="mt-2 text-sm text-gray-600">{{ isHandRaised ? 'Lower Hand' : 'Raise Hand' }}</span>
+      <!-- Monitor bottom bar -->
+      <div class="mt-2 flex justify-between items-center">
+        <div class="flex space-x-2">
+          <!-- Monitor buttons -->
+          <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-gray-600 rounded-full"></div>
         </div>
-  
-        <!-- Speaking Status -->
-        <div class="flex flex-col items-center">
-          <div [ngClass]="{'bg-red-100': !isSpeaking, 'bg-green-100': isSpeaking}" class="p-3 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" [ngClass]="{'text-red-600': !isSpeaking, 'text-green-600': isSpeaking}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
-          </div>
-          <span class="mt-2 text-sm text-gray-600">{{ isSpeaking ? 'Speaking' : 'Standby' }}</span>
-        </div>
-      </div>
-      
-      <!-- Waiting Message -->
-      <div *ngIf="isHandRaised && !isSpeaking" class="mt-6 text-center">
-        <p class="text-lg font-medium text-blue-600 animate-pulse">
-          Please wait for your turn to speak.
-        </p>
-        <p class="text-sm text-gray-600 mt-2">
-          The teacher will select you when it's your turn.
-        </p>
+        <!-- Power LED -->
+        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
       </div>
     </div>
-  
+    <!-- Monitor stand -->
+    <div class="bg-gray-700 h-16 w-32 mx-auto -mt-1 rounded-b-3xl shadow-lg"></div>
+    <!-- Stand base -->
+    <div class="bg-gray-800 h-4 w-48 mx-auto rounded-full shadow-md"></div>
+  </div>
+
+  <!-- Student Control Panel -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8 w-full max-w-md">
+    <h3 class="text-lg font-semibold mb-4 text-center">Speech Lab Controls</h3>
+    <div class="flex justify-around items-center">
+      <!-- Raise/Lower Hand Button -->
+      <div class="flex flex-col items-center">
+        <button
+          class="p-3 bg-gray-200 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none group"
+          [ngClass]="{'bg-yellow-200 hover:bg-yellow-300': isHandRaised, 'hover:bg-yellow-100': !isHandRaised}"
+          (click)="toggleHandRaise()"
+          aria-label="Raise or Lower Hand"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600 group-hover:text-yellow-700" [ngClass]="{'text-yellow-700': isHandRaised}" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3a1 1 0 012 0v5.5a.5.5 0 001 0V4a1 1 0 112 0v4.5a.5.5 0 001 0V6a1 1 0 112 0v5a7 7 0 11-14 0V9a1 1 0 012 0v2.5a.5.5 0 001 0V4a1 1 0 012 0v4.5a.5.5 0 001 0V3z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <span class="mt-2 text-sm text-gray-600">{{ isHandRaised ? 'Lower Hand' : 'Raise Hand' }}</span>
+      </div>
+
+      <!-- Speaking Status -->
+      <div class="flex flex-col items-center">
+        <div [ngClass]="{'bg-red-100': !isSpeaking, 'bg-green-100': isSpeaking}" class="p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" [ngClass]="{'text-red-600': !isSpeaking, 'text-green-600': isSpeaking}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+        </div>
+        <span class="mt-2 text-sm text-gray-600">{{ isSpeaking ? 'Speaking' : 'Standby' }}</span>
+      </div>
+    </div>
+    
     <!-- Floating Speech Analyzer Button -->
-    <button
-    class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full p-4 shadow-2xl hover:bg-blue-600 transition-all duration-300 z-50 animate-float-slow"
-    (click)="toggleSpeechAnalyzer()"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-    </svg>
-  </button>
-  
-    <!-- Speech Analyzer Modal -->
-    <div *ngIf="showSpeechAnalyzer" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <app-record-speech (close)="toggleSpeechAnalyzer()"></app-record-speech>
+    <div class="flex flex-col items-center mt-6">
+      <button
+        class="bg-blue-500 text-white rounded-full p-4 shadow-2xl hover:bg-blue-600 transition-all duration-300"
+        (click)="toggleSpeechAnalyzer()"
+      >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="#FFFFFF">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <defs>
+            <style>.cls-1{fill:#FFFFFF;}.cls-2{fill:none;}.cls-3{fill:#FFFFFF;}</style>
+          </defs>
+          <title>Icon_24px_SpeechtoText_Color</title>
+            <g data-name="Product Icons">
+              <g data-name="colored-32/speech">
+                <rect class="cls-1" x="11" y="2" width="2" height="20"></rect>
+                <rect class="cls-2" width="24" height="24"></rect>
+                <g>
+                  <rect id="Rectangle-path-2" data-name="Rectangle-path" class="cls-1" x="7" y="8" width="2" height="8"></rect>
+                  <rect id="Rectangle-path-3" data-name="Rectangle-path" class="cls-1" x="15" y="8" width="2" height="8"></rect>
+                  <rect id="Rectangle-path-4" data-name="Rectangle-path" class="cls-1" x="3" y="5" width="2" height="14"></rect>
+                  <rect id="Rectangle-path-5" data-name="Rectangle-path" class="cls-1" x="19" y="5" width="2" height="14"></rect>
+                  <rect id="Rectangle-path-6" data-name="Rectangle-path" class="cls-3" x="11" y="2" width="2" height="10"></rect>
+                  <rect id="Rectangle-path-7" data-name="Rectangle-path" class="cls-3" x="7" y="8" width="2" height="4"></rect>
+                  <rect id="Rectangle-path-8" data-name="Rectangle-path" class="cls-3" x="15" y="8" width="2" height="4"></rect>
+                  <rect id="Rectangle-path-9" data-name="Rectangle-path" class="cls-3" x="3" y="5" width="2" height="7"></rect>
+                  <rect id="Rectangle-path-10" data-name="Rectangle-path" class="cls-3" x="19" y="5" width="2" height="7"></rect>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <span class="mt-2 text-sm text-gray-600">Speech Analyzer</span>
+    </div>
+
+    <!-- Waiting Message -->
+    <div *ngIf="isHandRaised && !isSpeaking" class="mt-6 text-center">
+      <p class="text-lg font-medium text-blue-600 animate-pulse">
+        Please wait for your turn to speak.
+      </p>
+      <p class="text-sm text-gray-600 mt-2">
+        The teacher will select you when it's your turn.
+      </p>
     </div>
   </div>
+
+  <!-- Speech Analyzer Modal -->
+  <div *ngIf="showSpeechAnalyzer" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <app-record-speech (close)="toggleSpeechAnalyzer()"></app-record-speech>
+  </div>
+</div>

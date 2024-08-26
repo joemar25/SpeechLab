@@ -100,15 +100,29 @@ export class SideBarComponent {
 
   AdminMenu: MenuItem[] = [
     {
-      label: 'Manage Users',
-      icon: 'mdi:account-cog',
-      route: '/admin/manage-users',
+      label: 'Dashboard',
+      icon: 'ic:sharp-dashboard',
+      route: '/teacher/new-dashboard',
     },
-    { label: 'Count', icon: 'mdi:account-cog', route: '/admin/count' },
     {
-      label: 'Speechlab',
-      icon: 'mdi:account-cog',
-      route: '/admin/speech-lab',
+      label: 'User Management',
+      icon: 'mdi:account-group',
+      route: '/teacher/manage-class',
+    },
+    {
+      label: 'Class Management',
+      icon: 'mdi:book-open-variant',
+      route: '/teacher/manage-courses',
+    },
+    {
+      label: 'Content Management',
+      svgIcon: 'speech-lab-icon',
+      route: '/teacher/speechlab',
+    },
+    {
+      label: 'Speech Lab Management',
+      icon: 'mdi:dictionary',
+      route: '/dictionary/d-search',
     },
   ];
 
