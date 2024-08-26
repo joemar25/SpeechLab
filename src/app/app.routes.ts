@@ -70,6 +70,7 @@ export const routes: Routes = [
       { path: 'profile', component: UserProfileComponent },
       { path: 'task', component: TaskComponent },
       { path: 'course-details', component: CourseComponent },
+      { path: 'lesson-details', component: LessonComponent },
       { path: 'task/task-detail', component: TaskDetailComponent },
       { path: 'class-lab/teacher-led', component: TeacherLedComponent },
       { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
@@ -162,14 +163,6 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent, // or another component for admin layout
     children: [
-      { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'class-lab', component: ClassLabComponent },
-      { path: 'profile', component: UserProfileComponent },
-      { path: 'task', component: TaskComponent },
-      { path: 'course-details', component: CourseComponent },
-      { path: 'lesson-details', component: LessonComponent },
-      { path: 'task/task-detail', component: TaskDetailComponent },
       { path: 'class-lab/teacher-led', component: TeacherLedComponent },
       { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
       {
