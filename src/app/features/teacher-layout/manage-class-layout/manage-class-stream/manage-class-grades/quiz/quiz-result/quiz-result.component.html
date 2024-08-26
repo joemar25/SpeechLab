@@ -1,0 +1,33 @@
+<div class="h-full w-full relative">
+    <!-- Table Container -->
+    <div class="w-full h-full bg-white rounded-lg overflow-hidden flex flex-col">
+        <table class="w-full bg-white rounded-lg table-fixed">
+            <thead class="sticky top-0 z-10 bg-secondary-tw text-white">
+                <tr>
+                    <th class="w-1/4 px-6 py-2 font-semibold text-left">Name</th>
+                    <th class="w-2/4 px-6 py-2 font-semibold text-left">State</th>
+                    <th class="w-1/6 px-6 py-2 font-semibold text-left">Marks</th>
+                    <th class="w-1/6 px-6 py-2 font-semibold text-left">Grades</th>
+                    <th class="w-1/6 px-6 py-2 font-semibold text-left">Action</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="flex-grow overflow-y-auto custom-scrollbar">
+            <table class="w-full table-fixed">
+                <tbody class="divide-y divide-gray-200">
+                    <tr *ngFor="let user of users" class="hover:bg-gray-50">
+                        <td class="w-1/4 px-6 py-4 text-left">{{ user.name }}</td>
+                        <td class="w-2/4 px-6 py-4 text-left">{{ user.state }}</td>
+                        <td class="w-1/6 px-6 py-4 text-left">{{ user.marks }}</td>
+                        <td class="w-1/6 px-6 py-4 text-left">{{ user.grade }}</td>
+                        <td class="w-1/6 px-6 py-4 text-left">
+                            <span class="w-4 h-4 text-red-500 rounded-sm cursor-pointer">
+                                <iconify-icon icon="mdi:trash" width="20" height="20"></iconify-icon>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

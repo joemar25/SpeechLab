@@ -70,9 +70,24 @@
   background-color: #F5A425; /* Thumb color on hover */
 }
 
+/* No scroll bar shown */
 .scroll-none::-webkit-scrollbar{
   scrollbar-width: none;
 }
 .scroll-none::-webkit-scrollbar{
   display: none;
+}
+
+.active-button {
+  background-color: #F5A425;
+}
+.inactive-button {
+  background-color: #162239;
+}
+
+.active-icon {
+  background-color: #F5A425;
+}
+.inactive-icon {
+  background-color: #162239;
 }

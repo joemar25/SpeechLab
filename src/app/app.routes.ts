@@ -42,6 +42,13 @@ import { ManageClassGradesComponent } from './features/teacher-layout/manage-cla
 import { ManageClassStudentsComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-students/manage-class-students.component';
 import { ManageClassClassworkComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-classwork/manage-class-classwork.component';
 import { ASpeechlabComponent } from './features/admin-layout/a-speechlab/a-speechlab.component';
+import { QuizComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/quiz/quiz.component';
+import { AttendanceComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/attendance/attendance.component';
+import { TasksComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/tasks/tasks.component';
+import { QuizResultComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/quiz/quiz-result/quiz-result.component';
+import { QuizDashboardComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/quiz/quiz-dashboard/quiz-dashboard.component';
+import { TaskDashboardComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/tasks/task-dashboard/task-dashboard.component';
+import { TaskResultComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/tasks/task-result/task-result.component';
 
 export const routes: Routes = [
   {
@@ -94,19 +101,30 @@ export const routes: Routes = [
           { path: '', component: ManageClassDashboardComponent },
           {
             path: 'manage-class-stream',
-            component: ManageClassStreamComponent,
+            component: ManageClassStreamComponent, //under this path is, class-work, class-students, class-grades
             children: [
-              {
-                path: 'manage-class-grades',
-                component: ManageClassGradesComponent,
-              },
-              {
-                path: 'manage-class-students',
-                component: ManageClassStudentsComponent,
-              },
-              {
-                path: 'manage-class-classwork',
-                component: ManageClassClassworkComponent,
+              { path: 'manage-class-classwork', component: ManageClassClassworkComponent },
+              { path: 'manage-class-students', component: ManageClassStudentsComponent },
+              { path: 'manage-class-grades',
+                component: ManageClassGradesComponent, //under this path is, quiz, tasks, attendance
+                children: [
+                  { pathMatch: 'full', path: '', redirectTo: 'quiz' },
+                  { path: 'quiz', component: QuizComponent, //under this path is, quiz-dashboard, quiz-result
+                    children: [
+                      { pathMatch: 'full', path: '', redirectTo: 'quiz-dashboard' },
+                      { path: 'quiz-dashboard', component: QuizDashboardComponent },
+                      { path: 'quiz-result/:id', component: QuizResultComponent },
+                    ],
+                   },
+                  { path: 'tasks', component: TasksComponent, //under this path is, task-dashboard, task-result
+                    children: [
+                      { pathMatch: 'full', path: '', redirectTo: 'task-dashboard' },
+                      { path: 'task-dashboard', component: TaskDashboardComponent },
+                      { path: 'task-result/:id', component: TaskResultComponent },
+                    ]
+                   },
+                  { path: 'attendance', component: AttendanceComponent },
+                ],
               },
             ],
           },
@@ -163,4 +181,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

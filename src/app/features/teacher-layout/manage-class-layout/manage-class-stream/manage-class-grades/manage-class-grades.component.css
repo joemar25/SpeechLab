@@ -1,0 +1,4 @@
+.active-route {
+    padding-top: 2px;
+    border-bottom: 2px solid #F5A425; /* Color of the underline */
+}
