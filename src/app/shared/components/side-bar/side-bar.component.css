@@ -52,7 +52,33 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  .active-route {
-    color: var(--color-secondary) !important;
-    background-color: #1f2e4d;
-  }
+ .active-route {
+  color: var(--color-secondary) !important;
+  background-color: #1f2e4d;
+}
+
+.active-indicator {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 30px;
+  background-color: var(--color-secondary);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.w-20 .active-route .active-indicator {
+  display: block;
+}
+
+.w-20 .active-route {
+  background-color: transparent !important;
+}
+
+.w-20 .active-route:hover {
+  background-color: #1f2e4d !important;
+}

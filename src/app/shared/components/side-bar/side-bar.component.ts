@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Output, EventEmitter } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { SidebarServiceService } from '../../../core/services/SidebarService/sidebar-service.service';
 interface MenuItem {
   label: string;
   icon?: string;
@@ -57,10 +57,13 @@ export class SideBarComponent {
   currentMenu: MenuItem[] = [];
   othersMenu: MenuItem[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sidebarService: SidebarServiceService) {}
 
   ngOnInit() {
     this.setMenuByRole();
+    this.sidebarService.isCollapsed$.subscribe(
+      isCollapsed => this.isCollapsed = isCollapsed
+    );
   }
 
   setMenuByRole() {
@@ -84,8 +87,7 @@ export class SideBarComponent {
   }
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-    this.collapsedChange.emit(this.isCollapsed);
+    this.sidebarService.toggleSidebar();
   }
   signOut() {
     this.router.navigate(['/login']);

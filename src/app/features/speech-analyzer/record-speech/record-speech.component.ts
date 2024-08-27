@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SpeechAnalyzerComponent } from '../speech-analyzer.component';
 
 @Component({
   selector: 'app-record-speech',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpeechAnalyzerComponent],
   templateUrl: './record-speech.component.html',
   styleUrl: './record-speech.component.css'
 })

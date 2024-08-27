@@ -54,7 +54,7 @@ export const routes: Routes = [
     path: 'login', component: AutheenticationComponent,
   },
   {
-    path: 'student', component: StudentLayoutComponent,
+    path: 'student', component: HomeLayoutComponent,
     children: [
       { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -70,7 +70,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'teacher', component: TeacherLayoutComponent,
+    path: 'teacher', component: HomeLayoutComponent,
     children: [
       { path: 'speechlab', component: TeacherSpeechLabComponent },
       { path: 't-dashboard', component: TDashboardComponent },
@@ -108,22 +108,23 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'speech-analyzer', component: SpeechAnalyzerComponent,
+    path: 'speech-analyzer', component: HomeLayoutComponent,
     children: [
+      {path: 'analyze', component: SpeechAnalyzerComponent},
       { path: 'record-speech', component: RecordSpeechComponent },
       { path: 'record-list', component: RecordListComponent },
       { path: 'record-report', component: RecordReportComponent },
     ]
   },
   {
-    path: 'meet', component: TeacherLayoutComponent,
+    path: 'meet', component: StudentLayoutComponent,
     children: [
       { path: 'video-conference', component: VideoConferenceComponent },
     ]
   },
   // Admin routes
   {
-    path: 'admin', component: AdminLayoutComponent, // or another component for admin layout
+    path: 'admin', component: HomeLayoutComponent, // or another component for admin layout
     children: [
       { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
