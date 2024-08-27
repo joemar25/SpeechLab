@@ -1,8 +1,7 @@
-<!-- course-details-modal.component.html -->
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <section class="flex pr-4 rounded-none max-md:pr-3">
-    <article class="flex flex-col grow shrink-0 -mr-10 bg-white rounded-2xl basis-0 min-h-[700px] max-md:max-w-full ml-[16.5%]">
-      <iconify-icon (click)="closeModal()" class="absolute top-16 right-12 text-white cursor-pointer" icon="carbon:close-filled" width="30" height="30"></iconify-icon>
+    <article class="flex flex-col grow shrink-0 -mr-10 bg-white rounded-2xl basis-0 min-h-[700px] max-md:max-w-full ml-[16.5%] relative"> <!-- Added relative positioning -->
+      <iconify-icon (click)="closeModal()" class="absolute top-4 right-4 text-white cursor-pointer z-10" icon="carbon:close-filled" width="28" height="28"></iconify-icon>
       <header class="flex flex-col w-[940px] max-md:max-w-full">
         <img [src]="course?.imageUrl" alt="Cyber Security Course Banner" class="object-cover w-full h-64 rounded-t-2xl" />
         <div class="flex flex-col self-center mt-4 max-w-full w-[950px]">

@@ -144,7 +144,7 @@ export const routes: Routes = [
   },
   {
     path: 'speech-analyzer',
-    component: SpeechAnalyzerComponent,
+    component: HomeLayoutComponent,
     children: [
       { path: 'record-speech', component: RecordSpeechComponent },
       { path: 'record-list', component: RecordListComponent },

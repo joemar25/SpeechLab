@@ -1,7 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Output, EventEmitter } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SidebarServiceService } from '../../../core/services/SidebarService/sidebar-service.service';
+
 interface MenuItem {
   label: string;
   icon?: string;
@@ -15,10 +16,11 @@ interface MenuItem {
   imports: [RouterLink, RouterLinkActive, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+  styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent {
-  sideBar: boolean = false; // This controls whether the sidebar is minimized or not
+export class SideBarComponent implements OnInit {
+  @Output() collapsedChange = new EventEmitter<boolean>();
+  isCollapsed: boolean = false;
 
   studentMenu: MenuItem[] = [
     {
@@ -126,29 +128,30 @@ export class SideBarComponent {
     },
   ];
 
-
-  // General menu items that should be visible to all roles
   generalMenu: MenuItem[] = [
     { label: 'Report a Problem', icon: 'mdi:report-problem' },
     { label: 'Sign Out', icon: 'icon-park-outline:logout', route: '/login' },
   ];
 
   currentMenu: MenuItem[] = [];
-  othersMenu: any;
+  othersMenu: MenuItem[] = [];
 
   constructor(private router: Router, private sidebarService: SidebarServiceService) {}
 
   ngOnInit() {
     this.setMenuByRole();
     this.sidebarService.isCollapsed$.subscribe(
-      isCollapsed => this.isCollapsed = isCollapsed
+      isCollapsed => {
+        this.isCollapsed = isCollapsed;
+        this.collapsedChange.emit(this.isCollapsed);
+      }
     );
   }
 
   setMenuByRole() {
     const userRole = localStorage.getItem('userRole') as 'student' | 'teacher' | 'admin';
-    console.log('User Role:', userRole); // Add this line for debugging
-    switch(userRole) {
+    console.log('User Role:', userRole);
+    switch (userRole) {
       case 'student':
         this.currentMenu = [...this.studentMenu];
         break;
@@ -166,9 +169,12 @@ export class SideBarComponent {
   }
 
   toggleSidebar() {
-    this.sideBar = !this.sideBar;  // Toggle sidebar state
+    this.sidebarService.toggleSidebar();
   }
+
   signOut() {
+    // Implement your sign out logic here
+    localStorage.removeItem('userRole');
     this.router.navigate(['/login']);
   }
 
@@ -183,5 +189,12 @@ export class SideBarComponent {
       default:
         return '';
     }
+  }
+
+  getMenuItemClasses(): string {
+    return `flex items-center py-3 px-4 rounded-lg cursor-pointer transition-colors duration-200 glassmorph group ${this.isCollapsed ? 'justify-center' : ''}`;
+  }
+  getTextClasses(): string {
+    return this.isCollapsed ? 'hidden sidebar-hover-text' : 'block sidebar-text';
   }
 }
