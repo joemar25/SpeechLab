@@ -1,0 +1,30 @@
+<div class="w-full h-full custom-scrollbar flex flex-col gap-4 overflow-y-auto justify-center items-center">
+    <div class="w-full h-full flex flex-col gap-2">
+        <!-- items -->
+        @for (task of tasks; track $index) {
+            <div
+            class="w-full h-fit flex flex-row gap-4 justify-between items-center bg-white border border-gray-300 rounded-lg p-4 relative">
+            <div class="w-fit h-full flex flex-row gap-4 justify-start items-center">
+                <img class="w-12" src="/assets/images/manage-class/group.png" alt="">
+                <div class="flex flex-col">
+                    <h1 class="font-semibold">{{task.title}}</h1>
+                    <p class="text-sm text-gray-700">{{task.dueDate}}</p>
+                </div>
+            </div>
+            <div class="w-fit flex flex-row gap-6">
+                <div class="flex flex-col justify-center items-center">
+                    <h1 class="text-2xl font-bold">{{task.turnedIn}}</h1>
+                    <p class="text-xs font-medium">Turned in</p>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <h1 class="text-2xl font-bold">{{task.notSubmitted}}</h1>
+                    <p class="text-xs font-medium">Not Submitted</p>
+                </div>
+            </div>
+            <div class="w-fit pr-4">
+                <p [routerLink]="['/teacher/manage-class/manage-class-stream/manage-class-grades/tasks/task-result', task.id]" class="text-sm font-medium cursor-pointer">Open Details</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>

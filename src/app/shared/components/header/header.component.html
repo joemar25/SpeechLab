@@ -36,7 +36,7 @@
             </svg>
 
             <!-- Suggestions Dropdown -->
-            <div *ngIf="showSuggestions && filteredSuggestions.length > 0" class="absolute left-0 w-full mt-2 bg-white rounded-lg shadow-lg z-10">
+            <div @fadeAnimation *ngIf="showSuggestions && filteredSuggestions.length > 0" class="absolute left-0 w-full mt-2 bg-white rounded-lg shadow-lg z-10">
               <div *ngFor="let suggestion of filteredSuggestions" 
                    (click)="navigateTo(suggestion.route)"
                    class="p-3 cursor-pointer hover:bg-amber-100 text-sm text-gray-700">

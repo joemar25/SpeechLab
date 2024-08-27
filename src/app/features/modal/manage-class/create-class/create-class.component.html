@@ -1,0 +1,88 @@
+<div class="overflow-y-auto h-dvh w-dvw flex items-center  justify-center">
+    <div class="relative bg-white p-8 rounded-lg ml-[20%] h-fit 
+        w-full max-w-xl flex flex-col justify-evenly items-start ">
+        <iconify-icon (click)="closeModal()" class="cursor-pointer absolute top-2 right-2 z-[100]"
+            icon="lets-icons:close-square-duotone" width="35" height="35"></iconify-icon>
+        <div class="w-full h-full justify-center items-start flex flex-col gap-4">
+            <div class="w-full flex flex-row gap-4">
+                <div class="w-full flex flex-col gap-0.5">
+                    <label for="class_name" class="capitalize font-medium ml-1"> Class Name</label>
+                    <input type="text" id="class_name" placeholder="Enter class name"
+                        class="w-full py-2 pl-4 pr-10 rounded-lg border border-gray-600 overflow-hidden bg-tertiary-tw focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="w-fit flex flex-col gap-0.5">
+                    <label for="class_name" class="capitalize font-medium ml-1"> Class Name</label>
+                    <input type="text" id="class_name" placeholder="Auto Generated"
+                        class="w-56 py-2 pl-4 pr-10 rounded-lg border border-gray-600 overflow-hidden bg-tertiary-tw focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="w-full flex flex-col gap-0.5">
+                <div class="w-full flex flex-col gap-0.5">
+                    <label for="course" class="capitalize font-medium ml-1">Course</label>
+                    <div class="relative">
+                        <select id="course"
+                            class="w-full py-2 pl-4 pr-10 rounded-lg border border-gray-600 bg-tertiary-tw appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Select Course</option>
+                            <option>Course 1</option>
+                            <option>Course 2</option>
+                            <option>Course 3</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full flex flex-col gap-0.5">
+                    <label for="date" class="capitalize font-medium ml-1"> Date</label>
+                    <input type="date" id="date"
+                        class="w-full py-2 pl-4 pr-10 rounded-lg border border-gray-600 overflow-hidden bg-tertiary-tw focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div class="w-full flex flex-col gap-0.5">
+                <label for="time_schedule" class="capitalize font-medium ml-1">Time Schedule</label>
+                <div class="flex items-center gap-2">
+                    <!-- Start Time -->
+                    <div class="flex items-center gap-1">
+                        <select formControlName="startHour" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                        </select>
+                        :
+                        <select formControlName="startMinute" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+                        </select>
+                        <select formControlName="startPeriod" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+
+                    <!-- Separator -->
+                    <span>-</span>
+
+                    <!-- End Time -->
+                    <div class="flex items-center gap-1">
+                        <select formControlName="endHour" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                        </select>
+                        :
+                        <select formControlName="endMinute" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+                        </select>
+                        <select formControlName="endPeriod" class="w-16 p-2 rounded bg-gray-300 text-black">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex flex-row  gap-4 justify-end pt-6">
+                <button class="bg-primary-tw py-2 w-32 rounded-lg text-primary-text-tw hover:bg-secondary-tw duration-300">Create</button>
+                <button (click)="closeModal()" class="bg-primary-tw py-2 w-32 rounded-lg text-primary-text-tw hover:bg-red-700 duration-300">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

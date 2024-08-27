@@ -1,0 +1,79 @@
+<div class="w-full h-full flex items-center justify-center">
+    <div
+        class="relative bg-background-tw pt-4 rounded-lg h-full w-full flex flex-col justify-center items-center">
+        <iconify-icon (click)="close()" class="cursor-pointer absolute top-0 right-2 z-[100]"
+            icon="lets-icons:close-square-duotone" width="35" height="35">
+        </iconify-icon>
+
+        <div class="w-full h-full max-w-screen-sm flex flex-col gap-4 relative">
+            <img src="/assets/images/manage-class/group.png" class="w-10 h-10 absolute -top-0 -left-12" alt="">
+            <div class="w-full h-fit flex flex-col gap-4">
+                <div class="w-full flex flex-col gap-0.5">
+                    <div class="flex flex-row justify-between items-end">
+                        <div class="w-full flex flex-col gap-0.5">
+                            <h1 class="text-2xl font-bold">THIS IS THE QUIZ</h1>
+                            <p class="text-sm font-medium">Michael Maxwell</p>
+                            <p class="text-xs font-medium">July 08, 2024</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-700 font-medium whitespace-nowrap">Due July 10, 11:59 PM</p>
+                        </div>
+                    </div>
+                    <div class="w-full border-b border-black"></div>
+                </div>
+                
+                <div class="w-full h-full flex flex-col gap-4">
+                    <p class="w-full max-w-md text-sm font-medium">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero ab voluptate facilis ratione,
+                        iure suscipit aliquid veritatis nobis consectetur exercitationem, provident porro rem temporibus
+                        aperiam repellendus, quaerat a delectus ipsum?
+                    </p>
+                    <div class="w-full h-full flex flex-col gap-2">
+                        <h1 class="text-xs font-medium">Attachments:</h1>
+                        <div class="w-full h-full min-h-24 max-h-24 border border-gray-800">
+
+                        </div>
+                    </div>
+                    <div class="w-full h-full justify-center items-center flex flex-col gap-2">
+                        <div class="w-full h-full flex gap-1">
+                            <iconify-icon icon="mdi:users" width="20" height="20"></iconify-icon>
+                            <p class="text-xs font-medium">Class comments</p>
+                        </div>
+                        <div class="w-full h-full min-h-32 max-h-32 overflow-y-auto custom-scrollbar p-2 flex flex-col gap-4">
+                            <!-- Example Comment -->
+                            <div class="w-full flex flex-row justify-start items-start gap-3 relative">
+                                <img src="/assets/images/manage-class/profileicon.png" class="w-10 h-10 rounded-full border border-gray-400" alt="">
+                                <div class="w-fit flex flex-col">
+                                    <h1>John Doe</h1>
+                                    <p class="text-sm w-full max-w-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius voluptatem
+                                        sapiente placeat, quibusdam incidunt vel iure temporibus corrupti in facere maxime
+                                        aspernatur error inventore repudiandae nostrum recusandae nesciunt facilis minus?</p>
+                                </div>
+                                <p class="text-xs absolute top-0 right-0">//Time here</p>
+                            </div>
+                            <!-- Add more Example Comment -->
+
+                        </div>
+                        <div class="w-full flex justify-center items-center gap-2 px-4">
+                            <!-- if may profile si user -->
+                            <img class="border border-gray-400 rounded-full h-8 w-8" src="assets/images/manage-class/profileicon.png"
+                            alt="">
+                            <form class="w-full flex justify-between items-center gap-3">
+                                <input type="text" placeholder="Add comment..." 
+                                class="w-full py-1 placeholder:text-xs bg-background-tw rounded-2xl px-4 border border-gray-800 focus:outline-secondary-tw">
+                                <button type="submit">
+                                    <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.90781 17.6642L19.3578 10.1842C20.1678 9.83418 20.1678 8.69418 19.3578 8.34418L1.90781 0.864177C1.24781 0.574177 0.517812 1.06418 0.517812 1.77418L0.507812 6.38418C0.507812 6.88418 0.877812 7.31418 1.37781 7.37418L15.5078 9.26418L1.37781 11.1442C0.877812 11.2142 0.507812 11.6442 0.507812 12.1442L0.517812 16.7542C0.517812 17.4642 1.24781 17.9542 1.90781 17.6642Z"
+                                            fill="#0C0C0C" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

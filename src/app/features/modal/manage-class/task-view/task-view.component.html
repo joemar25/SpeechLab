@@ -1,0 +1,78 @@
+<div class="w-full h-full flex items-start justify-center">
+    <div (clickOutside)="close()" class="relative bg-background-tw p-6 px-8 rounded-lg h-fit 
+        w-full max-w-lg ml-[20%] mt-[5%] flex flex-col justify-evenly items-start">
+        <iconify-icon (click)="close()" class="text-secondary-tw hover:scale-75 duration-300 cursor-pointer absolute top-2 right-2 z-[100]"
+            icon="lets-icons:close-square-duotone" width="35" height="35">
+        </iconify-icon>
+
+        <div class="w-full h-full flex flex-col gap-4">
+            <h1 class="text-xl font-semibold pb-2">Turned In ({{taskId}})</h1>
+            <div class="w-full h-full min-h-fit max-h-32 p-2 border border-gray-700 rounded-lg">
+                <div
+                    class="w-full h-full min-h-fit max-h-32 pb-8 pt-4 grid grid-flow-col grid-rows-2 gap-8  custom-scrollbar overflow-x-auto">
+                    <!-- items -->
+                    <div class="flex flex-row w-fit justify-start items-center gap-2">
+                        <div class="w-12 h-12 bg-gray-300 rounded-lg">
+                        </div>
+                        <div class="flex flex-col">
+                            <h6 class="text-base font-semibold whitespace-nowrap">John Doe.pdf</h6>
+                            <p class="text-sm text-gray-600">PDF</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-fit justify-start items-center gap-2">
+                        <div class="w-12 h-12 bg-gray-300 rounded-lg">
+                        </div>
+                        <div class="flex flex-col">
+                            <h6 class="text-base font-semibold whitespace-nowrap">John Doe.pdf</h6>
+                            <p class="text-sm text-gray-600">PDF</p>
+                        </div>
+                    </div>
+                    <!-- end items -->
+                </div>
+            </div>
+            <div class="w-full h-fit">
+                <input type="text" placeholder="Enter grade out of 100"
+                    class="w-full p-2 bg-background-tw px-4 border border-gray-700 rounded-full focus:outline-secondary-tw">
+            </div>
+            <div class="w-full h-fit pb-4">
+                <p class="w-full h-full min-h-fit max-h-56 p-2 text-xs font-medium">Private Comment</p>
+                <div class="w-full min-h-fit max-h-56 px-4 overflow-y-auto custom-scrollbar flex flex-col p-2 gap-8">
+                    <div class="w-full flex flex-row justify-start items-start gap-2 relative">
+                        <img src="/assets/images/manage-class/profileicon.png" class="w-10 h-10 rounded-full" alt="">
+                        <div class="w-fit flex flex-col">
+                            <h1>John Doe</h1>
+                            <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius voluptatem
+                                sapiente placeat, quibusdam incidunt vel iure temporibus corrupti in facere maxime
+                                aspernatur error inventore repudiandae nostrum recusandae nesciunt facilis minus?</p>
+                        </div>
+                        <p class="text-xs absolute top-0 right-0">//Time here</p>
+                    </div>
+                    <div class="w-full flex flex-row justify-start items-start gap-2 relative">
+                        <img src="/assets/images/manage-class/profileicon.png" class="w-10 h-10 rounded-full" alt="">
+                        <div class="w-fit flex flex-col">
+                            <h1>John Doe</h1>
+                            <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius voluptatem
+                                sapiente placeat, quibusdam incidunt vel iure temporibus corrupti in facere maxime
+                                aspernatur error inventore repudiandae nostrum recusandae nesciunt facilis minus?</p>
+                        </div>
+                        <p class="text-xs absolute top-0 right-0">//Time here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex flex-row gap-2">
+                <img src="/assets/images/manage-class/profileicon.png" class="w-10 h-10 rounded-full" alt="">
+                <div class="w-full h-fit relative">
+                    <input type="text" placeholder="Enter comment here"
+                        class="w-full p-2 bg-background-tw px-4 pr-12 border border-gray-700 rounded-full focus:outline-secondary-tw">
+                        <button type="button">
+                            <svg  class="absolute top-3 right-4 cursor-pointer" width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.90781 17.6642L19.3578 10.1842C20.1678 9.83418 20.1678 8.69418 19.3578 8.34418L1.90781 0.864177C1.24781 0.574177 0.517812 1.06418 0.517812 1.77418L0.507812 6.38418C0.507812 6.88418 0.877812 7.31418 1.37781 7.37418L15.5078 9.26418L1.37781 11.1442C0.877812 11.2142 0.507812 11.6442 0.507812 12.1442L0.517812 16.7542C0.517812 17.4642 1.24781 17.9542 1.90781 17.6642Z"
+                                    fill="#0C0C0C" />
+                            </svg>
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

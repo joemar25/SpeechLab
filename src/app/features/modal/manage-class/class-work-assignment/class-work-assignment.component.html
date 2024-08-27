@@ -1,0 +1,57 @@
+<div class="w-full h-full flex items-center justify-center">
+    <div
+        class="relative bg-background-tw p-8 rounded-lg h-full w-full flex flex-col border border-gray-700 justify-evenly items-start">
+        <iconify-icon (click)="close()" class="cursor-pointer absolute top-2 right-2 z-[100]"
+            icon="lets-icons:close-square-duotone" width="35" height="35">
+        </iconify-icon>
+
+        <div class="w-full h-full flex flex-row gap-4">
+            <!-- Right panel-->
+            <div class="w-full h-full flex flex-col gap-4 pb-8  rounded-xl">
+                <div class="w-full flex flex-col gap-1.5">
+                    <label for="title" class="capitalize font-bold text-lg ml-1">Title</label>
+                    <input type="text" class="px-4 border bg-background-tw border-gray-700 rounded-2xl p-2 w-full">
+                </div>
+                <div class="w-full flex flex-col gap-1.5">
+                    <label for="points" class="capitalize font-bold text-lg ml-1">Instruction</label>
+                    <textarea
+                        class="px-4 border bg-background-tw border-gray-700 rounded-2xl p-2 w-full resize-none h-40"
+                        name="intstruction" id=""></textarea>
+                </div>
+                <div class="w-full flex flex-col gap-1.5">
+                    <label for="points" class="capitalize font-bold text-lg ml-1">Attach</label>
+                    <div
+                        class="px-4 border border-gray-700 rounded-2xl p-2 w-full resize-none h-40 bg-background-tw flex justify-center items-center">
+                        <div class="w-fit h-fit flex gap-4">
+                            <img class="w-12 h-12" src="/assets/images/manage-class/upload.png" alt="">
+                            <img class="w-12 h-12 cursor-pointer" src="/assets/images/manage-class/browse.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Left panel -->
+            <div class="w-fit h-full">
+                <div class="w-fit h-fit border border-gray-700 flex flex-col gap-4 pb-8 p-4 mt-8 rounded-xl">
+                    <div class="w-full flex flex-col gap-1.5">
+                        <label for="points" class="capitalize font-medium ml-1">Points</label>
+                        <input type="text" class="px-4 bg-background-tw border border-gray-700 rounded-2xl p-2 w-56">
+                    </div>
+                    <div class="w-full flex flex-col gap-1.5">
+                        <label for="points" class="capitalize font-medium ml-1">Due Date & Time</label>
+                        <input type="date" class="px-4 bg-background-tw border border-gray-700 rounded-2xl p-2 w-56">
+                        <input type="time" class="px-4 bg-background-tw border border-gray-700 rounded-2xl p-2 w-56">
+                    </div>
+                    <div class="w-full flex flex-row gap-1.5 px-1">
+                        <input type="checkbox" class="w-4 h-4 border border-gray-700 mt-1">
+                        <p class="text-sm">Close submission after due</p>
+                    </div>
+                    <div class="pt-4">
+                        <button
+                            class="bg-primary-tw py-2 w-full rounded-full text-primary-text-tw hover:bg-secondary-tw hover:scale-95 duration-300">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
