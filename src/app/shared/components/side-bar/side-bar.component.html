@@ -18,7 +18,11 @@
            class="relative flex items-center h-12 px-3">
         <div class="icon-container">
           <iconify-icon *ngIf="item.icon" [icon]="item.icon" class="icon-size"></iconify-icon>
-          <svg *ngIf="item.svgIcon" class="icon-size" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <svg *ngIf="item.svgIcon" 
+               [attr.viewBox]="item.svgIcon === 'meet-icon' ? '0 0 30 21' : '0 0 24 24'" 
+               [ngClass]="{'icon-size': item.svgIcon !== 'meet-icon', 'meet-icon-size': item.svgIcon === 'meet-icon'}"
+               fill="currentColor" 
+               xmlns="http://www.w3.org/2000/svg">
             <path [attr.d]="getSvgPath(item.svgIcon)" />
           </svg>
         </div>
