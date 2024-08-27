@@ -10,9 +10,12 @@ import { ManageSettingsService } from '../../../app-services/modal-services/mana
 import { ManageSettingsComponent } from '../modal/manage-settings/manage-settings.component';
 import { SuccessMessageComponent } from '../../shared/modal/success-message/success-message.component';
 import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.component';
+import { CommonModule } from '@angular/common';
+import { ChatComponent } from '../../shared/modal/chat/chat.component';
+import { SidebarServiceService } from '../../core/services/SidebarService/sidebar-service.service';
 
 @Component({
-  selector: 'app-admin-layout',
+  selector: 'app-teacher-layout',
   standalone: true,
   imports: [
     RouterModule,
@@ -22,8 +25,10 @@ import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.com
     ManageSettingsComponent,
     SuccessMessageComponent,
     NoChangesComponent,
+    CommonModule,
+    ChatComponent,
   ],
-  templateUrl: './admin-layout.component.html',
+  templateUrl: './admin-layout.component.html', 
   styleUrl: './admin-layout.component.css',
   animations: [
     trigger('fadeAnimation', [
@@ -39,39 +44,42 @@ import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.com
   ],
 })
 export class AdminLayoutComponent implements OnInit, OnDestroy {
-  private subscription: Subscription | undefined;
-  private settingsSubscription: Subscription | undefined;
-  private successSubscription!: Subscription;
+  private subscription: Subscription = new Subscription();
   notification: boolean = false;
   settings: boolean = false;
   success: boolean = false;
   noChanges: boolean = false;
+  isSidebarCollapsed = false;
+  isChatVisible: boolean = false;
 
   constructor(
     public notificationService: NotificationService,
-    private settingsModal: ManageSettingsService
+    private settingsModal: ManageSettingsService,
+    private sidebarService: SidebarServiceService
   ) {}
 
   ngOnInit() {
-    this.subscription = this.notificationService.notification$.subscribe(
-      (state) => (this.notification = state)
+    this.subscription.add(
+      this.notificationService.notification$.subscribe(
+        state => this.notification = state
+      )
     );
 
-    this.settingsSubscription = this.settingsModal.settings$.subscribe(
-      (state) => (this.settings = state) // Changed this line
+    this.subscription.add(
+      this.settingsModal.settings$.subscribe(
+        state => this.settings = state
+      )
+    );
+
+    this.subscription.add(
+      this.sidebarService.isCollapsed$.subscribe(
+        collapsed => this.isSidebarCollapsed = collapsed
+      )
     );
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    if (this.settingsSubscription) {
-      this.settingsSubscription.unsubscribe();
-    }
-    if (this.successSubscription) {
-      this.successSubscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 
   closeManageSettings() {
@@ -82,4 +90,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     this.notificationService.toggleNotification(false);
   }
 
+  toggleChatModal() {
+    this.isChatVisible = !this.isChatVisible;
+  }
 }
