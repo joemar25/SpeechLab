@@ -1,7 +1,7 @@
-<!-- course-details-modal.component.html -->
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <section class="flex pr-4 rounded-none max-md:pr-3">
-    <article class="flex flex-col grow shrink-0 -mr-10 bg-white rounded-2xl basis-0 min-h-[700px] max-md:max-w-full">
+    <article class="flex flex-col grow shrink-0 -mr-10 bg-white rounded-2xl basis-0 min-h-[700px] max-md:max-w-full ml-[16.5%] relative"> <!-- Added relative positioning -->
+      <iconify-icon (click)="closeModal()" class="absolute top-4 right-4 text-white cursor-pointer z-10" icon="carbon:close-filled" width="28" height="28"></iconify-icon>
       <header class="flex flex-col w-[940px] max-md:max-w-full">
         <img [src]="course?.imageUrl" alt="Cyber Security Course Banner" class="object-cover w-full h-64 rounded-t-2xl" />
         <div class="flex flex-col self-center mt-4 max-w-full w-[950px]">
@@ -22,7 +22,7 @@
                 <div class="flex flex-col self-stretch my-auto w-48 rounded-xl">
                   <input type="text" placeholder="Enter code here" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-800" />
                 </div>
-                <button [routerLink]="['/student/task/task-list']"  class="flex flex-col self-stretch my-auto text-sm font-medium text-center text-white rounded-xl w-[110px]">
+                <button class="flex flex-col self-stretch my-auto text-sm font-medium text-center text-white rounded-xl w-[110px]">
                   <span class="px-3 py-2 rounded-xl bg-slate-800 max-md:px-2">Enroll Now</span>
                 </button>
               </div>
@@ -81,6 +81,5 @@
         </div>
       </header>
     </article>
-    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/86c3432a359ecdf86ce9b98b4c391433d5e543a4ca3b613d41e21cff6c34a241?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea" alt="Decorative Icon" class="object-contain shrink-0 self-start mt-4 w-6 aspect-square" />
   </section>
 </div>

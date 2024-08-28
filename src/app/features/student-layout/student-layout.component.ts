@@ -12,6 +12,7 @@ import { SuccessMessageComponent } from '../../shared/modal/success-message/succ
 import { NoChangesComponent } from '../../shared/modal/no-changes/no-changes.component';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from '../../shared/modal/chat/chat.component';
+import { SidebarServiceService } from '../../core/services/SidebarService/sidebar-service.service';
 
 @Component({
   selector: 'app-student-layout',
@@ -27,7 +28,7 @@ import { ChatComponent } from '../../shared/modal/chat/chat.component';
     CommonModule,
     ChatComponent,
   ],
-  templateUrl: './student-layout.component.html',
+  templateUrl: './student-layout.component.html', 
   styleUrl: './student-layout.component.css',
   animations: [
     trigger('fadeAnimation', [
@@ -43,39 +44,42 @@ import { ChatComponent } from '../../shared/modal/chat/chat.component';
   ],
 })
 export class StudentLayoutComponent implements OnInit, OnDestroy {
-  private subscription: Subscription | undefined;
-  private settingsSubscription: Subscription | undefined;
-  private successSubscription!: Subscription;
+  private subscription: Subscription = new Subscription();
   notification: boolean = false;
   settings: boolean = false;
   success: boolean = false;
   noChanges: boolean = false;
+  isSidebarCollapsed = false;
+  isChatVisible: boolean = false;
 
   constructor(
     public notificationService: NotificationService,
-    private settingsModal: ManageSettingsService
+    private settingsModal: ManageSettingsService,
+    private sidebarService: SidebarServiceService
   ) {}
 
   ngOnInit() {
-    this.subscription = this.notificationService.notification$.subscribe(
-      (state) => (this.notification = state)
+    this.subscription.add(
+      this.notificationService.notification$.subscribe(
+        state => this.notification = state
+      )
     );
 
-    this.settingsSubscription = this.settingsModal.settings$.subscribe(
-      (state) => (this.settings = state) // Changed this line
+    this.subscription.add(
+      this.settingsModal.settings$.subscribe(
+        state => this.settings = state
+      )
+    );
+
+    this.subscription.add(
+      this.sidebarService.isCollapsed$.subscribe(
+        collapsed => this.isSidebarCollapsed = collapsed
+      )
     );
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    if (this.settingsSubscription) {
-      this.settingsSubscription.unsubscribe();
-    }
-    if (this.successSubscription) {
-      this.successSubscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 
   closeManageSettings() {
@@ -85,7 +89,6 @@ export class StudentLayoutComponent implements OnInit, OnDestroy {
   closeNotification() {
     this.notificationService.toggleNotification(false);
   }
-  isChatVisible: boolean = false;
 
   toggleChatModal() {
     this.isChatVisible = !this.isChatVisible;

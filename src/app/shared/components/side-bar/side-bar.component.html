@@ -1,68 +1,105 @@
-<div class="h-full w-[320px] duration-300 py-4 px-4 relative flex flex-col">
-  <div class="flex w-full justify-center items-center gap-3 px-2 mb-6">
-    <img
-      src="assets/logo/CATSU_Logo.png"
-      class="w-[70px] h-[70px] rounded-xl"
-      alt="Logo"
-    />
-    <div class="flex flex-col">
-      <p class="font-semibold text-base text-secondary-tw">
-        Catanduanes State University
-      </p>
+<div class="fixed top-0 left-0 h-screen z-50 transition-all duration-300 bg-[var(--color-primary)] shadow-lg scroll-none overflow-y-auto"
+     [ngClass]="isCollapsed ? 'w-20' : 'w-64'">
+  <div class="w-full h-full flex flex-col justify-between items-center py-4 px-2">
+    <div class="flex w-full justify-center items-center gap-3 mb-8">
+      <div class="w-12 h-12 flex-shrink-0"> <!-- Increased size for logo container -->
+        <img src="assets/logo/CATSU_Logo.png" class="w-full h-full object-contain rounded-xl" alt="Logo" />
+      </div>
+      <div [ngClass]="getTextClasses()">
+        <p class="font-semibold text-base text-white">Catanduanes State University</p>
+      </div>
     </div>
-  </div>
 
-  <div class="w-full flex flex-col gap-1 mb-auto">
-    <div
-      *ngFor="let item of currentMenu"
+    <div class="w-full flex flex-col gap-2 mb-auto">
+      <div *ngFor="let item of currentMenu"
       [routerLink]="item.route"
       [routerLinkActive]="'active-route'"
-      class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer"
-    >
-      <iconify-icon
-        *ngIf="item.icon"
-        [icon]="item.icon"
-        width="20"
-        height="20"
-      ></iconify-icon>
-      <svg
-        *ngIf="item.svgIcon"
-        width="20"
-        height="20"
-        viewBox="0 0 31 31"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path [attr.d]="getSvgPath(item.svgIcon)" />
-      </svg>
-      <p class="font-medium duration-300 text-base">
-        {{ item.label }}
-      </p>
+      [ngClass]="getMenuItemClasses()"
+      class="relative flex items-center h-12 px-3">
+   <div class="icon-container">
+     <iconify-icon *ngIf="item.icon" 
+                   [icon]="item.icon" 
+                   [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'"
+                   class="icon-size"
+     ></iconify-icon>
+     <ng-container *ngIf="item.svgIcon">
+       <svg *ngIf="item.svgIcon !== 'speech-analyzer-icon'" 
+            [attr.viewBox]="item.svgIcon === 'meet-icon' ? '0 0 30 21' : '0 0 24 24'" 
+            [ngClass]="{'icon-size': item.svgIcon !== 'meet-icon', 'meet-icon-size': item.svgIcon === 'meet-icon'}"
+            [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'"
+            fill="currentColor" 
+            xmlns="http://www.w3.org/2000/svg">
+         <path [attr.d]="getSvgPath(item.svgIcon)" />
+       </svg>
+       <svg *ngIf="item.svgIcon === 'speech-analyzer-icon'" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="icon-size"
+            [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'">
+         <g id="SVGRepo_iconCarrier">
+           <defs>
+             <style>
+               .cls-1, .cls-3 { fill: currentColor; }
+               .cls-2 { fill: none; }
+             </style>
+           </defs>
+           <title>Icon_24px_SpeechtoText_Color</title>
+           <g data-name="Product Icons">
+             <g data-name="colored-32/speech">
+               <rect class="cls-1" x="11" y="2" width="2" height="20"></rect>
+               <rect class="cls-2" width="24" height="24"></rect>
+               <g>
+                 <rect id="Rectangle-path-2" data-name="Rectangle-path" class="cls-1" x="7" y="8" width="2" height="8"></rect>
+                 <rect id="Rectangle-path-3" data-name="Rectangle-path" class="cls-1" x="15" y="8" width="2" height="8"></rect>
+                 <rect id="Rectangle-path-4" data-name="Rectangle-path" class="cls-1" x="3" y="5" width="2" height="14"></rect>
+                 <rect id="Rectangle-path-5" data-name="Rectangle-path" class="cls-1" x="19" y="5" width="2" height="14"></rect>
+                 <rect id="Rectangle-path-6" data-name="Rectangle-path" class="cls-3" x="11" y="2" width="2" height="10"></rect>
+                 <rect id="Rectangle-path-7" data-name="Rectangle-path" class="cls-3" x="7" y="8" width="2" height="4"></rect>
+                 <rect id="Rectangle-path-8" data-name="Rectangle-path" class="cls-3" x="15" y="8" width="2" height="4"></rect>
+                 <rect id="Rectangle-path-9" data-name="Rectangle-path" class="cls-3" x="3" y="5" width="2" height="7"></rect>
+                 <rect id="Rectangle-path-10" data-name="Rectangle-path" class="cls-3" x="19" y="5" width="2" height="7"></rect>
+               </g>
+             </g>
+           </g>
+         </g>
+       </svg>
+     </ng-container>
+   </div>
+   <p [ngClass]="getTextClasses()" 
+      class="font-medium text-base whitespace-nowrap ml-3"
+      [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'">
+     {{ item.label }}
+   </p>
+   <div class="active-indicator"></div>
+ </div>
     </div>
-  </div>
 
-  <div class="w-full mt-auto">
-    <div class="font-semibold uppercase glassmorphism pl-2 duration-300">
-      Others
-    </div>
-    <div class="flex flex-col gap-1">
-      <div
-        *ngFor="let item of othersMenu"
-        [routerLink]="item.route"
-        (click)="item.label === 'Sign Out' ? signOut() : null"
-        class="glassmorph flex justify-start items-center gap-2 pl-5 font-[450] p-3 rounded-lg cursor-pointer"
-      >
-        <iconify-icon
-          *ngIf="item.icon"
-          [icon]="item.icon"
-          [class.rotate-180]="item.label === 'Sign Out'"
-          width="20"
-          height="20"
-        ></iconify-icon>
-        <p class="font-medium duration-300 text-base">
-          {{ item.label }}
-        </p>
+    <div class="w-full mt-auto">
+      <div [ngClass]="getTextClasses()" class="font-semibold uppercase glassmorphism px-2 py-1 mb-2 text-center">Others</div>
+      <div class="flex flex-col gap-2">
+        <div *ngFor="let item of othersMenu"
+             [routerLink]="item.route"
+             (click)="item.label === 'Sign Out' ? signOut() : null"
+             [ngClass]="getMenuItemClasses()"
+             class="relative flex items-center h-12 px-3">
+          <div class="icon-container">
+            <iconify-icon *ngIf="item.icon" [icon]="item.icon" [class.rotate-180]="item.label === 'Sign Out'" class="icon-size"></iconify-icon>
+          </div>
+          <p [ngClass]="getTextClasses()" class="font-medium text-base whitespace-nowrap ml-3">{{ item.label }}</p>
+          <div class="active-indicator"></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Adjusted collapse button -->
+  <button (click)="toggleSidebar()"
+          class="fixed top-7 bg-[var(--color-secondary)] rounded-full p-1 shadow-md focus:outline-none hover:brightness-90 z-[9999] transition-all duration-300"
+          [ngClass]="{'left-[calc(5rem-8px)]': isCollapsed, 'left-[calc(16rem-8px)]': !isCollapsed}">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white transition-transform duration-300 ease-in-out"
+         [ngClass]="{'rotate-180': isCollapsed}"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
 </div>
