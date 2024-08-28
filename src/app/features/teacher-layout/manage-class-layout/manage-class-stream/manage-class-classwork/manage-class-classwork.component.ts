@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
 import { ClassworkViewTaskComponent } from '../../../../modal/manage-class/classwork-view-task/classwork-view-task.component';
 import { ClassworkViewQuizComponent } from '../../../../modal/manage-class/classwork-view-quiz/classwork-view-quiz.component';
 import { ManageClassService, ModalState } from '../../../../../../app-services/manage-class/manage-class.service';
-import { Router } from 'express';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-class-classwork',
