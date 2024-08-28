@@ -17,7 +17,7 @@
                             width="20" height="20"></iconify-icon>
                         @if (dropDown[item.id]) {
                         <div @fadeAnimation (clickOutside)="closeDropdown(item.id)"
-                            class="absolute z-[100] right-6 top-0 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            class="absolute z-[1000] right-6 top-0 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-2 relative px-2" role="none">
                                 <div routerLink="/teacher/manage-courses/course-preview/course/{{item.id}}"

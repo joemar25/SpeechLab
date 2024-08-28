@@ -12,7 +12,7 @@ module.exports = {
 
         'bg-tw': '#F3F7FC',
 
-        'primary-tint-tw': '#92B1F5',
+        'primary-tint-tw': '#4A789C',
         'secondary-tint-tw': '#EDB53B',
         
 

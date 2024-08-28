@@ -37,8 +37,8 @@
 
 <!-- Create and edit -->
 @if (currentModal === ModalState.CreateCourse) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
-    <div class="flex justify-center items-center z-[500] w-full h-full">
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
         <div class="w-full h-full">
             <app-course-create (closeModal)="closeCreateModal()"></app-course-create>
         </div>
@@ -48,8 +48,8 @@
 
 <!-- Publish Confirmation -->
 @if (currentModal === ModalState.PublishCourseConfirmation) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
-    <div class="flex justify-center items-center z-[500] w-full h-full">
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
         <div class="w-full h-full">
             <app-course-publish-course (closeModal)="close()"></app-course-publish-course>
         </div>
@@ -59,8 +59,8 @@
 
 <!-- Drafts -->
 @if (currentModal === ModalState.SaveDraftConfirmation) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
-    <div class="flex justify-center items-center z-[500] w-full h-full">
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
         <div class="w-full h-full">
             <app-course-save-as-draft (closeModal)="close()"></app-course-save-as-draft>
         </div>
@@ -70,8 +70,8 @@
 
 <!-- Delete -->
 @if (currentModal === ModalState.DeleteCourseConfirmation) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
-    <div class="flex justify-center items-center z-[500] w-full h-full">
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
         <div class="w-full h-full">
             <app-course-delete (closeModal)="close()"></app-course-delete>
         </div>

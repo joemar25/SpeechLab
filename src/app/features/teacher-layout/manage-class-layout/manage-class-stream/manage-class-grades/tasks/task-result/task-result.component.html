@@ -1,4 +1,4 @@
-<div class="h-full w-full relative px-6">
+<div class="h-full w-full relative pr-6">
     <!-- Table Container -->
     <div class="w-full h-full bg-white rounded-lg overflow-hidden flex flex-col">
         <table class="w-full bg-white rounded-lg table-fixed">
@@ -17,14 +17,14 @@
                 <tbody class="divide-y divide-gray-200">
                     <tr *ngFor="let task of taskList" class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-left">{{ task.name }}</td>
-                        <td class="px-6 py-4 text-left">{{ task.date }}</td>
+                        <td class="px-6 py-4 text-left text-primary-tint-tw">{{ task.date }}</td>
                         <td class="px-6 py-4 text-left">
                             <span class="inline-block px-4 py-1 text-center text-white rounded-full w-36"
                                 [ngClass]="{'bg-green-500': task.status === 'Turned in', 'bg-red-500': task.status === 'Not submitted'}">
                                 {{ task.status }}
                             </span>
                         </td>
-                        <td class=" px-6 py-4 text-left">{{ task.grade }}</td>
+                        <td class=" px-6 py-4 text-left text-primary-tint-tw">{{ task.grade }}</td>
                         <td class="w-32 px-6 py-4 text-left">
                             <span class="w-4 h-4 rounded-sm cursor-pointer">
                                 <p (click)="openModal(task.id, $event)"
@@ -40,8 +40,8 @@
 </div>
 
 @if (selectedTaskId != null) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full background">
-    <div class="flex justify-center items-center z-[100] w-full h-full">
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
         <div class="w-full h-full">
             <app-task-view [taskId]="selectedTaskId"  (closeModal)="closeModal()"></app-task-view>
         </div>

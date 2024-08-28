@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../../../shared/directives/click-outside.directive';
 
 interface Question {
   text: string;
@@ -9,11 +10,12 @@ interface Question {
 @Component({
   selector: 'app-course-create-survey',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ClickOutsideDirective],
   templateUrl: './course-create-survey.component.html',
   styleUrl: './course-create-survey.component.css'
 })
 export class CourseCreateSurveyComponent {
+  @Output () close = new EventEmitter<void>();
   formTitle = '';
   formDescription = '';
   questions: Question[] = [];
@@ -47,7 +49,6 @@ export class CourseCreateSurveyComponent {
   }
 
   cancel() {
-    // Implement cancel logic here
-    console.log('Form cancelled');
+    this.close.emit();
   }
 }

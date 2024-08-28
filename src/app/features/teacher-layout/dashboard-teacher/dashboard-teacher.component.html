@@ -105,7 +105,7 @@
 
 <!-- modals -->
 @if (showChatModal) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
+<div @fadeAnimation class="fixed top-0 left-0 z-[1000] w-full h-full background">
   <div class="flex justify-center items-center h-fit w-fit ">
     <app-modal-chat (close)="closeChatModal()"></app-modal-chat>
   </div>
@@ -114,8 +114,8 @@
 
 
 @if (showAlertModal) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
-  <div class="flex justify-center items-center z-[100] h-full w-full">
+<div @fadeAnimation class="fixed top-0 left-0 z-[1000] w-full h-full background">
+  <div class="flex justify-center items-center z-[1000] h-full w-full">
     <app-modal-alert (clickAlert)="closeAlertModal()"></app-modal-alert>
   </div>
 </div>
@@ -123,8 +123,8 @@
 
 
 @if (showBroadcastModal) {
-<div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full background">
-  <div class="flex justify-center items-center z-[100] h-full w-full">
+<div @fadeAnimation class="fixed top-0 left-0 z-[1000] w-full h-full background">
+  <div class="flex justify-center items-center z-[1000] h-full w-full">
     <app-modal-broadcast (clickAlert)="closeBroadcastModal()"></app-modal-broadcast>
   </div>
 </div>

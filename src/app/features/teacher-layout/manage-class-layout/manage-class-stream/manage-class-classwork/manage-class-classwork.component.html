@@ -1,7 +1,7 @@
 <div class="w-full h-full relative ">
     <div class="w-full h-full flex flex-col gap-4 justify-center items-center">
         <div class="w-full h-full flex flex-col justify-center items-center gap-4 ">
-            <div class="w-full  h-fit overflow-visible relative justify-end items-center flex px-6">
+            <div class="w-full  h-fit overflow-visible relative justify-end items-center flex">
                 <button (click)="showDropDown(1, $event)" class="w-36 capitalize bg-primary-tw rounded-lg text-primary-text-tw py-1.5
                  hover:bg-secondary-tw flex flex-row justify-center items-center duration-300">
                     <iconify-icon icon="tdesign:plus" width="25" height="25"></iconify-icon> create class
@@ -10,7 +10,7 @@
                 <div @fadeAnimation (clickOutside)="closeDropDown()"
                     class="absolute top-10 right-6 w-56 bg-white rounded-lg shadow-lg overflow-hidden z-50 border py-4 px-4 border-gray-200">
                     @for (item of dropDownList; track $index) {
-                    <button (click)="openModal(item.id, $event)"
+                    <button (click)="openModal(dropDownList[$index], $index)"
                         class="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-200 hover:text-secondary-tw">
                         {{item.name}}
                     </button>
@@ -19,7 +19,7 @@
                 }
             </div>
             <div class="w-full h-full custom-scrollbar flex flex-col gap-4 overflow-y-auto justify-center items-center">
-                <div class="w-full h-full  flex flex-col gap-2 px-6">
+                <div class="w-full h-full  flex flex-col gap-2">
                     <!-- items -->
                     @for (work of classWork; track $index) {
                     <div
@@ -52,27 +52,24 @@
         </div>
 
     </div>
-</div>
-
-@if (currentModal === ModalState.CreateTask) {
-    <div @fadeAnimation class="fixed top-0 left-0 z-[100] w-full h-full">
+    @if (currentModal === ModalState.CreateTask) {
+    <div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full">
         <div class="flex justify-center items-center z-[100] w-full h-full">
             <div class="w-full h-full">
-                @if (selectedId === 1) {
-                    <app-class-work-assignment (closeModal)="closeModal()"></app-class-work-assignment>
-                } @else if (selectedId === 2) {
-                    <app-class-work-quiz (closeModal)="closeModal()"></app-class-work-quiz>
-                } @else {
-                    <app-class-work-evaluation (closeModal)="closeModal()"></app-class-work-evaluation>
+                @if (selectedIndex === 0) {
+                <app-class-work-assignment (closeModal)="closeModal()"></app-class-work-assignment>
+                } @else if (selectedIndex === 1) {
+                <app-class-work-quiz (closeModal)="closeModal()"></app-class-work-quiz>
+                } @else if (selectedIndex === 2) {
+                <app-class-work-evaluation (closeModal)="closeModal()"></app-class-work-evaluation>
                 }
             </div>
         </div>
     </div>
-}
-
-  <!-- @if (selectedTaskId !== null) {
-    <div @fadeAnimation class="absolute top-0 left-0 z-[100] w-full h-full">
-        <div class="flex justify-center items-center z-[100] w-full h-full">
+    }
+    @if (selectedTaskId !== null) {
+    <div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full">
+        <div class="flex justify-center items-center z-[1000] w-full h-full">
             <div class="w-full h-full">
                 @if (selectedTaskId === 1) {
                 <app-class-work-assignment (closeModal)="closeTaskModal()"></app-class-work-assignment>
@@ -87,4 +84,16 @@
             </div>
         </div>
     </div>
-    } -->
+    }
+    <!-- need to be relative to make the modal appear inside the body -->
+</div>
+
+@if (selectedTaskId !== null) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
+        <div class="w-full h-full">
+            <app-delete-class (closeModal)="closeTaskModal()"></app-delete-class>
+        </div>
+    </div>
+</div>
+}

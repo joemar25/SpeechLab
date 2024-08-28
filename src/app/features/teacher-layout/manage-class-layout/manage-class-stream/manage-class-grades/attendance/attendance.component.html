@@ -1,4 +1,4 @@
-<div class="h-full w-full relative px-6">
+<div class="h-full w-full relative pr-6">
     <!-- Table Container -->
     <div class="w-full h-full bg-white rounded-lg overflow-hidden flex flex-col">
         <table class="w-full bg-white rounded-lg table-fixed">
@@ -17,8 +17,8 @@
                 <tbody class="divide-y divide-gray-200">
                     <tr *ngFor="let task of attendanceList" class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-left">{{ task.name }}</td>
-                        <td class="px-6 py-4 text-left">{{ task.date }}</td>
-                        <td class=" px-6 py-4 text-left">{{ task.time }}</td>
+                        <td class="px-6 py-4 text-left text-primary-tint-tw">{{ task.date }}</td>
+                        <td class=" px-6 py-4 text-left text-primary-tint-tw">{{ task.time }}</td>
                         <td class="px-6 py-4 text-left capitalize">
                             <span class="inline-block px-4 py-1 text-center text-white rounded-full w-36"
                                 [ngClass]="{'bg-green-500': task.status === 'present', 'bg-red-500': task.status === 'absent'}">

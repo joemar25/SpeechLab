@@ -10,6 +10,7 @@ import { ClassworkViewQuizComponent } from '../../../../modal/manage-class/class
 import { ManageClassService, ModalState } from '../../../../../../app-services/manage-class/manage-class.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { DeleteClassComponent } from "../../../../modal/manage-class/delete-class/delete-class.component";
 
 @Component({
   selector: 'app-manage-class-classwork',
@@ -21,8 +22,9 @@ import { Router } from '@angular/router';
     ClassWorkQuizComponent,
     ClassworkViewTaskComponent,
     ClassworkViewQuizComponent,
-    CommonModule
-  ],
+    CommonModule,
+    DeleteClassComponent
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './manage-class-classwork.component.html',
   styleUrl: './manage-class-classwork.component.css',
@@ -39,12 +41,12 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-export class ManageClassClassworkComponent implements OnInit, OnDestroy{
+export class ManageClassClassworkComponent implements OnInit, OnDestroy {
   public ModalState = ModalState;
   currentModal: ModalState = ModalState.None;
   private subscription!: Subscription;
   selectedId: any | null = null;
-  
+
   constructor(
     private router: Router,
     private manageClassService: ManageClassService
@@ -53,7 +55,6 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscription = this.manageClassService.settings$.subscribe(state => {
       this.currentModal = state;
-      this.selectedId = state;
     });
   }
 
@@ -63,12 +64,19 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy{
     }
   }
 
+  //Create task
+  selectedIndex: number | null = null;
+  openModal(item: { id: string; name: string }, index: number) {
+    this.manageClassService.toggleSettings(ModalState.CreateTask);
+    this.selectedIndex = index;
+  }
+
   closeModal() {
     this.manageClassService.toggleSettings(ModalState.None);
   }
   // isActive: boolean = false;
   dropDown: any | null = null;
-  
+
   showDropDown(id: any, event: Event) {
     event.preventDefault();
     this.dropDown = id;
@@ -79,12 +87,6 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy{
     // this.isActive = false
   }
 
-  //Create task
-  openModal(id: number, event: Event) {
-    this.manageClassService.toggleSettings(id);
-    this.selectedId = id;
-    console.log(this.selectedId, id);
-  }
 
   //Task modal
   quiz: string = 'quiz';
@@ -96,12 +98,12 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy{
 
     if (work.status === 'task' && item === 1) {
       this.selectedTaskId = 1;
-    }else if (work.status === 'task' && item === 2) {
+    } else if (work.status === 'task' && item === 2) {
       this.selectedTaskId = 3;
     }//
-     else if (work.status === 'quiz' && item === 1) {
+    else if (work.status === 'quiz' && item === 1) {
       this.selectedTaskId = 2;
-    }else if (work.status === 'quiz' && item === 2) {
+    } else if (work.status === 'quiz' && item === 2) {
       this.selectedTaskId = 4;
     }
   }
@@ -109,21 +111,21 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy{
   closeTaskModal() {
     this.selectedTaskId = null;
   }
-  
+
   classWork = [
-    { id: '1asd', name: 'Task', due: 'August 22, 2022 11:59 PM', status: 'task'},
+    { id: '1asd', name: 'Task', due: 'August 22, 2022 11:59 PM', status: 'task' },
     { id: '2asd', name: 'Quiz', due: 'August 22, 2022 11:59 PM', status: 'quiz' },
   ]
 
   dropDownList = [
-    { id: 1, name: 'Assignment'},
-    { id: 2, name: 'Quiz' },
-    { id: 3, name: 'Evaluation'},
+    { id: 'wwerafasdf', name: 'Assignment' },
+    { id: 'asdfasdfadf', name: 'Quiz' },
+    { id: 'asdfasdfasdf', name: 'Evaluation' },
   ]
 
   actionList = [
-    { id: 1, name: 'Edit'},
-    { id: 2, name: 'View'},
-    { id: 3, name: 'Delete'},
+    { id: 1, name: 'Edit' },
+    { id: 2, name: 'View' },
+    { id: 3, name: 'Delete' },
   ]
 }
