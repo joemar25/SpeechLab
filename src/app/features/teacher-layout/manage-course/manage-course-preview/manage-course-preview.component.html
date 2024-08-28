@@ -1,0 +1,30 @@
+<div class="w-full h-full flex flex-col py-4 gap-4">
+    <div class="w-full h-fit px-6">
+        <button (click)="goBack()"
+            class="bg-primary-tw py-1 w-24 rounded-full text-primary-text-tw hover:bg-secondary-tw duration-300">Back</button>
+    </div>
+    <div class="w-full h-full overflow-y-auto custom-scrollbar">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<!-- Modal for Certificate -->
+@if (currentModal === ModalState.Certificate) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
+    <div class="flex justify-center items-center z-[1000] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-certificate (clickOutside)="close()" (closeModal)="close()"></app-course-certificate>
+        </div>
+    </div>
+</div>
+}
+
+@if (currentModal === ModalState.Survey) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
+    <div class="flex justify-center items-center z-[500] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-create-survey (clickOutside)="close()" (closeModal)="close()"></app-course-create-survey>
+        </div>
+    </div>
+</div>
+}

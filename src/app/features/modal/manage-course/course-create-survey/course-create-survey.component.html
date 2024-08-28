@@ -1,0 +1,46 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl">
+        <h2 class="text-2xl font-bold mb-4">
+            {{ formTitle || 'Untitled Form' }}
+        </h2>
+        <input [(ngModel)]="formTitle" placeholder="Form title" class="w-full p-2 mb-4 border rounded" />
+        <textarea [(ngModel)]="formDescription" placeholder="Form description"
+            class="w-full p-2 mb-4 border rounded h-24"></textarea>
+
+        @for (question of questions; track question) {
+        <div class="mb-4 p-4 border rounded">
+            <p class="font-bold">{{ question.text }}</p>
+            <p class="text-sm text-gray-500">Type: {{ question.type }}</p>
+        </div>
+        }
+
+        @if (showQuestionForm) {
+        <div class="mb-4 p-4 border rounded">
+            <input [(ngModel)]="newQuestion.text" placeholder="Question" class="w-full p-2 mb-2 border rounded" />
+            <select [(ngModel)]="newQuestion.type" class="w-full p-2 mb-2 border rounded">
+                <option value="paragraph">Paragraph</option>
+                <option value="short-answer">Short answer</option>
+            </select>
+            <button (click)="saveQuestion()" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">
+                Save Question
+            </button>
+            <button (click)="cancelQuestion()" class="bg-gray-300 px-4 py-2 rounded">
+                Cancel
+            </button>
+        </div>
+        } @else {
+        <button (click)="addQuestion()" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+            Add Question
+        </button>
+        }
+
+        <div class="flex justify-end">
+            <button (click)="cancel()" class="bg-gray-300 px-4 py-2 rounded mr-2">
+                Cancel
+            </button>
+            <button (click)="save()" class="bg-blue-500 text-white px-4 py-2 rounded">
+                Save
+            </button>
+        </div>
+    </div>
+</div>

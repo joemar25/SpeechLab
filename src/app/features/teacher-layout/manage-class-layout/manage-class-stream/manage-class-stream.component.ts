@@ -1,6 +1,8 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { ManageClassService, ModalState } from '../../../../../app-services/manage-class/manage-class.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-class-stream',
@@ -23,13 +25,15 @@ import { Router, RouterModule } from '@angular/router';
   ],
 })
 export class ManageClassStreamComponent {
-
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+  ){}
+
+
   goBack() {
     this.router.navigate(['/teacher/manage-class']);
   }
+
   activeRoutes = [
     {
       link: '/teacher/manage-class/manage-class-stream/manage-class-classwork',

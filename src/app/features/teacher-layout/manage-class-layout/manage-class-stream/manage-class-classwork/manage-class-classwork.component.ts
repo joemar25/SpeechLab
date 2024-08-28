@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ClassWorkAssignmentComponent } from '../../../../modal/manage-class/class-work-assignment/class-work-assignment.component';
@@ -7,6 +7,9 @@ import { ClassWorkQuizComponent } from '../../../../modal/manage-class/class-wor
 import { CommonModule } from '@angular/common';
 import { ClassworkViewTaskComponent } from '../../../../modal/manage-class/classwork-view-task/classwork-view-task.component';
 import { ClassworkViewQuizComponent } from '../../../../modal/manage-class/classwork-view-quiz/classwork-view-quiz.component';
+import { ManageClassService, ModalState } from '../../../../../../app-services/manage-class/manage-class.service';
+import { Router } from 'express';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-class-classwork',
@@ -36,7 +39,33 @@ import { ClassworkViewQuizComponent } from '../../../../modal/manage-class/class
     ]),
   ],
 })
-export class ManageClassClassworkComponent {
+export class ManageClassClassworkComponent implements OnInit, OnDestroy{
+  public ModalState = ModalState;
+  currentModal: ModalState = ModalState.None;
+  private subscription!: Subscription;
+  selectedId: any | null = null;
+  
+  constructor(
+    private router: Router,
+    private manageClassService: ManageClassService
+  ) { }
+
+  ngOnInit(): void {
+    this.subscription = this.manageClassService.settings$.subscribe(state => {
+      this.currentModal = state;
+      this.selectedId = state;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  closeModal() {
+    this.manageClassService.toggleSettings(ModalState.None);
+  }
   // isActive: boolean = false;
   dropDown: any | null = null;
   
@@ -51,13 +80,10 @@ export class ManageClassClassworkComponent {
   }
 
   //Create task
-  selectedAssignmentId: number | null = null;
   openModal(id: number, event: Event) {
-    event.preventDefault();
-    this.selectedAssignmentId = id;
-  }
-  closeModal() {
-    this.selectedAssignmentId = null;
+    this.manageClassService.toggleSettings(id);
+    this.selectedId = id;
+    console.log(this.selectedId, id);
   }
 
   //Task modal

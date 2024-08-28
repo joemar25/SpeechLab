@@ -49,6 +49,15 @@ import { QuizResultComponent } from './features/teacher-layout/manage-class-layo
 import { QuizDashboardComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/quiz/quiz-dashboard/quiz-dashboard.component';
 import { TaskDashboardComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/tasks/task-dashboard/task-dashboard.component';
 import { TaskResultComponent } from './features/teacher-layout/manage-class-layout/manage-class-stream/manage-class-grades/tasks/task-result/task-result.component';
+import { ManageCoursePreviewComponent } from './features/teacher-layout/manage-course/manage-course-preview/manage-course-preview.component';
+import { AdvancedComponent } from './features/teacher-layout/manage-course/manage-courses-layout/advanced/advanced.component';
+import { AllCoursesComponent } from './features/teacher-layout/manage-course/manage-courses-layout/all-courses/all-courses.component';
+import { BeginnerComponent } from './features/teacher-layout/manage-course/manage-courses-layout/beginner/beginner.component';
+import { IntermediateComponent } from './features/teacher-layout/manage-course/manage-courses-layout/intermediate/intermediate.component';
+import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-course/manage-courses-layout/manage-courses-layout.component';
+import { CoursePreviewComponent } from './features/teacher-layout/manage-course/manage-course-preview/course-preview/course-preview.component';
+import { ManageCourseComponent } from './features/teacher-layout/manage-course/manage-course.component';
+
 
 export const routes: Routes = [
   {
@@ -130,6 +139,26 @@ export const routes: Routes = [
           },
         ],
       },
+      { path: 'manage-courses', component: ManageCourseComponent,
+        children: [
+          { path: '', component: ManageCoursesLayoutComponent,
+            children: [
+              { pathMatch: 'full', path: '', redirectTo: 'all-courses' },
+              { path: 'all-courses', component: AllCoursesComponent },
+              { path: 'advanced', component: AdvancedComponent },
+              { path: 'beginner', component: BeginnerComponent },
+              { path: 'intermediate', component: IntermediateComponent },
+            ],
+           },
+           { path: 'course-preview', component: ManageCoursePreviewComponent,
+            children: [
+              { pathMatch: 'full', path: '', redirectTo: 'course/:id' },
+              { path: 'course/:id', component: CoursePreviewComponent },
+            ]
+           },
+           { pathMatch: 'full', path: '', redirectTo: 'all-courses' },
+        ]
+      },
     ],
   },
   {
@@ -158,6 +187,7 @@ export const routes: Routes = [
       { path: 'video-conference', component: VideoConferenceComponent },
     ],
   },
+  
   // Admin routes
   {
     path: 'admin',

@@ -1,0 +1,81 @@
+<div class="h-full w-full relative py-6">
+    <div class="h-full w-full flex flex-col">
+        <div class="w-full h-fit flex justify-between items-center">
+            <div class="w-full h-fit flex flex-row gap-4 px-6">
+                <button routerLink="/teacher/manage-courses/all-courses" routerLinkActive="active-route"
+                    class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw">All courses</button>
+                <button routerLink="/teacher/manage-courses/beginner" routerLinkActive="active-route"
+                    class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw">Beginner</button>
+                <button routerLink="/teacher/manage-courses/intermediate" routerLinkActive="active-route"
+                    class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw">Intermediate</button>
+                <button routerLink="/teacher/manage-courses/advanced" routerLinkActive="active-route"
+                    class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw">Advanced</button>
+            </div>
+            <div class="flex justify-center items-center gap-4 px-6">
+                <button (click)="openCreateModal()"
+                    class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw flex justify-center items-center gap-2 capitalize">
+                    <iconify-icon icon="system-uicons:plus" width="25" height="25"></iconify-icon>
+                    create
+                </button>
+                <!-- //dorpdown here -->
+                <div class="w-fit">
+                    <button
+                        class="w-28 py-1 rounded-md bg-primary-tw text-primary-text-tw flex justify-center items-center gap-2 capitalize">
+                        drafts
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-full overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modals -->
+
+<!-- Create and edit -->
+@if (currentModal === ModalState.CreateCourse) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
+    <div class="flex justify-center items-center z-[500] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-create (closeModal)="closeCreateModal()"></app-course-create>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Publish Confirmation -->
+@if (currentModal === ModalState.PublishCourseConfirmation) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
+    <div class="flex justify-center items-center z-[500] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-publish-course (closeModal)="close()"></app-course-publish-course>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Drafts -->
+@if (currentModal === ModalState.SaveDraftConfirmation) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
+    <div class="flex justify-center items-center z-[500] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-save-as-draft (closeModal)="close()"></app-course-save-as-draft>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Delete -->
+@if (currentModal === ModalState.DeleteCourseConfirmation) {
+<div @fadeAnimation class="absolute top-0 left-0 z-[500] w-full h-full background">
+    <div class="flex justify-center items-center z-[500] w-full h-full">
+        <div class="w-full h-full">
+            <app-course-delete (closeModal)="close()"></app-course-delete>
+        </div>
+    </div>
+</div>
+}
+

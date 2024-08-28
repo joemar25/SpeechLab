@@ -1,19 +1,21 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { CreateClassComponent } from "../../../modal/manage-class/create-class/create-class.component";
 import { RouterModule } from '@angular/router';
 import { ClickOutsideDirective } from '../../../../shared/directives/click-outside.directive';
 import { DeleteClassComponent } from '../../../modal/manage-class/delete-class/delete-class.component';
+import { ManageClassService, ModalState } from '../../../../../app-services/manage-class/manage-class.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manage-class-dashboard',
   standalone: true,
   imports: [
-    CommonModule, 
-    CreateClassComponent, 
-    DeleteClassComponent, 
-    RouterModule, 
+    CommonModule,
+    CreateClassComponent,
+    DeleteClassComponent,
+    RouterModule,
     ClickOutsideDirective
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,20 +34,44 @@ import { DeleteClassComponent } from '../../../modal/manage-class/delete-class/d
     ]),
   ],
 })
-export class ManageClassDashboardComponent {
+export class ManageClassDashboardComponent implements OnInit, OnDestroy {
+  public ModalState = ModalState;
+  currentModal: ModalState = ModalState.None;
+  private subscription!: Subscription;
+
+  constructor(
+    private manageClassService: ManageClassService
+  ) { }
+
+  ngOnInit(): void {
+    this.subscription = this.manageClassService.settings$.subscribe(state => {
+      this.currentModal = state;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+
   actionList = [
-    { id: 1, name: 'Edit'},
-    { id: 2, name: 'Delete'},
+    { id: 1, name: 'Edit' },
+    { id: 2, name: 'Delete' },
   ]
 
   // Action modal
-  selectedModal: any | null = null
-  openModal(item:any){
-    this.selectedModal  = item.id
-  } 
-  closeSelectedModal(){
-    this.selectedModal = null;
+  selectedId: any | null = null;
+  openModal(item: { id: any; name: string }) {
+    this.manageClassService.toggleSettings(item.id);
+    this.selectedId = item.id;
   }
+
+  closeSelectedModal() {
+    this.manageClassService.toggleSettings(ModalState.None);
+  }
+
   // Dropdown
   dropDown: any | null = null;
   showDropDown(id: any, event: Event) {
@@ -56,14 +82,13 @@ export class ManageClassDashboardComponent {
     this.dropDown = null
   }
 
-// Create modal
-  createClass: boolean = false;
+  // Create modal
   showModal() {
-    this.createClass = true;
+    this.manageClassService.toggleSettings(ModalState.CreateClass);
   }
 
   closeModal() {
-    this.createClass = false;
+    this.manageClassService.toggleSettings(ModalState.None);
   }
 
 

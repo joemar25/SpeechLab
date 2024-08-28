@@ -1,0 +1,15 @@
+<div class="w-full h-full flex justify-center items-center">
+    <div class="w-full h-fit pt-8 max-w-md ml-[20%] bg-white p-4 rounded-xl">
+        <div class="w-full h-full flex flex-col gap-6 justify-center items-center">
+            <h1 class="font-bold text-2xl">Delete Course</h1>
+            <p class="text-center px-4 pb-4">
+                Are you sure you want to delete this course? This action cannot be undone, and all associated content will be permanently removed.
+            </p>
+            <div class="w-full flex justify-center items-center gap-4">
+                <button (click)="close()" class="py-1.5 w-36 bg-primary-tw text-primary-text-tw rounded-full font-semibold">Cancel</button>
+                <button (click)="confirmSaveDraft()"
+                    class="py-1.5 w-36 bg-red-500 text-primary-text-tw rounded-full font-semibold">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

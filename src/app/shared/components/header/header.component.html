@@ -1,105 +1,116 @@
 <header class="w-full py-2 px-2 sm:px-4 lg:px-4">
   <div class="w-full rounded-2xl shadow-sd py-3 sm:py-4 px-3 sm:px-4 lg:px-8 bg-neutral-50">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <!-- Left side: Date and Time -->
-        <div class="flex flex-wrap justify-center sm:justify-start items-center gap-4 w-full sm:w-auto">
-          <div class="flex items-center gap-2 text-gray-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <span class="text-sm font-medium">{{ currentDate | date: 'EEEE, MMMM d, y' }}</span>
-          </div>
-          <div class="flex items-center gap-2 text-gray-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span class="text-sm font-medium">{{ currentTime | date: 'hh:mm:ss a' }}</span>
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+      <!-- Left side: Date and Time -->
+      <div class="flex flex-wrap justify-center sm:justify-start items-center gap-4 w-full sm:w-auto">
+        <div class="flex items-center gap-2 text-gray-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span class="text-sm font-medium">{{ currentDate | date: 'EEEE, MMMM d, y' }}</span>
+        </div>
+        <div class=" items-center gap-2 text-gray-600 hidden xl:flex">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="text-sm font-medium ">{{ currentTime | date: 'hh:mm:ss a' }}</span>
+        </div>
+      </div>
+
+      <!-- Right side: Search, Notifications, and Profile -->
+      <div class="flex flex-wrap justify-center sm:justify-end items-center gap-4 w-full sm:w-auto">
+        <!-- Search Bar with Suggestions -->
+        <div class="relative flex-grow sm:flex-grow-0 max-w-md hidden xl:block">
+          <input type="text" placeholder="Search..."
+            class="w-full sm:w-64 py-2 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-150 ease-in-out"
+            [(ngModel)]="searchTerm" (focus)="onFocus()" (blur)="onBlur()" (input)="filterSuggestions()" />
+          <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+
+          <!-- Suggestions Dropdown -->
+          <div @fadeAnimation *ngIf="showSuggestions && filteredSuggestions.length > 0"
+            class="absolute left-0 w-full mt-2 bg-white rounded-lg shadow-lg z-10">
+            <div *ngFor="let suggestion of filteredSuggestions" (click)="navigateTo(suggestion.route)"
+              class="p-3 cursor-pointer hover:bg-amber-100 text-sm text-gray-700">
+              {{ suggestion.label }}
+            </div>
           </div>
         </div>
 
-        <!-- Right side: Search, Notifications, and Profile -->
-        <div class="flex flex-wrap justify-center sm:justify-end items-center gap-4 w-full sm:w-auto">
-          <!-- Search Bar with Suggestions -->
-          <div class="relative flex-grow sm:flex-grow-0 max-w-md">
-            <input 
-              type="text" 
-              placeholder="Search..." 
-              class="w-full sm:w-64 py-2 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-150 ease-in-out" 
-              [(ngModel)]="searchTerm"
-              (focus)="onFocus()"
-              (blur)="onBlur()"
-              (input)="filterSuggestions()"
-            />
-            <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        <!-- Notifications -->
+        <div class="relative">
+          <button (click)="toggleNotification()"
+            class="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+              </path>
             </svg>
-
-            <!-- Suggestions Dropdown -->
-            <div @fadeAnimation *ngIf="showSuggestions && filteredSuggestions.length > 0" class="absolute left-0 w-full mt-2 bg-white rounded-lg shadow-lg z-10">
-              <div *ngFor="let suggestion of filteredSuggestions" 
-                   (click)="navigateTo(suggestion.route)"
-                   class="p-3 cursor-pointer hover:bg-amber-100 text-sm text-gray-700">
-                {{ suggestion.label }}
-              </div>
-            </div>
+          </button>
+          <!-- Notification Indicator -->
+          <div *ngIf="notification"
+            class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+            <span class="text-xs text-white font-bold">8</span>
           </div>
-
-          <!-- Notifications -->
-          <div class="relative">
-            <button (click)="toggleNotification()" class="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-300">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-              </svg>
-            </button>
-            <!-- Notification Indicator -->
-            <div *ngIf="notification" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-              <span class="text-xs text-white font-bold">8</span>
+          <!-- Notification Dropdown -->
+          <div *ngIf="dropDown" @fadeAnimation (clickOutside)="closeDropdown()"
+            class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg overflow-hidden z-20 border border-gray-200">
+            <div class="p-4 bg-gray-50 border-b border-gray-200">
+              <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>
             </div>
-            <!-- Notification Dropdown -->
-            <div *ngIf="dropDown" @fadeAnimation (clickOutside)="closeDropdown()" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg overflow-hidden z-20 border border-gray-200">
-              <div class="p-4 bg-gray-50 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>
-              </div>
-              <div class="max-h-64 overflow-y-auto">
-                <div (click)="openNotification()" class="p-4 hover:bg-gray-50 cursor-pointer transition duration-150 ease-in-out border-b border-gray-200">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                      <svg class="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                      </svg>
-                    </div>
-                    <div class="ml-4">
-                      <p class="text-sm font-medium text-gray-900">{{ name }}</p>
-                      <p class="text-sm text-gray-500">started asynchronous class</p>
-                      <p class="text-xs text-gray-400 mt-1">Few seconds ago</p>
-                    </div>
+            <div class="max-h-64 overflow-y-auto">
+              <div (click)="openNotification()"
+                class="p-4 hover:bg-gray-50 cursor-pointer transition duration-150 ease-in-out border-b border-gray-200">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <svg class="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                      </path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-900">{{ name }}</p>
+                    <p class="text-sm text-gray-500">started asynchronous class</p>
+                    <p class="text-xs text-gray-400 mt-1">Few seconds ago</p>
                   </div>
                 </div>
-                <!-- Add more notification items here -->
               </div>
+              <!-- Add more notification items here -->
             </div>
           </div>
+        </div>
 
-          <!-- Profile -->
-          <div class="relative">
-            <button (click)="toggleDropdown()" class="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 rounded-full p-2 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-300">
-              <img src="https://via.placeholder.com/40" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
-              <span class="text-sm font-medium hidden md:inline">{{ name }}</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <!-- Profile Dropdown -->
-            <div *ngIf="profileDropdown" @fadeAnimation (clickOutside)="closeProfileDropdown()" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-20 border border-gray-200">
-              <div class="p-4 border-b border-gray-200">
-                <p class="text-sm font-medium text-gray-900">{{ name }}</p>
-                <p class="text-xs text-gray-500">ID NO: 1146489955</p>
-              </div>
-              <a [routerLink]="['/student/profile']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">View Profile</a>
-              <a (click)="openSettings()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">Manage Settings</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+        <!-- Profile -->
+        <div class="relative">
+          <button (click)="toggleDropdown()"
+            class="flex items-center space-x-2 text-gray-600 hover:bg-gray-100 rounded-full p-2 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-300">
+            <img src="https://via.placeholder.com/40" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
+            <span class="text-sm font-medium hidden md:inline">{{ name }}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- Profile Dropdown -->
+          <div *ngIf="profileDropdown" @fadeAnimation (clickOutside)="closeProfileDropdown()"
+            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-20 border border-gray-200">
+            <div class="p-4 border-b border-gray-200">
+              <p class="text-sm font-medium text-gray-900">{{ name }}</p>
+              <p class="text-xs text-gray-500">ID NO: 1146489955</p>
             </div>
+            <a [routerLink]="['/student/profile']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">View
+              Profile</a>
+            <a (click)="openSettings()"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">Manage Settings</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
           </div>
         </div>
       </div>

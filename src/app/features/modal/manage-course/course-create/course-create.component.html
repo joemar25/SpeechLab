@@ -1,0 +1,76 @@
+<div class="w-full h-full flex items-center justify-center">
+    <div
+        class="relative bg-white shadow-sd rounded-lg ml-[20%] mt-[5%] h-[85%] w-full max-w-6xl flex flex-col justify-center items-center">
+        <iconify-icon (click)="close()" class="cursor-pointer absolute top-0 right-2 z-[100]"
+            icon="lets-icons:close-square-duotone" width="35" height="35">
+        </iconify-icon>
+
+        <div class="w-full h-full p-8 flex flex-col gap-4 justify-start items-start">
+            <h1 class="font-bold text-xl ">Create Course</h1>
+            <div class="w-full flex flex-row gap-4">
+                <div class="w-full h-fit flex flex-col gap-4">
+                    <input type="text" placeholder="Course title"
+                        class="px-4 border border-gray-700 rounded-xl p-2 w-full focus:outline-secondary-tw">
+                    <div class="relative">
+                        <select id="course"
+                            class="w-full py-2 pl-4 pr-10 rounded-xl border border-gray-700 appearance-none focus:outline-secondary-tw text-gray-700 cursor-pointer">
+                            <option value="" disabled selected class="cursor-not-allowed">Select Difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-sm border border-black rounded-xl flex justify-center items-center">
+                    <button class="flex justify-center items-center gap-1 font-medium">
+                        <iconify-icon icon="tdesign:plus" width="25" height="25"></iconify-icon>
+                        Add thumbnail
+                    </button>
+                </div>
+            </div>
+            <div class="w-full h-fit pb-6">
+                <textarea
+                    class="px-4 py-2 w-full border border-black rounded-xl p-2 focus:outline-secondary-tw resize-none h-32"
+                    placeholder="Description" name="" id=""></textarea>
+            </div>
+            <div class=" w-full h-full flex flex-row gap-4 border border-gray-700 rounded-xl p-4">
+                <div class="w-full h-full flex flex-col gap-4">
+                    <input type="text" placeholder="Lesson title"
+                    class="px-4 border border-gray-700 rounded-xl p-2 w-full focus:outline-secondary-tw">
+                    <textarea name="" id="" placeholder="Lesson description" class="px-4 py-2 w-full border border-gray-700 rounded-xl p-2 focus:outline-secondary-tw resize-none h-full"></textarea>
+                </div>
+                <div class="w-full h-full max-w-sm flex flex-col gap-4">
+                    <input type="text" placeholder="Lesson objectives"
+                        class="px-4 border border-gray-700 rounded-xl p-2 w-full focus:outline-secondary-tw">
+                    <div
+                        class="h-full px-4 border border-gray-700 rounded-2xl p-2 w-full resize-none flex justify-center items-center">
+                        <div class="w-fit h-fit flex gap-4">
+                            <img class="w-12 h-12" src="/assets/images/manage-class/upload.png" alt="">
+                            <img class="w-12 h-12 cursor-pointer" src="/assets/images/manage-class/browse.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" w-full h-1/2  rounded-xl">
+                <div class="w-full h-full flex justify-between items-end">
+                    <button
+                        class="w-36 bg-primary-tw py-1.5 rounded-lg text-primary-text-tw flex justify-center items-center gap-1">
+                        <iconify-icon class="text-secondary-tw" icon="mdi:plus-box" width="25"
+                            height="25"></iconify-icon>Add Lesson
+                    </button>
+                    <div class="flex flex-row justify-center items-center gap-4">
+                        <button (click)="saveDraft()" class="w-36 bg-primary-tw py-1.5 rounded-lg text-primary-text-tw">Save as draft</button>
+                        <button (click)="publishCourse()" class="w-36 bg-primary-tw py-1.5 rounded-lg text-primary-text-tw">Publish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
