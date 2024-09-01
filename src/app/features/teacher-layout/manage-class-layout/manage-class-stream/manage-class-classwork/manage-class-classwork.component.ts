@@ -92,24 +92,27 @@ export class ManageClassClassworkComponent implements OnInit, OnDestroy {
   quiz: string = 'quiz';
   task: string = 'task';
   selectedTaskId: number | null = null;
+  
   openTaskModal(work: any, item: number, event: Event) {
-    event.preventDefault();
-    this.selectedTaskId = work.id;
-
-    if (work.status === 'task' && item === 1) {
-      this.selectedTaskId = 1;
-    } else if (work.status === 'task' && item === 2) {
-      this.selectedTaskId = 3;
-    }//
-    else if (work.status === 'quiz' && item === 1) {
-      this.selectedTaskId = 2;
-    } else if (work.status === 'quiz' && item === 2) {
-      this.selectedTaskId = 4;
-    }
+      event.preventDefault();
+      this.selectedTaskId = work.id;
+  
+      if (work.status === 'task' && item === 1) {
+          this.selectedTaskId = 1;
+      } else if (work.status === 'task' && item === 2) {
+          this.selectedTaskId = 3;
+      } else if (work.status === 'quiz' && item === 1) {
+          this.selectedTaskId = 2;
+      } else if (work.status === 'quiz' && item === 2) {
+          this.selectedTaskId = 4;
+      } else {
+          this.currentModal = ModalState.Delete;
+      }
   }
-
+  
   closeTaskModal() {
-    this.selectedTaskId = null;
+      this.selectedTaskId = null;
+      this.currentModal = ModalState.None;
   }
 
   classWork = [
