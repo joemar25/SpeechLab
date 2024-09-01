@@ -69,4 +69,28 @@ export class SigninComponent {
       alert('An error occurred during login.');
     }
   }
+
+  loginWithPredefinedAccount(role: 'student' | 'teacher' | 'admin') {
+    let email = '';
+    let password = '';
+
+    switch (role) {
+      case 'student':
+        email = 'james@gmail.com';
+        password = 'password';
+        break;
+      case 'teacher':
+        email = 'ben@teacher.com';
+        password = 'password';
+        break;
+      case 'admin':
+        email = 'adam@admin.com';
+        password = 'password';
+        break;
+    }
+
+    this.email = email;
+    this.password = password;
+    this.login();
+  }
 }

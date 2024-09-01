@@ -24,4 +24,10 @@
     </div>
 
     <button type="submit" (click)="login()" class="bg-secondary-tw py-2 w-32 rounded-lg text-primary-text-tw">Login</button>
-</div>
+
+    <!-- New buttons for predefined accounts -->
+    <div class="w-full flex flex-col justify-center items-center gap-4 mt-4">
+        <button (click)="loginWithPredefinedAccount('student')" class="bg-blue-500 py-2 w-32 rounded-lg text-white">Login as Student</button>
+        <button (click)="loginWithPredefinedAccount('teacher')" class="bg-green-500 py-2 w-32 rounded-lg text-white">Login as Teacher</button>
+        <button (click)="loginWithPredefinedAccount('admin')" class="bg-red-500 py-2 w-32 rounded-lg text-white">Login as Admin</button>
+    </div>
