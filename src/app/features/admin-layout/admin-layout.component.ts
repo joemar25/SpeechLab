@@ -14,19 +14,20 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from '../../shared/modal/chat/chat.component';
 import { SidebarServiceService } from '../../core/services/SidebarService/sidebar-service.service';
 
+
 @Component({
   selector: 'app-teacher-layout',
   standalone: true,
   imports: [
     RouterModule,
     HeaderComponent,
-    SideBarComponent,
     NotificationComponent,
     ManageSettingsComponent,
     SuccessMessageComponent,
     NoChangesComponent,
     CommonModule,
     ChatComponent,
+    SideBarComponent,
   ],
   templateUrl: './admin-layout.component.html', 
   styleUrl: './admin-layout.component.css',

@@ -12,7 +12,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-speech-analyzer',
   standalone: true,
-  imports: [RouterModule, HeaderComponent, SideBarComponent, NotificationComponent, ManageSettingsComponent],
+  imports: [RouterModule, HeaderComponent, NotificationComponent, ManageSettingsComponent, SideBarComponent],
   templateUrl: './speech-analyzer.component.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styleUrl: './speech-analyzer.component.css',

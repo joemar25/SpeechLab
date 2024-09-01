@@ -13,10 +13,38 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
-  // Example function to get data from a table
+  // Method to sign in user
+  async signIn(email: string, password: string) {
+    const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
+    return { data, error };
+  }
+
+  // Method to get user profile by email
+  async getProfile(email: string) {
+    const { data, error } = await this.supabase
+      .from('profiles')
+      .select('role')
+      .eq('email', email)
+      .single(); // Assumes that email is unique in the 'profiles' table
+  
+    if (error) {
+      console.error('Error fetching profile:', error);
+      return { data: null, error };
+    }
+  
+    if (!data) {
+      console.warn('No profile found for email:', email);
+    }
+  
+    console.log('Fetched profile data:', data);
+  
+    return { data, error };
+  }
+  
+
   async getData() {
     let { data, error } = await this.supabase
-      .from('profiles') // Replace with your table name
+      .from('profiles') 
       .select('*');
 
     if (error) {

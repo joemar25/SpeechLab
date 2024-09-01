@@ -6,7 +6,7 @@ import { SideBarComponent } from "../../shared/components/side-bar/side-bar.comp
 @Component({
   selector: 'app-meet-layout',
   standalone: true,
-  imports: [RouterModule,HeaderComponent,SideBarComponent],
+  imports: [RouterModule,HeaderComponent, SideBarComponent],
   templateUrl: './meet-layout.component.html',
   styleUrl: './meet-layout.component.css'
 })

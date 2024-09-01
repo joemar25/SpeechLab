@@ -1,7 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { SupabaseService } from './supabase.service'; 
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router'; // Removed SupabaseService import
 
 @Component({
   selector: 'app-root',
@@ -22,22 +21,10 @@ import { SupabaseService } from './supabase.service';
     ]),
   ],
 })
-export class AppComponent implements OnInit { 
+export class AppComponent { 
   title = 'speechlabv2';
-  data: any; 
 
-  constructor(private supabaseService: SupabaseService) {} 
 
-  ngOnInit() {
-    this.fetchData(); 
-  }
+  constructor() {} 
 
-  async fetchData() {
-    try {
-      this.data = await this.supabaseService.getData(); 
-      console.log('Fetched data:', this.data); 
-    } catch (error) {
-      console.error('Error fetching data:', error); 
-    }
-  }
 }
