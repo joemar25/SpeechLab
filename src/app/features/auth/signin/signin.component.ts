@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../../../supabase.service';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
@@ -10,11 +10,21 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit {
   email: string = '';
   password: string = '';
 
   constructor(private supabaseService: SupabaseService, private router: Router) {}
+
+  ngOnInit() {
+    // Check if user is already logged in
+    const userRole = localStorage.getItem('userRole');
+
+    if (userRole) {
+      // Redirect to the appropriate dashboard
+      this.redirectToDashboard(userRole);
+    }
+  }
 
   async login() {
     try {
@@ -49,21 +59,8 @@ export class SigninComponent {
       // Store the userRole in localStorage
       localStorage.setItem('userRole', userRole);
   
-      // Redirect based on user role
-      switch (userRole) {
-        case 'student':
-          this.router.navigate(['/student/dashboard']);
-          break;
-        case 'teacher':
-          this.router.navigate(['/teacher/new-dashboard']);
-          break;
-        case 'admin':
-          this.router.navigate(['/admin/dashboard']);
-          break;
-        default:
-          console.error('Unknown role:', userRole);
-          alert('Unknown user role.');
-      }
+      // Redirect to the appropriate dashboard
+      this.redirectToDashboard(userRole);
     } catch (error) {
       console.error('Login error:', error);
       alert('An error occurred during login.');
@@ -92,5 +89,23 @@ export class SigninComponent {
     this.email = email;
     this.password = password;
     this.login();
+  }
+
+  // Helper function to redirect to the appropriate dashboard
+  private redirectToDashboard(userRole: string) {
+    switch (userRole) {
+      case 'student':
+        this.router.navigate(['/student/dashboard']);
+        break;
+      case 'teacher':
+        this.router.navigate(['/teacher/new-dashboard']);
+        break;
+      case 'admin':
+        this.router.navigate(['/admin/dashboard']);
+        break;
+      default:
+        console.error('Unknown role:', userRole);
+        alert('Unknown user role.');
+    }
   }
 }
