@@ -77,7 +77,7 @@ export class SigninComponent implements OnInit {
         password = 'password';
         break;
       case 'teacher':
-        email = 'ben@teacher.com';
+        email = 'isla@teacher.com';
         password = 'password';
         break;
       case 'admin':

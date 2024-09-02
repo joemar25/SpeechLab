@@ -125,4 +125,33 @@ export class SupabaseService {
       return { session: null, error: error instanceof Error ? error : new Error('Unknown error refreshing session') };
     }
   }
+
+
+
+
+  // for header
+
+  async getProfileHeader(email: string): Promise<{ data: { first_name: string; last_name: string; role: string } | null; error: Error | null }> {
+    try {
+      const { data, error } = await this.supabase
+        .from('profiles')
+        .select('first_name, last_name, role')  
+        .eq('email', email)
+        .single();
+  
+      if (error) throw error;
+  
+      if (!data) {
+        console.warn('No profile found for email:', email);
+        return { data: null, error: new Error('Profile not found') };
+      }
+  
+      return { data, error: null };
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+      return { data: null, error: error instanceof Error ? error : new Error('Unknown error fetching profile') };
+    }
+  }
+  
+  
 }

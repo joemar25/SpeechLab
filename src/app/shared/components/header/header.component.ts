@@ -6,6 +6,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
 import { NotificationService } from '../../../../app-services/modal-services/notification.service';
 import { ManageSettingsService } from '../../../../app-services/modal-services/manage-settings.service';
 import { FormsModule } from '@angular/forms';
+import { SupabaseService } from '../../../supabase.service';
 
 @Component({
   selector: 'app-header',
@@ -31,6 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy{
   currentDate: Date = new Date();
   currentTime: Date = new Date();
   private timeInterval: any;
+  profileDropdown: boolean = false;
+  name = '';
+  role = '';
+  email ='';
+  
 
 
   searchTerm: string = '';
@@ -44,6 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
 
   constructor(
+    private supabaseService: SupabaseService,
     private notificationService: NotificationService,
     private settingsModal: ManageSettingsService,
     private router: Router
@@ -77,26 +84,41 @@ export class HeaderComponent implements OnInit, OnDestroy{
       this.showSuggestions = false; // Hide suggestions when input loses focus
     }, 200); // Delay to allow click events to register
   }
+
+
   ngOnInit() {
     // Update the current time every second
     this.timeInterval = setInterval(() => {
       this.currentTime = new Date();
     }, 1000);
+  
+    // Fetch the profile data
+    this.supabaseService.getUser().subscribe(user => {
+      if (user) {
+        this.supabaseService.getProfileHeader(user.email!).then(response => {  // Use non-null assertion
+          if (response.data) {
+            this.name = `${response.data.first_name} ${response.data.last_name}`;
+            this.role = response.data.role;
+          }
+        });
+      }
+    });
   }
+  
+  
+
   ngOnDestroy() {
     // Clear the interval when the component is destroyed to prevent memory leaks
     if (this.timeInterval) {
       clearInterval(this.timeInterval);
     }
   }
-  name="Michael Maxwell";
   info = "Welcome back!";
   notification = true;
   settings = true;
 
 
   dropDown: boolean = false;
-  profileDropdown: boolean = false;
   toggleNotification() {
     this.dropDown = !this.dropDown;
   }
