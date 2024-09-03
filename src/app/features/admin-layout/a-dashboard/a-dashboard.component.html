@@ -1,1 +1,59 @@
-<p>a-dashboard works!</p>
+<section class="p-6 min-h-screen">
+    <h1 class="text-4xl font-bold mb-10">Admin Dashboard</h1>
+    
+    <!-- Dashboard and Calendar Row -->
+    <div class="flex flex-col lg:flex-row gap-6 mb-10">
+      <!-- Dashboard Chart Placeholder -->
+      <div class="flex-grow bg-white bg-opacity-10 rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Student Enrollment Trend</h2>
+        <div class="h-64 flex items-center justify-center text-[var(--color-secondary)] border-2 border-[var(--color-secondary)] rounded">
+          Chart placeholder (Chart.js not available)
+        </div>
+      </div>
+      
+      <!-- Calendar -->
+      <div class="w-full lg:w-[402px] bg-white bg-opacity-10 rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-[var(--color-secondary)] text-[var(--color-primary)] p-4 flex justify-between items-center">
+          <h2 class="text-2xl font-semibold">
+            {{ formatDate(currentDate) }}
+          </h2>
+          <div class="flex gap-2">
+            <button (click)="changeMonth(-1)" class="p-2 rounded-full hover:bg-[var(--color-primary)] hover:text-[var(--color-secondary)]" aria-label="Previous month">
+              &lt;
+            </button>
+            <button (click)="changeMonth(1)" class="p-2 rounded-full hover:bg-[var(--color-primary)] hover:text-[var(--color-secondary)]" aria-label="Next month">
+              &gt;
+            </button>
+          </div>
+        </div>
+        <table class="w-full text-sm text-center">
+          <thead>
+            <tr class="bg-white bg-opacity-20">
+              <th *ngFor="let day of weekDays" class="p-2 font-semibold">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of calendarDays">
+              <td *ngFor="let day of week" 
+                  class="p-2 border border-white border-opacity-20" 
+                  [ngClass]="{'bg-[var(--color-secondary)] text-[var(--color-primary)]': isToday(day), 'text-[var(--color-secondary)]': day?.hasEvent}">
+                {{ day?.date }}
+                <div *ngIf="day?.hasEvent" class="text-xs mt-1">Event</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Metric Containers Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div *ngFor="let metric of metrics" class="bg-white bg-opacity-10 rounded-lg shadow-lg p-6 hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-all duration-300">
+        <div class="flex justify-between items-start mb-4">
+          <h3 class="text-lg font-semibold">{{ metric.title }}</h3>
+          <span class="text-2xl">{{ metric.icon }}</span>
+        </div>
+        <p class="text-3xl font-bold">{{ metric.value }}</p>
+      </div>
+    </div>
+  </section>

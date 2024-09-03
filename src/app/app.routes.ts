@@ -57,6 +57,7 @@ import { IntermediateComponent } from './features/teacher-layout/manage-course/m
 import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-course/manage-courses-layout/manage-courses-layout.component';
 import { CoursePreviewComponent } from './features/teacher-layout/manage-course/manage-course-preview/course-preview/course-preview.component';
 import { ManageCourseComponent } from './features/teacher-layout/manage-course/manage-course.component';
+import { AUsermanagementComponent } from './features/admin-layout/a-usermanagement/a-usermanagement.component';
 
 
 export const routes: Routes = [
@@ -193,15 +194,9 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent, // or another component for admin layout
     children: [
-      { path: 'class-lab/teacher-led', component: TeacherLedComponent },
-      { path: 'class-lab/self-assesment', component: SelfAssesmentComponent },
-      {
-        path: 'class-lab/self-assesment/assesment-category',
-        component: AssesmentCategoryComponent,
-      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ADashboardComponent },
-      { path: 'manage-users', component: ADashboardComponent },
+      { path: 'manage-users', component: AUsermanagementComponent },
       { path: 'count', component: CourseComponent },
       { path: 'speech-lab', component: ASpeechlabComponent },
     ],
