@@ -1,7 +1,6 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from './guards/role.guard';
-
-import { NgModule } from '@angular/core';
 import { AutheenticationComponent } from './features/auth/login-layout/autheentication.component';
 import { ClassLabComponent } from './features/student-layout/class-lab/class-lab.component';
 import { DashboardComponent } from './features/student-layout/dashboard/dashboard.component';
@@ -62,17 +61,9 @@ import { AUsermanagementComponent } from './features/admin-layout/a-usermanageme
 import { AClassmanagementComponent } from './features/admin-layout/a-classmanagement/a-classmanagement.component';
 import { AContentmanagementComponent } from './features/admin-layout/a-contentmanagement/a-contentmanagement.component';
 
-
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: AutheenticationComponent,
-  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: AutheenticationComponent },
   {
     path: 'student',
     component: StudentLayoutComponent,
@@ -118,28 +109,59 @@ export const routes: Routes = [
           { path: '', component: ManageClassDashboardComponent },
           {
             path: 'manage-class-stream',
-            component: ManageClassStreamComponent, //under this path is, class-work, class-students, class-grades
+            component: ManageClassStreamComponent,
             children: [
-              { path: 'manage-class-classwork', component: ManageClassClassworkComponent },
-              { path: 'manage-class-students', component: ManageClassStudentsComponent },
-              { path: 'manage-class-grades',
-                component: ManageClassGradesComponent, //under this path is, quiz, tasks, attendance
+              {
+                path: 'manage-class-classwork',
+                component: ManageClassClassworkComponent,
+              },
+              {
+                path: 'manage-class-students',
+                component: ManageClassStudentsComponent,
+              },
+              {
+                path: 'manage-class-grades',
+                component: ManageClassGradesComponent,
                 children: [
                   { pathMatch: 'full', path: '', redirectTo: 'quiz' },
-                  { path: 'quiz', component: QuizComponent, //under this path is, quiz-dashboard, quiz-result
+                  {
+                    path: 'quiz',
+                    component: QuizComponent,
                     children: [
-                      { pathMatch: 'full', path: '', redirectTo: 'quiz-dashboard' },
-                      { path: 'quiz-dashboard', component: QuizDashboardComponent },
-                      { path: 'quiz-result/:id', component: QuizResultComponent },
+                      {
+                        pathMatch: 'full',
+                        path: '',
+                        redirectTo: 'quiz-dashboard',
+                      },
+                      {
+                        path: 'quiz-dashboard',
+                        component: QuizDashboardComponent,
+                      },
+                      {
+                        path: 'quiz-result/:id',
+                        component: QuizResultComponent,
+                      },
                     ],
-                   },
-                  { path: 'tasks', component: TasksComponent, //under this path is, task-dashboard, task-result
+                  },
+                  {
+                    path: 'tasks',
+                    component: TasksComponent,
                     children: [
-                      { pathMatch: 'full', path: '', redirectTo: 'task-dashboard' },
-                      { path: 'task-dashboard', component: TaskDashboardComponent },
-                      { path: 'task-result/:id', component: TaskResultComponent },
-                    ]
-                   },
+                      {
+                        pathMatch: 'full',
+                        path: '',
+                        redirectTo: 'task-dashboard',
+                      },
+                      {
+                        path: 'task-dashboard',
+                        component: TaskDashboardComponent,
+                      },
+                      {
+                        path: 'task-result/:id',
+                        component: TaskResultComponent,
+                      },
+                    ],
+                  },
                   { path: 'attendance', component: AttendanceComponent },
                 ],
               },
@@ -147,9 +169,13 @@ export const routes: Routes = [
           },
         ],
       },
-      { path: 'manage-courses', component: ManageCourseComponent,
+      {
+        path: 'manage-courses',
+        component: ManageCourseComponent,
         children: [
-          { path: '', component: ManageCoursesLayoutComponent,
+          {
+            path: '',
+            component: ManageCoursesLayoutComponent,
             children: [
               { pathMatch: 'full', path: '', redirectTo: 'all-courses' },
               { path: 'all-courses', component: AllCoursesComponent },
@@ -157,15 +183,17 @@ export const routes: Routes = [
               { path: 'beginner', component: BeginnerComponent },
               { path: 'intermediate', component: IntermediateComponent },
             ],
-           },
-           { path: 'course-preview', component: ManageCoursePreviewComponent,
+          },
+          {
+            path: 'course-preview',
+            component: ManageCoursePreviewComponent,
             children: [
               { pathMatch: 'full', path: '', redirectTo: 'course/:id' },
               { path: 'course/:id', component: CoursePreviewComponent },
-            ]
-           },
-           { pathMatch: 'full', path: '', redirectTo: 'all-courses' },
-        ]
+            ],
+          },
+          { pathMatch: 'full', path: '', redirectTo: 'all-courses' },
+        ],
       },
     ],
   },
@@ -195,13 +223,11 @@ export const routes: Routes = [
       { path: 'video-conference', component: VideoConferenceComponent },
     ],
   },
-  
-  // Admin routes
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [RoleGuard],
-    data: { expectedRole: ['admin'] },   // or another component for admin layout
+    data: { expectedRole: ['admin'] },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ADashboardComponent },
@@ -214,13 +240,11 @@ export const routes: Routes = [
       { path: 'teacher-view', component: TeacherLayoutComponent },
     ],
   },
-  {
-    path: '**',
-    redirectTo: '/login', // or a 404 page
-  },
+  { path: '**', redirectTo: '/login' },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
