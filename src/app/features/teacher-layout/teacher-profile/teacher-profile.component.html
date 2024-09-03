@@ -1,0 +1,162 @@
+<section class="flex flex-col pl-6 rounded-none max-md:pl-4">
+    <header class="shrink-0 max-w-full bg-zinc-600 h-[250px] w-full max-md:mr-1"></header>
+    <div class="mb-6 px-12 py-6 bg-slate-800 max-md:px-4 max-md:mr-1 max-md:max-w-full">
+      <div class="h-1 pb-16 flex items-center gap-36 max-md:flex-col">
+        <div class="flex items-center w-[32%] max-md:w-full">
+          <div class="flex-shrink-0 rounded-full bg-zinc-300 h-[120px] w-[120px] flex items-center justify-center">
+            <svg class="ml-16 mt-24" width="36" height="36" viewBox="0 0 46 46" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <circle cx="23.314" cy="23" r="22.5" fill="#F5A425" />
+              <path
+                d="M23.314 27.725C25.3022 27.725 26.914 26.1132 26.914 24.125C26.914 22.1368 25.3022 20.525 23.314 20.525C21.3257 20.525 19.714 22.1368 19.714 24.125C19.714 26.1132 21.3257 27.725 23.314 27.725Z"
+                fill="#162239" />
+              <path
+                d="M19.939 12.875L17.8802 15.125H14.314C13.0765 15.125 12.064 16.1375 12.064 17.375V30.875C12.064 32.1125 13.0765 33.125 14.314 33.125H32.314C33.5515 33.125 34.564 32.1125 34.564 30.875V17.375C34.564 16.1375 33.5515 15.125 32.314 15.125H28.7477L26.689 12.875H19.939ZM23.314 29.75C20.209 29.75 17.689 27.23 17.689 24.125C17.689 21.02 20.209 18.5 23.314 18.5C26.419 18.5 28.939 21.02 28.939 24.125C28.939 27.23 26.419 29.75 23.314 29.75Z"
+                fill="#162239" />
+            </svg>
+          </div>
+          <div class="mt-14 ml-4 text-white">
+            <h2 class="text-lg font-bold">{{ studentProfile.name }}</h2>
+            <p class="mt-1 text-xs font-medium">ID NO: {{ studentProfile.idNo }}</p>
+          </div>
+        </div>
+        <div class="mt-14 flex justify-between items-center w-[68%] max-md:w-full">
+          <div class="flex flex-col gap-3 text-sm font-medium text-white">
+            <div class="flex items-center gap-2">
+              <svg width="25" height="25" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M15.3125 2.94482C8.4125 2.94482 2.8125 8.54482 2.8125 15.4448C2.8125 22.3448 8.4125 27.9448 15.3125 27.9448C22.2125 27.9448 27.8125 22.3448 27.8125 15.4448C27.8125 8.54482 22.2125 2.94482 15.3125 2.94482ZM22.8125 19.1948H16.5625L15.3125 16.6948H12.1875V22.9448H10.3125V9.19482H17.8125L19.0625 11.6948H22.8125V19.1948Z"
+                  fill="#F5A425" />
+              </svg>
+              <p>{{ studentProfile.nationality }}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg width="25" height="25" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M15.3125 2.5C10.475 2.5 6.5625 6.4125 6.5625 11.25C6.5625 17.8125 15.3125 27.5 15.3125 27.5C15.3125 27.5 24.0625 17.8125 24.0625 11.25C24.0625 6.4125 20.15 2.5 15.3125 2.5ZM15.3125 14.375C13.5875 14.375 12.1875 12.975 12.1875 11.25C12.1875 9.525 13.5875 8.125 15.3125 8.125C17.0375 8.125 18.4375 9.525 18.4375 11.25C18.4375 12.975 17.0375 14.375 15.3125 14.375Z"
+                  fill="#F5A425" />
+              </svg>
+  
+              <p>{{ studentProfile.address }}</p>
+            </div>
+          </div>
+          <svg class="cursor-pointer" (click)="editProfile()" xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M40.502 4.69165L46.752 10.9417L41.9874 15.7083L35.7374 9.45832L40.502 4.69165ZM17.6104 33.8333H23.8604L39.0416 18.6521L32.7916 12.4021L17.6104 27.5833V33.8333Z"
+              fill="#F5A425" />
+            <path
+              d="M40.5267 40.0833H17.9392C17.885 40.0833 17.8288 40.1042 17.7746 40.1042C17.7059 40.1042 17.6371 40.0854 17.5663 40.0833H11.36V10.9167H25.6246L29.7913 6.75H11.36C9.06211 6.75 7.19336 8.61667 7.19336 10.9167V40.0833C7.19336 42.3833 9.06211 44.25 11.36 44.25H40.5267C41.6318 44.25 42.6916 43.811 43.473 43.0296C44.2544 42.2482 44.6934 41.1884 44.6934 40.0833V22.025L40.5267 26.1917V40.0833Z"
+              fill="#F5A425" />
+          </svg>
+  
+        </div>
+      </div>
+    </div>
+    <div class="max-md:max-w-full">
+      <div class="flex gap-4 max-md:flex-col">
+        <div class="flex flex-col w-[37%] max-md:ml-0 max-md:w-full">
+          <div class="flex flex-col grow max-md:mt-4 max-md:max-w-full">
+            <article class="flex flex-col px-4 py-4 w-full rounded-xl bg-slate-800 max-md:max-w-full">
+              <header class="flex flex-wrap gap-4 justify-between max-md:max-w-full">
+                <h2 class="text-lg font-bold text-white">Teacher's Feedback</h2>
+                <a href="#" class="my-auto text-sm font-medium text-zinc-400" (click)="viewAllFeedbacks()">View
+                  Feedbacks</a>
+              </header>
+              <p class="self-start mt-4 text-sm font-bold text-white">
+                <span class="text-amber-500">{{ teacherFeedback.course }}</span> | <span>{{ teacherFeedback.teacher
+                  }}</span> | <span>Date: {{ teacherFeedback.date }}</span>
+              </p>
+              <p class="mt-3 mr-4 text-base text-white max-md:mr-2 max-md:max-w-full">
+                {{ teacherFeedback.feedback }}
+              </p>
+            </article>
+            <section
+              class="flex flex-col px-5 pt-3 pb-5 mt-4 w-full rounded-xl bg-slate-800 max-md:px-4 max-md:max-w-full">
+              <h2 class="self-start text-lg font-bold text-white">Courses Status</h2>
+              <div class="flex gap-4 mt-4 max-md:max-w-full">
+                <div class="flex flex-col grow shrink-0 self-start mt-1 text-sm font-semibold basis-0 w-full">
+                  @for (course of courses; track course.name) {
+                  <div class="flex gap-4 justify-between">
+                    <p class="text-white">{{ course.name }}</p>
+                    <p class="text-amber-500">{{ course.progress }}%</p>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700 mt-1 mb-3">
+                    <div class="bg-amber-500 h-2 rounded-full" [style.width.%]="course.progress"></div>
+                  </div>
+                  }
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="flex flex-col ml-4 w-[63%] max-md:ml-0 max-md:w-full">
+          <section
+            class="flex flex-col items-start px-8 py-5 mx-auto w-full text-sm font-medium text-white rounded-xl bg-slate-800 max-md:px-4 max-md:mt-4 max-md:max-w-full">
+            <h2 class="text-lg font-bold mb-6">Profile Information</h2>
+            <div class="flex flex-col w-full space-y-6">
+              <div class="flex items-center gap-3">
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba23cb26277eec604ae3fda54d4ad9f85686bc84637d9812ddf8a5714e70dbea?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea"
+                  alt="" class="object-contain shrink-0 aspect-square w-[25px]" />
+                <p>DATE OF BIRTH:</p>
+                <p class="flex-1">{{ studentProfile.dateOfBirth }}</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/2466771d7e08241a193167511d4ab63db18647514f34d10afd2b340e879c8806?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea"
+                  alt="" class="object-contain shrink-0 aspect-square w-[25px]" />
+                <p>SEX:</p>
+                <div class="flex flex-1 gap-4">
+                  @for (option of sexOptions; track option) {
+                  <div class="flex items-center gap-2">
+                    <img loading="lazy"
+                      [src]="option === 'Male' ? 'male-icon-url' : option === 'Female' ? 'female-icon-url' : 'transgender-icon-url'"
+                      alt="" class="object-contain shrink-0 w-5 aspect-square" />
+                    <p>{{ option }}</p>
+                  </div>
+                  }
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/91fd4bd0487b19588be6262dcbeb4aae17e0558faba08f06399147f23fc95576?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea"
+                  alt="" class="object-contain shrink-0 aspect-square w-[25px]" />
+                <p>NATIONALITY:</p>
+                <p class="flex-1">{{ studentProfile.nationality }}</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/76e99f505b897152160de3e0faf1c7ec1453b3c4e6a612ad2240559f92c41953?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea"
+                  alt="" class="object-contain shrink-0 aspect-square w-[25px]" />
+                <p>ADDRESS:</p>
+                <p class="flex-1">{{ studentProfile.address }}</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/98aea450c4f6385eea225f8e76520c24d68a32b032cb2acadede289f8c19d6f4?apiKey=2e31fa6b2d0c458aaebf11d5898097ea&&apiKey=2e31fa6b2d0c458aaebf11d5898097ea"
+                  alt="" class="object-contain shrink-0 aspect-square w-[25px]" />
+                <p>EMAIL ADDRESS:</p>
+                <p class="flex-1">{{ studentProfile.emailAddress }}</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  @if (openEdit) {
+    <div @fadeAnimation class="w-full h-full z-50 background-dim fixed top-0 left-0 flex justify-center items-center">
+      <app-student-profile (close)="closeEdit()"></app-student-profile>
+    </div>
+  }
+  @if (success) {
+    <div @fadeAnimation class="w-full h-full z-[1000] fixed top-0 left-0 flex justify-center items-center">
+        <app-success-message></app-success-message>
+    </div>
+    }@else if(noChanges) {
+    <div @fadeAnimation class="w-full h-full fixed top-0 left-0 flex justify-center items-center">
+        <app-no-changes></app-no-changes>
+    </div>
+    }
