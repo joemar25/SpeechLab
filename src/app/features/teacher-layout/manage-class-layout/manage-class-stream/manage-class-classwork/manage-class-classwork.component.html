@@ -67,33 +67,31 @@
         </div>
     </div>
     }
-    @if (selectedTaskId !== null) {
-    <div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full">
-        <div class="flex justify-center items-center z-[1000] w-full h-full">
-            <div class="w-full h-full">
-                @if (selectedTaskId === 1) {
-                <app-class-work-assignment (closeModal)="closeTaskModal()"></app-class-work-assignment>
-                }@else if(selectedTaskId === 2){
-                <app-class-work-quiz (closeModal)="closeTaskModal()"></app-class-work-quiz>
-                }@else if(selectedTaskId === 3){
-                <app-classwork-view-task (closeModal)="closeTaskModal()"></app-classwork-view-task>
-                }
-                @else if(selectedTaskId === 4){
-                <app-classwork-view-quiz (closeModal)="closeTaskModal()"></app-classwork-view-quiz>
-                }
+    @if (selectedTaskId !== null && currentModal !== ModalState.Delete) {
+        <div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full">
+            <div class="flex justify-center items-center z-[1000] w-full h-full">
+                <div class="w-full h-full">
+                    @if (selectedTaskId === 1) {
+                        <app-class-work-assignment (closeModal)="closeTaskModal()"></app-class-work-assignment>
+                    } @else if (selectedTaskId === 2) {
+                        <app-class-work-quiz (closeModal)="closeTaskModal()"></app-class-work-quiz>
+                    } @else if (selectedTaskId === 3) {
+                        <app-classwork-view-task (closeModal)="closeTaskModal()"></app-classwork-view-task>
+                    } @else if (selectedTaskId === 4) {
+                        <app-classwork-view-quiz (closeModal)="closeTaskModal()"></app-classwork-view-quiz>
+                    }
+                </div>
             </div>
         </div>
-    </div>
     }
-    <!-- need to be relative to make the modal appear inside the body -->
-</div>
-
-@if (selectedTaskId !== null) {
-<div @fadeAnimation class="absolute top-0 left-0 z-[1000] w-full h-full background">
-    <div class="flex justify-center items-center z-[1000] w-full h-full">
-        <div class="w-full h-full">
-            <app-delete-class (closeModal)="closeTaskModal()"></app-delete-class>
+    
+    @if (currentModal === ModalState.Delete) {
+        <div @fadeAnimation class="fixed top-0 left-0 z-[1000] w-full h-full background">
+            <div class="flex justify-center items-center z-[1000] w-full h-full">
+                <div class="w-full h-full">
+                    <app-delete-class (closeModal)="closeTaskModal()"></app-delete-class>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-}
+    }
+    

@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from './guards/role.guard';
 
 import { NgModule } from '@angular/core';
 import { AutheenticationComponent } from './features/auth/login-layout/autheentication.component';
@@ -73,6 +74,8 @@ export const routes: Routes = [
   {
     path: 'student',
     component: StudentLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: ['student'] },
     children: [
       { path: '', redirectTo: 'student/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -94,6 +97,8 @@ export const routes: Routes = [
   {
     path: 'teacher',
     component: TeacherLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: ['teacher'] },
     children: [
       { path: 'speechlab', component: TeacherSpeechLabComponent },
       { path: 't-dashboard', component: TDashboardComponent },
@@ -192,7 +197,9 @@ export const routes: Routes = [
   // Admin routes
   {
     path: 'admin',
-    component: AdminLayoutComponent, // or another component for admin layout
+    component: AdminLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: ['admin'] },   // or another component for admin layout
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ADashboardComponent },
@@ -200,6 +207,10 @@ export const routes: Routes = [
       { path: 'count', component: CourseComponent },
       { path: 'speech-lab', component: ASpeechlabComponent },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '/login', // or a 404 page
   },
 ];
 @NgModule({

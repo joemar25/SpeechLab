@@ -1,11 +1,11 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router'; // Removed SupabaseService import
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,RouterLink],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   animations: [
@@ -21,6 +21,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     ]),
   ],
 })
-export class AppComponent {
+export class AppComponent { 
   title = 'speechlabv2';
+
+
+  constructor() {} 
+
 }

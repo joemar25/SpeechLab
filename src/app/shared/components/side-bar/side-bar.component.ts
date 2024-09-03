@@ -91,7 +91,7 @@ export class SideBarComponent implements OnInit {
     {
       label: 'Text to Speech',
       svgIcon: 'text-to-speech-icon',
-      route: '/teacher/text-to-speech',
+      route: '/text-to-speech/text-record',
     },
     {
       label: 'Speech Access',

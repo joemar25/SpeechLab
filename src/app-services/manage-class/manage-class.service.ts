@@ -7,6 +7,7 @@ export enum ModalState {
   CreateSpecificClass,
   CreateTask,
   CreateQuiz,
+  Delete
 
   
   // Add more modal states as needed
