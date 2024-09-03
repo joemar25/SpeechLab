@@ -17,23 +17,23 @@
       [ngClass]="getMenuItemClasses()"
       class="relative flex items-center h-12 px-3">
    <div class="icon-container">
-     <iconify-icon *ngIf="item.icon" 
-                   [icon]="item.icon" 
+     <iconify-icon *ngIf="item.icon"
+                   [icon]="item.icon"
                    [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'"
                    class="icon-size"
      ></iconify-icon>
      <ng-container *ngIf="item.svgIcon">
-       <svg *ngIf="item.svgIcon !== 'speech-analyzer-icon'" 
-            [attr.viewBox]="item.svgIcon === 'meet-icon' ? '0 0 30 21' : '0 0 24 24'" 
+       <svg *ngIf="item.svgIcon !== 'speech-analyzer-icon'"
+            [attr.viewBox]="item.svgIcon === 'meet-icon' ? '0 0 30 21' : '0 0 24 24'"
             [ngClass]="{'icon-size': item.svgIcon !== 'meet-icon', 'meet-icon-size': item.svgIcon === 'meet-icon'}"
             [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'"
-            fill="currentColor" 
+            fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
          <path [attr.d]="getSvgPath(item.svgIcon)" />
        </svg>
-       <svg *ngIf="item.svgIcon === 'speech-analyzer-icon'" 
-            viewBox="0 0 24 24" 
-            xmlns="http://www.w3.org/2000/svg" 
+       <svg *ngIf="item.svgIcon === 'speech-analyzer-icon'"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
             class="icon-size"
             [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'">
          <g id="SVGRepo_iconCarrier">
@@ -65,7 +65,7 @@
        </svg>
      </ng-container>
    </div>
-   <p [ngClass]="getTextClasses()" 
+   <p [ngClass]="getTextClasses()"
       class="font-medium text-base whitespace-nowrap ml-3"
       [style.color]="isActive(item.route) ? 'var(--color-secondary)' : 'currentColor'">
      {{ item.label }}
