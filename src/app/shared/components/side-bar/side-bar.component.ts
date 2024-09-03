@@ -114,17 +114,17 @@ export class SideBarComponent implements OnInit {
     {
       label: 'Class Management',
       icon: 'mdi:book-open-variant',
-      route: '/teacher/manage-courses',
+      route: '/admin/manage-class',
     },
     {
       label: 'Content Management',
       svgIcon: 'speech-lab-icon',
-      route: '/teacher/speechlab',
+      route: '/admin/manage-contents',
     },
     {
       label: 'Speech Lab Management',
       icon: 'mdi:dictionary',
-      route: '/dictionary/d-search',
+      route: '/admin/manage-speechlab',
     },
   ];
 

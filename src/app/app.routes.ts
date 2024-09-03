@@ -59,6 +59,8 @@ import { ManageCoursesLayoutComponent } from './features/teacher-layout/manage-c
 import { CoursePreviewComponent } from './features/teacher-layout/manage-course/manage-course-preview/course-preview/course-preview.component';
 import { ManageCourseComponent } from './features/teacher-layout/manage-course/manage-course.component';
 import { AUsermanagementComponent } from './features/admin-layout/a-usermanagement/a-usermanagement.component';
+import { AClassmanagementComponent } from './features/admin-layout/a-classmanagement/a-classmanagement.component';
+import { AContentmanagementComponent } from './features/admin-layout/a-contentmanagement/a-contentmanagement.component';
 
 
 export const routes: Routes = [
@@ -204,8 +206,12 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: ADashboardComponent },
       { path: 'manage-users', component: AUsermanagementComponent },
-      { path: 'count', component: CourseComponent },
-      { path: 'speech-lab', component: ASpeechlabComponent },
+      { path: 'manage-class', component: AClassmanagementComponent },
+      { path: 'manage-contents', component: AContentmanagementComponent },
+      { path: 'manage-speechlab', component: ASpeechlabComponent },
+      { path: 'login-view', component: AutheenticationComponent },
+      { path: 'student-view', component: StudentLayoutComponent },
+      { path: 'teacher-view', component: TeacherLayoutComponent },
     ],
   },
   {

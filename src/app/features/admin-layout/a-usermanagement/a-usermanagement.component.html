@@ -1,54 +1,210 @@
-<section class="flex flex-col">
-    <div class="flex flex-wrap gap-10 justify-between items-end w-full max-md:max-w-full">
-      <form class="flex flex-col text-2xl rounded-none min-w-[240px] text-zinc-300 w-[605px] max-md:max-w-full">
-        <div class="flex flex-wrap gap-4 px-px bg-white rounded-2xl border border-solid border-slate-900">
-          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/31bd039e12b310740bc900f9bcbce5c0efe1b886b0a9ec152e31994c917dd012?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="object-contain shrink-0 rounded-none aspect-[1.37] w-[70px]" alt="" />
-          <label for="searchInput" class="sr-only">Search by Email or Name</label>
-          <input type="text" id="searchInput" class="flex-auto my-auto w-[504px] max-md:max-w-full" placeholder="Search by Email or Name" aria-label="Search by Email or Name" />
-        </div>
-      </form>
-      <button class="flex relative flex-col rounded-2xl aspect-[3.725] w-[149px]" aria-label="Add new student">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7c8c328d6e42a9855d0a81ed51fa3325f88ca46c67c4343470f5007d6cf0b1ac?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="object-cover absolute inset-0 size-full" alt="" />
-        <div class="flex relative shrink-0 h-10 bg-white rounded-2xl border border-black border-solid"></div>
+<section class="p-6 bg-gray-100 min-h-screen">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row justify-between items-center mb-8 space-y-4 lg:space-y-0 lg:space-x-4">
+      <div class="relative w-full lg:w-2/3">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (ngModelChange)="searchTerms$.next($event)" 
+          name="searchInput" 
+          class="w-full pl-12 pr-4 py-3 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#F5A425] text-gray-700"
+          placeholder="Search by Email or Name" 
+          aria-label="Search by Email or Name"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      <button 
+        (click)="openAddModal()" 
+        class="w-full lg:w-auto flex items-center justify-center px-6 py-3 bg-[#162239] text-white rounded-lg hover:bg-opacity-90 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:ring-opacity-50"
+        aria-label="Add new user"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Add New User
       </button>
     </div>
-    <div class="flex flex-col mt-9 w-full max-md:max-w-full">
-      <header class="flex flex-col justify-center px-8 py-6 w-full text-2xl font-bold text-black bg-white rounded-2xl border border-black border-solid max-md:px-5 max-md:max-w-full">
-        <div class="flex flex-wrap gap-10 items-center w-full max-md:max-w-full">
-          <div class="self-stretch my-auto">Student ID</div>
-          <div class="self-stretch my-auto">Name</div>
-          <div class="self-stretch my-auto">Date created</div>
-          <div class="self-stretch my-auto">Email</div>
-          <div class="self-stretch my-auto">Role</div>
-          <div class="self-stretch my-auto">Status</div>
-          <div class="self-stretch my-auto">Action</div>
+
+    <!-- User Table -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-[#162239] text-left text-xs font-semibold text-white uppercase tracking-wider">
+            <th class="px-6 py-3">User ID</th>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Date Created</th>
+            <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Role</th>
+            <th class="px-6 py-3">Status</th>
+            <th class="px-6 py-3">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+        <tr *ngFor="let user of filteredUsers$ | async" class="hover:bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.id }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10">
+                <img class="h-10 w-10 rounded-full" [src]="'https://ui-avatars.com/api/?name=' + user.name + '&background=162239&color=ffffff'" [alt]="user.name">
+              </div>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.dateCreated | date:'MM/dd/yyyy' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.email }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.role }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                  [ngClass]="{
+                    'bg-green-100 text-green-800': user.status === 'Active',
+                    'bg-red-100 text-red-800': user.status === 'Inactive',
+                    'bg-[#F5A425] text-[#162239]': user.status === 'For approval'
+                  }">
+              {{ user.status }}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <ng-container *ngIf="user.status === 'For approval'; else editDeleteButtons">
+              <button (click)="approveUser(user)" class="text-green-600 hover:text-green-900 mr-3" aria-label="Approve user">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </button>
+              <button (click)="rejectUser(user)" class="text-red-600 hover:text-red-900" aria-label="Reject user">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </ng-container>
+            <ng-template #editDeleteButtons>
+              <button (click)="openEditModal(user)" class="text-[#F5A425] hover:text-opacity-80 mr-3" aria-label="Edit user">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </button>
+              <button (click)="deleteUser(user)" class="text-red-600 hover:text-red-900" aria-label="Delete user">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div *ngIf="isAddModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md m-4 relative">
+      <button (click)="closeAddModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h2 class="text-2xl font-bold mb-6 text-[#162239]">Add New User</h2>
+      <form (ngSubmit)="addNewUser()" class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="newUser.name" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
         </div>
-      </header>
-      <main class="flex flex-col w-full max-md:max-w-full">
-        <article class="flex flex-col justify-center px-7 py-3.5 w-full bg-white border border-black border-solid max-md:px-5 max-md:max-w-full">
-          <div class="flex flex-wrap gap-10 items-center w-full max-md:max-w-full">
-            <div class="self-stretch my-auto text-xl font-bold text-black">2020-2323</div>
-            <div class="flex grow shrink gap-2.5 items-center self-stretch py-2 pr-6 pl-4 my-auto text-xl font-bold text-black bg-white min-h-[45px] w-[202px] max-md:pr-5">
-              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2fdc064bd491408f13227a1fea405a8e41c941bcf7984cbf290fd78aa9e6abcf?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" class="object-contain shrink-0 self-stretch my-auto aspect-square w-[29px]" alt="" />
-              <div class="self-stretch my-auto">Sean palacay</div>
-            </div>
-            <time class="self-stretch my-auto text-xl text-black">8/23/2024</time>
-            <div class="self-stretch my-auto text-xl text-black">seanjethrocom</div>
-            <div class="self-stretch my-auto text-xl font-medium text-black">Student</div>
-            <div class="grow shrink gap-2.5 self-stretch px-4 py-1 my-auto text-base font-medium text-center text-yellow-700 bg-orange-300 rounded-2xl min-h-[24px] w-[105px]">
-              For approval
-            </div>
-            <div class="flex grow shrink gap-2.5 items-center self-stretch py-3 pr-6 pl-6 my-auto bg-white min-h-[45px] w-[91px] max-md:px-5">
-              <button aria-label="Edit student" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square">
-                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8b65d986f113f6f8cc6d54c61bf6af56e8737dc651c058ba9d3fa3dd161e2495?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" alt="" class="w-full h-full" />
-              </button>
-              <button aria-label="Delete student" class="object-contain shrink-0 self-stretch my-auto w-6 aspect-square">
-                <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/668653a84e172cdd83b479ae42d84ae277a3860c0a19946257305097c48daa21?placeholderIfAbsent=true&apiKey=f35c25b17acb406083beeda46a28c843" alt="" class="w-full h-full" />
-              </button>
-            </div>
-          </div>
-        </article>
-        <div class="flex w-full bg-white rounded-none border border-black border-solid min-h-[657px] max-md:max-w-full"></div>
-      </main>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input type="email" id="email" name="email" [(ngModel)]="newUser.email" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+        </div>
+        <div>
+          <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+          <select id="role" name="role" [(ngModel)]="newUser.role" required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+            <option value="" disabled selected>Select a role</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" (click)="closeAddModal()"
+                  class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-300 ease-in-out">
+            Cancel
+          </button>
+          <button type="submit"
+                  class="px-4 py-2 bg-[#162239] text-white rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:ring-opacity-50 transition duration-300 ease-in-out">
+            Add User
+          </button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
+
+
+  <div *ngIf="isEditModalOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md m-4 relative">
+      <button (click)="closeEditModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h2 class="text-2xl font-bold mb-6 text-[#162239]">Edit User</h2>
+      <form (ngSubmit)="updateUser()" class="space-y-6">
+        <div>
+          <label for="editName" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input type="text" id="editName" name="editName" 
+                 [ngModel]="editingUser?.name" 
+                 (ngModelChange)="editingUser!.name = $event" 
+                 required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+        </div>
+        <div>
+          <label for="editEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input type="email" id="editEmail" name="editEmail" 
+                 [ngModel]="editingUser?.email" 
+                 (ngModelChange)="editingUser!.email = $event" 
+                 required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+        </div>
+        <div>
+          <label for="editRole" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+          <select id="editRole" name="editRole" 
+                  [ngModel]="editingUser?.role" 
+                  (ngModelChange)="editingUser!.role = $event" 
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div>
+          <label for="editStatus" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+          <select id="editStatus" name="editStatus" 
+                  [ngModel]="editingUser?.status" 
+                  (ngModelChange)="editingUser!.status = $event" 
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:border-[#F5A425]">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+            <option value="For approval">For approval</option>
+          </select>
+        </div>
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" (click)="closeEditModal()"
+                  class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-300 ease-in-out">
+            Cancel
+          </button>
+          <button type="submit"
+                  class="px-4 py-2 bg-[#162239] text-white rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-[#F5A425] focus:ring-opacity-50 transition duration-300 ease-in-out">
+            Update User
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

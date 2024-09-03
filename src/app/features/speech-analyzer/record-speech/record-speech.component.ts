@@ -6,7 +6,9 @@ import { SpeechAnalyzerComponent } from '../speech-analyzer.component';
 @Component({
   selector: 'app-record-speech',
   standalone: true,
-  imports: [CommonModule, SpeechAnalyzerComponent],
+  imports: [CommonModule, SpeechAnalyzerComponent
+    
+  ],
   templateUrl: './record-speech.component.html',
   styleUrl: './record-speech.component.css'
 })
