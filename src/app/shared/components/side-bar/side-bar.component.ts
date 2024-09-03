@@ -104,12 +104,12 @@ export class SideBarComponent implements OnInit {
     {
       label: 'Dashboard',
       icon: 'ic:sharp-dashboard',
-      route: '/teacher/new-dashboard',
+      route: '/admin/dashboard',
     },
     {
       label: 'User Management',
       icon: 'mdi:account-group',
-      route: '/teacher/manage-class',
+      route: '/admin/manage-users',
     },
     {
       label: 'Class Management',
