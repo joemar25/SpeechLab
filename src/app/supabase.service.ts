@@ -2,6 +2,29 @@ import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient, Session, AuthChangeEvent, User } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';  // Import the uuid library
+
+
+interface Course {
+  course_id: string;
+  course_title: string;
+  skill_level: string;
+  description: string;
+  thumbnail: string;
+  duration: number;
+  language: string;
+  required_survey: boolean;
+}
+
+interface Lesson {
+  lesson_id: string;
+  course_id: string;
+  lesson_title: string;
+  description: string;
+  objectives: string;
+  attachments: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -152,6 +175,91 @@ export class SupabaseService {
       return { data: null, error: error instanceof Error ? error : new Error('Unknown error fetching profile') };
     }
   }
+
   
-  
+
+
+  // create course 
+
+  async createCourseAndLessons(
+    course: {
+      course_id: string;
+      course_title: string;
+      skill_level: 'easy' | 'medium' | 'hard';  // Enum values must match your schema
+      description: string;
+      thumbnail: string;
+      duration: number;
+      language: string;
+      required_survey: boolean;
+    },
+    lessons: Array<{
+      lesson_id: string;
+      course_id: string;
+      lesson_title: string;
+      description: string;
+      objectives: string;
+      attachments: string;
+    }>
+  ): Promise<{ data: { course: any; lessons: any[] } | null; error: Error | null }> {
+    try {
+      // Insert course into 'courses' table
+      const { data: courseData, error: courseError } = await this.supabase
+        .from('courses')
+        .insert([
+          {
+            course_id: course.course_id,  // UUID generated with uuidv4
+            course_title: course.course_title,
+            skill_level: course.skill_level,
+            description: course.description,
+            thumbnail: course.thumbnail,
+            duration: course.duration,
+            language: course.language,
+            required_survey: course.required_survey,
+          }
+        ])
+        .select(); // Ensure the data returned is in proper format
+
+      if (courseError) throw courseError;
+
+      // Insert lessons into 'lessons' table
+      const lessonInserts = lessons.map((lesson) => ({
+        ...lesson,
+        course_id: courseData[0].course_id, // Use the ID from the newly created course
+      }));
+
+      const { data: lessonsData, error: lessonsError } = await this.supabase
+        .from('lessons')
+        .insert(lessonInserts)
+        .select();
+
+      if (lessonsError) throw lessonsError;
+
+      return { data: { course: courseData[0], lessons: lessonsData }, error: null };
+    } catch (error) {
+      console.error('Error creating course and lessons:', error);
+      return { data: null, error: error instanceof Error ? error : new Error('Unknown error creating course and lessons') };
+    }
+  }
+
+  // Uploading of file to correct storage buckets
+  async uploadFile(file: File, path: string, bucket: 'thumbnail' | 'lesson_attachments'): Promise<string> {
+    try {
+      const { data, error } = await this.supabase.storage
+        .from(bucket) // Use the appropriate bucket name
+        .upload(path, file);
+
+      if (error) {
+        throw error;
+      }
+
+      if (data && data.path) {
+        return data.path; // Return the file path if it exists
+      } else {
+        throw new Error('File upload failed. No data returned.');
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      throw error; // Rethrow the error after logging it
+    }
+  }
 }
